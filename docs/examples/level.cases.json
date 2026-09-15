@@ -1,0 +1,8 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {"name":"两端落地的合法解","expected":"success","stroke":[[265,395.5],[344,265],[424,395.5]]},
+    {"name":"仅救右边的合法失败画法","expected":"failure","stroke":[[344,265],[424,395.5]]}
+  ]
+}

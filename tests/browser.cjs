@@ -63,12 +63,14 @@ async function screenshot(page, name) {
   assert.equal(await page.locator('#test-button').isDisabled(), true);
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
   await screenshot(page, 'desktop-ready.png');
+  await page.waitForFunction(() => Boolean(window.rescueDebug));
   const resourceOrigins = await page.evaluate(() => [...new Set(performance.getEntriesByType('resource').map(r => new window.URL(r.name).origin))]);
   assert.deepEqual(resourceOrigins, [new global.URL(URL).origin]);
   await context.setOffline(true);
-  evidence.checks.push('Runtime resources are all same-origin; five levels play with browser network offline.');
+  evidence.checks.push('Runtime resources (including individual level JSON files) are all same-origin; nine levels play with browser network offline.');
 
   for (let i = 0; i < solutions.length; i++) {
+    if (i === 5) await page.locator('#chapter-challenge').click();
     await page.locator(`[data-level="${i + 1}"]`).click();
     await draw(page, solutions[i]);
     evidence.desktop.push(await sit(page, true));
@@ -77,8 +79,9 @@ async function screenshot(page, name) {
   await screenshot(page, 'desktop-graduated.png');
   await context.setOffline(false);
   await page.reload({waitUntil:'networkidle'});
-  assert.equal(Object.keys((await page.evaluate(() => rescueDebug.snapshot())).records).length, 5);
-  evidence.checks.push('5/5 mouse-drawn wins, graduation UI and localStorage survive reload.');
+  assert.equal(Object.keys((await page.evaluate(() => rescueDebug.snapshot())).records).length, 9);
+  evidence.checks.push('9/9 mouse-drawn wins across two chapters, graduation UI and localStorage survive reload.');
+  await page.locator('#chapter-beginner').click();
   await page.locator('[data-level="1"]').click();
   await draw(page, failures[0]); evidence.desktop.push(await sit(page, false));
   await page.locator('#test-button').click();
@@ -93,6 +96,12 @@ async function screenshot(page, name) {
   await page.locator('#share-button').click(); await page.locator('#toast').waitFor({state:'visible',timeout:5000});
   assert.equal(await page.evaluate(() => navigator.clipboard.readText()), URL + '#level=1');
   evidence.checks.push('Two-tier hints, modal help and actual copied challenge URL work.');
+  const downloadEvent = page.waitForEvent('download'); await page.locator('#export-button').click();
+  const download = await downloadEvent, exported = path.join(local,'exported-level-01.json');
+  await download.saveAs(exported);
+  const exportedLevel = JSON.parse(fs.readFileSync(exported,'utf8'));
+  assert.deepEqual(exportedLevel, require('../levels/01-missing-leg.json'));
+  evidence.checks.push('Save-level button downloads independent, lossless, versioned JSON matching the source file.');
 
   // Actual Chromium touch input through its isolated CDP session, not JS event injection.
   const mobile = await browser.newContext({viewport:{width:390,height:844}, deviceScaleFactor:2, isMobile:true, hasTouch:true});
