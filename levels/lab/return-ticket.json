@@ -1,0 +1,120 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "lab/return-ticket",
+  "chapter": "脑洞接力",
+  "progression": {
+    "groupOrder": 40,
+    "order": 60,
+    "difficulty": "medium"
+  },
+  "title": "别忘了回程",
+  "tag": "组件组合 · 想一步",
+  "brief": "墙能接住中场，不一定接得住结尾。",
+  "condition": "1.5 秒右脚踏板撤走，1.8 秒重力向右；3.2 秒侧墙也撤走，重力回向下。别忘了较低的永久右岸。",
+  "quip": "今天的工位，又有自己的想法。",
+  "success": "原来还可以这样坐！",
+  "failure": "再想想重量下一站要去哪。",
+  "ink": 650,
+  "gold": 590,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "hint": [
+    "要给两个方向都留落脚点。只做横帐篷能过中场，但回程呢？",
+    "从右墙上部经椅面回到右墙下部，再接一只脚到永久右岸。"
+  ],
+  "drawArea": {
+    "drawTop": 140
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "left-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 280,
+        "h": 90
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 450,
+        "y": 450,
+        "w": 250,
+        "h": 90
+      }
+    },
+    {
+      "id": "tray",
+      "type": "core/terrain",
+      "params": {
+        "x": 370,
+        "y": 400,
+        "w": 60,
+        "h": 36
+      }
+    },
+    {
+      "id": "wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 600,
+        "y": 100,
+        "w": 28,
+        "h": 300
+      }
+    },
+    {
+      "id": "depart",
+      "type": "core/temporary-terrain",
+      "params": [
+        {
+          "target": "tray",
+          "removeAt": 1500,
+          "label": "右脚踏板"
+        },
+        {"target":"wall","removeAt":3200,"label":"中场侧墙"}
+      ]
+    },
+    {
+      "id": "return",
+      "type": "core/gravity",
+      "params": [
+        {
+          "at": 0,
+          "x": 0,
+          "y": 1,
+          "label": "出发向下 ↓"
+        },
+        {
+          "at": 1800,
+          "x": 1,
+          "y": 0,
+          "label": "中场向右 →"
+        },
+        {
+          "at": 3200,
+          "x": 0,
+          "y": 1,
+          "label": "回程向下 ↓"
+        }
+      ]
+    }
+  ]
+}

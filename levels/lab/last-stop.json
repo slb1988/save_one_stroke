@@ -1,0 +1,66 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "lab/last-stop",
+  "chapter": "脑洞接力",
+  "progression": {
+    "groupOrder": 40,
+    "order": 20,
+    "difficulty": "hard"
+  },
+  "title": "脚下的班车",
+  "tag": "组件组合 · 想两步",
+  "brief": "平台横着开走，不代表支撑一定会断。",
+  "condition": "1.0–3.0 秒光滑的蓝色平台向右移动 120 单位。左腿站在固定地面，右边要接住整段行程。",
+  "quip": "今天的工位，又有自己的想法。",
+  "success": "原来还可以这样坐！",
+  "failure": "再想想重量下一站要去哪。",
+  "ink": 420,
+  "gold": 365,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "hint": [
+    "别追着平台画一根斜腿；想想什么形状能让接触点沿着它移动。",
+    "从右椅面向左下伸到平台左侧，再向右画一段宽底横梁，覆盖起点与终点，让移动接触只经过平直底边。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "left"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "left-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 275,
+        "h": 90
+      }
+    },
+    {
+      "id": "shuttle",
+      "type": "lab/elevator",
+      "params": {
+        "x": 390,
+        "y": 400,
+        "w": 65,
+        "h": 24,
+        "dx": 120,
+        "dy": 0,
+        "start": 1000,
+        "end": 3000,
+        "label": "横移班车"
+      }
+    }
+  ]
+}

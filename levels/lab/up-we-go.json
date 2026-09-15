@@ -1,0 +1,66 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "lab/up-we-go",
+  "chapter": "脑洞接力",
+  "progression": {
+    "groupOrder": 40,
+    "order": 10,
+    "difficulty": "easy"
+  },
+  "title": "一起坐电梯",
+  "tag": "组件组合 · 歇一关",
+  "brief": "不用更长的腿，今天连地板也跟你一起走。",
+  "condition": "0.8 秒后蓝色平台平稳上升 65 单位，2.6 秒到站。让两边的脚搭同一班车。",
+  "quip": "今天的工位，又有自己的想法。",
+  "success": "原来还可以这样坐！",
+  "failure": "再想想重量下一站要去哪。",
+  "ink": 200,
+  "gold": 150,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "hint": [
+    "蓝色实线才是现在的地面，虚线是终点。",
+    "像第一关一样补右腿。两边一起升，椅子就不会歪。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "left"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "distant",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 100,
+        "h": 90
+      }
+    },
+    {
+      "id": "lift",
+      "type": "lab/elevator",
+      "params": {
+        "x": 220,
+        "y": 400,
+        "w": 230,
+        "h": 24,
+        "dx": 0,
+        "dy": -65,
+        "start": 800,
+        "end": 2600,
+        "label": "升降工位"
+      }
+    }
+  ]
+}

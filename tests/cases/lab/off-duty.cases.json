@@ -1,0 +1,42 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "地板撤走后改走挂点",
+      "expected": "success",
+      "stroke": [
+        [
+          234,
+          130
+        ],
+        [
+          240,
+          269
+        ],
+        [
+          416,
+          269
+        ],
+        [
+          444,
+          130
+        ]
+      ]
+    },
+    {
+      "name": "给临时地板多补一条腿",
+      "expected": "failure",
+      "stroke": [
+        [
+          404,
+          264
+        ],
+        [
+          438,
+          395.5
+        ]
+      ]
+    }
+  ]
+}

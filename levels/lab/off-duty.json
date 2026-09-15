@@ -1,0 +1,57 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "lab/off-duty",
+  "chapter": "脑洞接力",
+  "progression": {
+    "groupOrder": 40,
+    "order": 30,
+    "difficulty": "easy"
+  },
+  "title": "地板先下班",
+  "tag": "组件组合 · 歇一关",
+  "brief": "有时该少造两条腿，多借两个挂点。",
+  "condition": "装卸踏板 2.2 秒后撤走；墙上的两只金环不会下班。一笔可以把整把椅子挂起来。",
+  "quip": "今天的工位，又有自己的想法。",
+  "success": "原来还可以这样坐！",
+  "failure": "再想想重量下一站要去哪。",
+  "ink": 520,
+  "gold": 490,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "hint": [
+    "腿再长，也留不住要撤走的地板。",
+    "从左环连到椅面，再连到右环。金环能转动，两个分开的挂点更稳。"
+  ],
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "dock-kit",
+      "type": "workshop/hanging-kit",
+      "params": {
+        "span": 210,
+        "floorY": 270,
+        "removeAt": 2200
+      },
+      "at": {
+        "x": 234,
+        "y": 130
+      }
+    }
+  ]
+}

@@ -3,6 +3,7 @@ const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
+const contentIndex = require('./content-index.cjs');
 const arg = process.argv.indexOf('--port');
 const PORT = Number(arg >= 0 ? process.argv[arg + 1] : process.env.PORT || 4173);
 if (!Number.isInteger(PORT) || PORT < 1 || PORT > 65535) { console.error('Invalid port. Example: npm start -- --port 4174'); process.exit(1); }
@@ -13,6 +14,13 @@ const server = http.createServer((req, res) => {
   try { pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname); }
   catch { res.writeHead(400); return res.end('Bad request'); }
   if (pathname === '/health') { res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); return res.end(req.method === 'HEAD' ? '' : JSON.stringify({ app: 'save-one-stroke', version: '1.0.0', pid: process.pid })); }
+  if (pathname === '/levels/manifest.json' || pathname === '/js/modules/manifest.json') {
+    try {
+      const data = pathname.startsWith('/levels/') ? contentIndex.discover() : contentIndex.modules();
+      res.writeHead(200, {'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});
+      return res.end(req.method === 'HEAD' ? '' : JSON.stringify(data));
+    } catch(error) { res.writeHead(500,{'Content-Type':'text/plain; charset=utf-8'}); return res.end(error.message); }
+  }
   if (pathname === '/') pathname = '/index.html';
   if (pathname.includes('..') || !(pathname === '/index.html' || pathname === '/styles.css' || /^\/(js|assets|vendor|levels|docs|schemas)\/[\w./-]+$/.test(pathname))) { res.writeHead(404); return res.end('Not found'); }
   const filename = path.resolve(ROOT, '.' + pathname);

@@ -1,7 +1,7 @@
 'use strict';
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { levels } = require('../js/levels.js');
+const levels = require('../js/levels.js').levels.filter(l=>l.version<3);
 const P = require('../js/physics.js');
 const { solutions, failures, alternatives } = require('./fixtures.cjs');
 

@@ -1,0 +1,96 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "lab/world-tour",
+  "chapter": "脑洞接力",
+  "progression": {
+    "groupOrder": 40,
+    "order": 40,
+    "difficulty": "hard"
+  },
+  "title": "下方环球旅行",
+  "tag": "组件组合 · 想两步",
+  "brief": "向下、向左、再向上：哪种支撑不必跟着换方向？",
+  "condition": "1.7 秒重力向左，3.2 秒向上。金环是可转动铰接，不是万能胶；椅面仍须近水平。",
+  "quip": "今天的工位，又有自己的想法。",
+  "success": "原来还可以这样坐！",
+  "failure": "再想想重量下一站要去哪。",
+  "ink": 550,
+  "gold": 490,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "hint": [
+    "先考虑不是地面支撑的办法。一个挂点会不会随着新重力摆动？",
+    "两个分开的挂点可以约束旋转，把椅子同时连到左右金环。"
+  ],
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "remote",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 100,
+        "h": 90
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 270,
+          "y": 130,
+          "radius": 10,
+          "label": "左金环"
+        },
+        {
+          "x": 440,
+          "y": 130,
+          "radius": 10,
+          "label": "右金环"
+        }
+      ]
+    },
+    {
+      "id": "tour",
+      "type": "core/gravity",
+      "params": [
+        {
+          "at": 0,
+          "x": 0,
+          "y": 1,
+          "label": "先向下 ↓"
+        },
+        {
+          "at": 1700,
+          "x": -1,
+          "y": 0,
+          "label": "现在向左 ←"
+        },
+        {
+          "at": 3200,
+          "x": 0,
+          "y": -1,
+          "label": "最后向上 ↑"
+        }
+      ]
+    }
+  ]
+}

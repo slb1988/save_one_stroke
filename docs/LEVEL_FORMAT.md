@@ -1,8 +1,8 @@
-# 《救一笔！》关卡格式与生成规则 · v1 / v2
+# 《救一笔！》关卡格式与生成规则 · v1 / v2 / v3
 
 本文可用于手工离线迭代，也可连同 Schema 直接发给 LLM。**当前引擎只接受数据，不接受 JavaScript、回调、表达式、HTML 组件或外部资源 URL。** 不需要也不接入在线模型服务。
 
-- 机器可读格式：[v1 基础关卡](../schemas/level-v1.schema.json) / [v2 规则变种](../schemas/level-v2.schema.json)，均为 JSON Schema Draft 2020-12；按文件 version 选择，不混用。
+- 机器可读格式：[v1 基础关卡](../schemas/level-v1.schema.json) / [v2 规则变种](../schemas/level-v2.schema.json) / [v3 模块组合](../schemas/level-v3.schema.json)，均为 JSON Schema Draft 2020-12；按文件 version 选择，不混用。
 - 权威运行时校验：[`js/level-format.js`](../js/level-format.js)，浏览器导入、内置目录加载和离线 CLI 共用。
 - 物理判定：[`js/physics.js`](../js/physics.js)，与游戏逐帧试坐相同。
 - 完整例子：[v1 level.json](examples/level.json) / [v2 variant.json](examples/variant.json)；各有同名 `.cases.json` 合法解与失败例，可直接导入或离线验证。
@@ -13,9 +13,9 @@
 
 单关文件是 UTF-8 JSON 对象，最多 **65,536 字节（64 KiB，按 UTF-8 字节而非字符数）**。允许文件头 BOM；不允许 Markdown 围栏、注释、尾逗号、`NaN`、`Infinity`、数字字符串或函数。未知字段在任何嵌套层级都会报错，不忽略它们。
 
-必填 `format: "save-one-stroke-level"`、`version: 1` 或 `2`。原有九关保留 v1；新增四个规则变种用 v2，必须显式声明 `mechanics`。v1 文件不能带 mechanics，旧格式不会悄悄获得新行为；v2 保留全部基础几何字段，新增能力见第 5B 节。升级时保留原文件并重新验证，不必迁移旧九关。
+必填 `format: "save-one-stroke-level"`、`version: 1`、`2` 或 `3`。原九个 v1 与四个 v2 关卡无需迁移；v1 不能带 mechanics，v2 保留基础几何并显式声明 mechanics（第 5B 节）。v3 用注册模块/场景配方描述组合（第 5C 节），不把新能力悄悄塞进旧文件。
 
-内置目录 `levels/manifest.json` 列出文件名，格式为 `save-one-stroke-manifest` / 版本 1。文件名为 `01-name.json` 这样的两到三位数字加小写字母/连字符；内置 id 必须按清单从 1 连续编号。
+内置目录 `levels/manifest.json` 现在由 `npm run content:build` 自动生成（save-one-stroke-manifest / 版本 2），不手工加条目。`npm start` 对这个 URL 实时扫描开发目录：新增 `levels/<namespace>/<slug>.json` 后点击「刷新目录」即可发现，无需重启。数字 id 不再要求连续；旧 `#level=1` 等链接及成绩键不变。旧关的编排数据集中保存在 `levels/legacy.progression.json`；新 v3 关每文件自带 progression。
 
 **外部单关不要求连续编号。** 其 id 可以是 1–999999；浏览器为每份导入内容另外分配本地键，所以即使 id 与内置关相同，也不会覆盖内置几何或成绩。同内容重复导入会复用已有存档；相同 id 但不同内容可以并存。
 
@@ -33,7 +33,7 @@
 
 ## 3. 顶层字段
 
-下表是两版共用的基础字段，v2 额外必填 mechanics（见 5B）；除它们外没有其他顶层字段；`script`、`onWin`、`solution`、`goal`、`duration`、`verified`、`$schema` 等都不接受。不要为了给 JSON 加 Schema 提示而在关卡内部塞 `$schema`，应在编辑器或验证器外部关联 Schema 文件。
+下表只描述 v1/v2 基础字段，v2 额外必填 mechanics（见 5B）；v3 字段差异见 5C，不得混用。除此之外没有其他顶层字段；`script`、`onWin`、`solution`、`goal`、`duration`、`verified`、`$schema` 等都不接受。不要为了给 JSON 加 Schema 提示而在关卡内部塞 `$schema`，应在编辑器或验证器外部关联 Schema 文件。
 
 | 字段 | 必填 | 类型与合法范围 | 作用 |
 | --- | --- | --- | --- |
@@ -100,9 +100,9 @@
 
 基础机制：缺脚/无腿、偏心人猫载荷、不同高度的固定平台、空洞、多猫区、分时/反向外力、墨水和省墨评级。v2 新增真正撤走的临时地形、固定金环铰接、世界重力切换、动态落球及显式画区；行为均来自几何/载荷/forces/mechanics，不按 id 触发。
 
-仍不支持：连续移动地板（仅支持定时撤走）、任意物体之间的通用铰链、绳索/弹簧、结构断裂、非矩形 terrain、非圆形掉落物、独立布娃娃、可编程目标、时间轴回调、图片/网络资源、自定义材质参数。v2 的金环只是预先固定在墙上的零长度铰接点，不能把未实现能力写进 condition 冒充机制。
+v1/v2 不支持连续移动地板；v3 的 `lab/elevator` 模块支持预告的有限直线移动，详细边界见[模块契约](MODULES.md)。仍不支持：任意物体之间的通用铰链、绳索/弹簧、结构断裂、非矩形 terrain、非圆形掉落物、独立布娃娃、可编程目标、时间轴回调、图片/网络资源、自定义材质参数。v2 的金环只是预先固定在墙上的零长度铰接点，不能把未实现能力写进 condition 冒充机制。
 
-**两版的存活目标仍是全局规则，而不是可自由改写的字段：**
+**所有版本的存活目标仍是全局规则，而不是可自由改写的字段：**
 
 1. 固定120 Hz模拟，试坐5000ms；切后台或打开玩法/导入窗口时暂停。
 2. 任何时刻绝对倾角>24°，或载荷所在座面点比初始座面下降>65，或其 x 跑到40–680之外，或结构/松散笔画/已出生落球碰猫，判失败；以后翻回正面也不能复活。
@@ -216,6 +216,29 @@ v2 的 mechanics 是闭合对象：只接受 drawTop、drawBottom、temporaryTer
 
 Schema 负责各项结构/数值边界，运行时还核对索引、画区关系、重力时序/模长、球出生位置等跨字段条件。v1/v2 导入、保存、导出及离线验证走同一解析入口；不需要也不允许把 mechanics 转成 JavaScript。
 
+## 5C. v3 模块化场景
+
+完整可导入例子：[`levels/lab/up-we-go.json`](../levels/lab/up-we-go.json)；同引擎样例：[`tests/cases/lab/up-we-go.cases.json`](../tests/cases/lab/up-we-go.cases.json)。[模块实现、参数、并行所有权](MODULES.md)是扩展入口。
+
+v3 保留上表的 format、全部叙事文字、ink/gold、load、hint，以及可选 gap/labels；替换以下结构：
+
+| 字段 | v3 合同 |
+| --- | --- |
+| version | 固定 3 |
+| id | 稳定的 `namespace/name`，小写字母、数字、连字符，≤100字；不作序号或规则开关 |
+| chapter | 非空≤40字的分组名，不再限制三个旧章节 |
+| progression | 必填 `{groupOrder,order,difficulty}`；两种顺序值为0–99999有限数字，difficulty为easy/medium/hard |
+| scene | 必填1–80项 `{id,type,params,at?}`；实例 id 为1–60字的小写字母/数字/连字符，type 为已注册模块名 |
+| at | 可选 `{x,y}` 平移原点，范围0–720/0–480；默认0；累加 prefab 原点，不旋转或缩放。变换后仍须通过世界边界检查 |
+| params | 只能是对应模块的闭合参数；未知字段、未知模块、脚本/URL/回调一律拒绝 |
+| drawArea | 可选 `{drawTop,drawBottom}`，沿用 v2 同名画区边界，不包含机制 |
+
+v3 不接受顶层 chair、terrain、mechanics、forces、forbidden/forbiddenZones；这些由 scene 中的元素/规则生成。必须最终生成1–30块木椅（第一块seat）与1–30块基础地形；全局 load 仍是世界坐标，不能靠 prefab 偷改载荷。JSON 导出保留原始配方，不输出展开缓存或运行状态。
+
+同一 chapter 的 groupOrder 必须一致。目录先按 groupOrder、分组名、order 排序，同序位按稳定 id 打破平局；下一个关卡取目录邻居，不做 id+1。新关的建议节奏是轻松→烧脑→轻松→烧脑→轻松→推理，但难度是创作者标注，不是自动计算或趣味性保证。
+
+可用模块参数及 prefab 与元素的区别见 MODULES.md；生成的 v3 Schema 从每个模块的 schema 拼成 type→params 的闭合联合，`npm run content:build` 同时更新它。各机制之间的索引、时序、出生碰撞与总数量等关系仍由运行时检查。
+
 ## 6. 离线迭代与验证
 
 Node.js 18+；离线格式/物理验证无需 npm install、网络或浏览器。
@@ -242,7 +265,7 @@ cases 是单独版本化 JSON：`format:"save-one-stroke-cases"`、`version:1`�
 3. 为当前文件写一条候选解和一条朴素错误画法的 cases，运行同引擎校验。候选解失败就继续调整，不写“已验证”。
 4. 在游戏点击「导入 / 本地关卡」→「选择 JSON 并保存」，试画、试坐，看碰撞与失败原因。必要时换一条自由画法检查是否过于脆弱。
 5. 用「保存关卡」导出。修改文件后重新导入：相同内容复用；修改后的版本会作为另一份本地关保存，旧版不被悄悄覆盖。
-6. 若要纳入内置列表，给它正确的连续 id/文件名，再加入 manifest；只有导入试玩不需要改清单。
+6. 若要纳入内置列表，把 v3 文件放到自己的 `levels/<namespace>/` 目录，点击「刷新目录」。纯静态发布前运行 `npm run content:build` 和 `npm run content:check`，把生成的目录、模块、Schema 与关卡一起发布；不手改 manifest。
 
 运行验证后再改几何、载荷、墨水或外力，旧结果就不能证明新文件。CLI 不是自动求解器，不穷举、不判断趣味性，也不保证所有浏览器/帧调度下绝对无数值偏差；最终仍需浏览器复核。
 
@@ -254,6 +277,9 @@ cases 是单独版本化 JSON：`format:"save-one-stroke-cases"`、`version:1`�
 - `#local=...` 只是这台浏览器的存档引用，不是可分享的完整关卡。跨设备请发导出的 JSON。导入的同 id 文件不污染内置 id 的成绩。
 - 关卡和成绩刷新后仍保留。同一浏览器里不同端口/域名是不同 localStorage；例如4173与5178的本地库相互独立。
 - 存储被拒绝、配额满或已有库损坏时，不假装保存成功；保留旧数据并报错。移除存档需再次点击确认；导出的磁盘文件不被删除。
+- 「刷新目录」只更新可选列表，不替换当前关卡快照、不清空笔画、不重建正在运行的物理世界、不改导入库。想玩文件的新版本需重新选关。删除或损坏的关卡会从目录隔离，但当前快照仍可玩，成绩不会因目录暂时缺项而丢失。
+- 单文件错误在「目录来源 / 加载诊断」显示文件路径；重复 id 的所有冲突文件一起隔离，不按加载先后覆盖。整个索引/网络失败保留之前的目录。
+- **Nginx 不扫描磁盘。** 纯静态站只能读取已经发布的 manifest 与文件；刷新不会从 GitHub 拉取未发布内容，也不会在生产运行 Node。已加载模块代码的修改/删除需整页重载；新增可信模块文件可由开发目录刷新发现。
 
 ## 8. 可直接给 LLM 的生成提示
 

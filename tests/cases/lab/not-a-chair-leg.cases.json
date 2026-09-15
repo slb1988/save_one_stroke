@@ -1,0 +1,34 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "独立挡板把球送走",
+      "expected": "success",
+      "stroke": [
+        [
+          450,
+          150
+        ],
+        [
+          620,
+          230
+        ]
+      ]
+    },
+    {
+      "name": "只挂短绳球照样落向猫",
+      "expected": "failure",
+      "stroke": [
+        [
+          450,
+          150
+        ],
+        [
+          450,
+          180
+        ]
+      ]
+    }
+  ]
+}

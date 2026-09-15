@@ -1,0 +1,17 @@
+{
+  "format": "save-one-stroke-modules",
+  "version": 1,
+  "files": [
+    "core/anchors.js",
+    "core/cats.js",
+    "core/chair.js",
+    "core/drops.js",
+    "core/forces.js",
+    "core/gravity.js",
+    "core/temporary-terrain.js",
+    "core/terrain.js",
+    "lab/elevator.js",
+    "workshop/hanging-kit.js",
+    "workshop/seat.js"
+  ]
+}

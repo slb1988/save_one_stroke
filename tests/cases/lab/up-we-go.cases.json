@@ -1,0 +1,34 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "两只脚同乘",
+      "expected": "success",
+      "stroke": [
+        [
+          404,
+          264
+        ],
+        [
+          404,
+          395.5
+        ]
+      ]
+    },
+    {
+      "name": "短脚等不到电梯",
+      "expected": "failure",
+      "stroke": [
+        [
+          404,
+          264
+        ],
+        [
+          404,
+          330
+        ]
+      ]
+    }
+  ]
+}

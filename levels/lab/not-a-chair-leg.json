@@ -1,0 +1,99 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "lab/not-a-chair-leg",
+  "chapter": "脑洞接力",
+  "progression": {
+    "groupOrder": 40,
+    "order": 50,
+    "difficulty": "easy"
+  },
+  "title": "这一笔不修椅子",
+  "tag": "组件组合 · 歇一关",
+  "brief": "椅子本来就稳。今天真正要救的是旁边午睡的老板。",
+  "condition": "0.9 秒后球落向猫区。可用两个墙环挂一块独立斜挡板，不必焊到木椅；球也不能碰猫。",
+  "quip": "今天的工位，又有自己的想法。",
+  "success": "原来还可以这样坐！",
+  "failure": "再想想重量下一站要去哪。",
+  "ink": 250,
+  "gold": 200,
+  "load": {
+    "x": 275,
+    "mass": 14
+  },
+  "hint": [
+    "先别动椅子。观察球的下落位置和两个金环。",
+    "把左高右低的两个环连起来，球会向右滚走；这一笔只挂住自己也有用。"
+  ],
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 180,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "boss",
+      "type": "core/cats",
+      "params": [
+        {
+          "x": 483,
+          "y": 310,
+          "w": 90,
+          "h": 70,
+          "label": "午睡老板"
+        }
+      ]
+    },
+    {
+      "id": "ramp-pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 450,
+          "y": 150,
+          "radius": 10,
+          "label": "高端"
+        },
+        {
+          "x": 620,
+          "y": 230,
+          "radius": 10,
+          "label": "低端"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 900,
+          "x": 535,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "label": "快递球"
+        }
+      ]
+    }
+  ]
+}

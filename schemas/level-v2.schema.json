@@ -3,7 +3,7 @@
   "$id": "https://save-one-stroke.invalid/level-v2.schema.json",
   "title": "救一笔！单关文件 v2 · 规则变种",
   "description": "兼容全部 v1 基础几何；v2 必须显式声明 mechanics，纯数据、64KiB 上限，同一运行时校验，格式合法不代表可解。",
-  "$comment": "附加运行时约束：gold<=ink；矩形 x+w<=720、y+h<=600；gap[0]<gap[1]；force.start<force.end。内置 manifest 要求 id 从1连续；外部单关无此顺序要求。 v2还须验证：临时terrain索引有效且不重复；gravity从at=0严格递增、向量模0.2–1.5；画区非空且能接到座面；落球出生圈在可见范围内且不与初始实体重叠。",
+  "$comment": "附加运行时约束：gold<=ink；矩形 x+w<=720、y+h<=600；gap[0]<gap[1]；force.start<force.end。数字 id 不要求连续；旧链接和成绩键保持不变，展示顺序由目录编排元数据决定。 v2还须验证：临时terrain索引有效且不重复；gravity从at=0严格递增、向量模0.2–1.5；画区非空且能接到座面；落球出生圈在可见范围内且不与初始实体重叠。",
   "type": "object",
   "additionalProperties": false,
   "required": [

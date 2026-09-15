@@ -3,7 +3,7 @@
   "$id": "https://save-one-stroke.invalid/level-v1.schema.json",
   "title": "救一笔！单关文件 v1",
   "description": "纯数据，不执行脚本。UTF-8 单文件最多 65536 字节；Schema 合法不等于可解。跨字段关系还须运行 js/level-format.js 或 npm run level:validate。",
-  "$comment": "附加运行时约束：gold<=ink；矩形 x+w<=720、y+h<=600；gap[0]<gap[1]；force.start<force.end。内置 manifest 要求 id 从1连续；外部单关无此顺序要求。",
+  "$comment": "附加运行时约束：gold<=ink；矩形 x+w<=720、y+h<=600；gap[0]<gap[1]；force.start<force.end。数字 id 不要求连续；旧链接和成绩键保持不变，展示顺序由目录编排元数据决定。",
   "type": "object",
   "additionalProperties": false,
   "required": ["format","version","id","chapter","title","tag","brief","condition","quip","success","failure","ink","gold","chair","terrain","load","hint"],

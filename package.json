@@ -12,7 +12,11 @@
     "test:import": "node tests/import-browser.cjs",
     "level:validate": "node scripts/validate-level.cjs",
     "test:variants": "node --test tests/variants.test.cjs",
-    "test:variants:browser": "node tests/variants-browser.cjs"
+    "test:variants:browser": "node tests/variants-browser.cjs",
+    "content:build": "node scripts/content-index.cjs",
+    "content:check": "node scripts/content-index.cjs --check",
+    "test:content": "node --test tests/content.test.cjs",
+    "test:content:browser": "node tests/content-browser.cjs"
   },
   "engines": {
     "node": ">=18"

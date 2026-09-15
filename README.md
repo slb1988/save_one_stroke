@@ -1,6 +1,6 @@
 # 救一笔！
 
-只准补一笔的椅子急救小游戏。**13 个完整中文关卡：5 关入门 + 4 关进阶 + 4 关规则变种**，真实二维刚体物理，鼠标 / 触屏 / 键盘可玩；无后台、无 CDN、无联网 AI。每关都是独立、可序列化的 JSON 文件，游戏内可一键导出。
+只准补一笔的椅子急救小游戏。**19 个完整中文关卡：保留原13关，新增6关难易交错的「脑洞接力」**，真实二维刚体物理，鼠标 / 触屏 / 键盘可玩；无后台、无 CDN、无联网 AI。每关都是独立、可序列化的 JSON 文件，游戏内可一键导出。
 
 ## 立即试玩
 
@@ -12,12 +12,12 @@ npm start
 
 打开 **http://127.0.0.1:4173/**。运行游戏无需 `npm install`。
 
-新一轮直接玩 **http://127.0.0.1:4173/#level=10**，或点击「变种 · 10–13」。原有7的反向风、8/9的空间练习均保留；新关不再只是挤障碍，而是让承重规则真的发生变化。
+新内容直接玩 **http://127.0.0.1:4173/#level=lab%2Fup-we-go**，或点击「脑洞接力」。原13关、数字链接和成绩均保留；新关重点是电梯接力、独立挡板、重力旅行等新因果，不只挤障碍。
 
 - 端口被占用：`npm start -- --port 4174`。
 - 不依附终端的后台服务：`npm run start:background`。该命令健康检查通过后返回 URL / PID，使用 `detached`、独立标准流及 `unref`，状态保存在 `.local/server.json`。若 IDE 使用全进程树清理策略导致服务停止，重新运行 `npm start` 即可。
 - 前台服务按 `Ctrl+C` 停止；后台服务可按 `.local/server.json` 中的 PID 在任务管理器结束。
-- 也可用 `python -m http.server 4173 --bind 127.0.0.1` 启动静态目录。
+- 也可先 `npm run content:build`，再用 `python -m http.server 4173 --bind 127.0.0.1` 启动纯静态目录；新增文件后须重新构建索引。
 - 只监听本机回环地址，不是公网发布。挑战链接携带 `#level=关卡号`；本机链接不能直接给其他设备访问。
 
 ## 怎么玩
@@ -32,7 +32,7 @@ npm start
 
 键盘：`Tab` 选中画板，方向键移动笔尖，空格落笔 / 抬笔，`Shift` 慢移；`R` 重画，`Enter` 试坐。画板外可正常触屏滚动。音效默认关闭，可手动开启。
 
-## 十三个小谜题
+## 原有十三个小谜题
 
 | 关卡 | 智力点 | 墨水 / 三星目标 |
 | --- | --- | --- |
@@ -50,20 +50,41 @@ npm start
 | 地板拐弯了 | 2秒后重力向右，右墙变成新的承重面 | 450 / 405 |
 | 别只会补腿 | 上方施工，真球会下落滚动；平顶接球会翻，斜顶可导走 | 330 / 295 |
 
+## 脑洞接力：轻松与烧脑交错
+
+| 稳定 id | 新关 | 认知惊喜 / 难度 |
+| --- | --- | --- |
+| `lab/up-we-go` | 一起坐电梯 | 两边同乘一个上升平台 / 轻松 |
+| `lab/last-stop` | 脚下的班车 | 横梁让接触点滑动换班，不追着平台造腿 / 烧脑 |
+| `lab/off-duty` | 地板先下班 | 装卸踏板撤走，双挂点接管重量 / 轻松 |
+| `lab/world-tour` | 下方环球旅行 | 下→左→上，双挂点约束而不是万能胶 / 烧脑 |
+| `lab/not-a-chair-leg` | 这一笔不修椅子 | 独立挂起的斜挡板把球导离猫，根本不焊椅子 / 轻松 |
+| `lab/return-ticket` | 别忘了回程 | 重力回向下时侧墙也退场，还要有永久落脚点 / 推理 |
+
+### 动态添加，不手写目录
+
+1. 在自己的 `levels/<namespace>/<slug>.json` 增加 v3 关卡，填写稳定id与 progression；在 `tests/cases/<namespace>/` 配合法解和失败例。
+2. 用 `npm start` 开发服务时，点击「刷新目录」即可发现新增文件，无需重启；坏文件显示路径并隔离，不破坏当前笔画、试坐、成绩或导入库。
+3. 新类型放在 `js/modules/<namespace>/<slug>.js` 自注册；场景配方与模块接口见 **[docs/MODULES.md](docs/MODULES.md)**，不用编辑通用主循环或中心 imports。
+4. 纯静态发布前运行 `npm run content:build`，然后 `npm run content:check`，一起发布文件与生成索引。Nginx 不扫描目录，刷新不会从 GitHub 拉未发布内容，也不需要生产 Node 服务。
+
+本轮未提交、推送或部署。难度是作者标注，合法解不等于趣味性已经由玩家确认。
+
 ## 单关文件与序列化
 
-完整坐标/字段规则、引擎机制边界、可直接使用的 JSON 示例、离线流程与 LLM 提示见 **[docs/LEVEL_FORMAT.md](docs/LEVEL_FORMAT.md)**；机器可读格式见 **[v1 Schema](schemas/level-v1.schema.json)** / **[v2 规则变种 Schema](schemas/level-v2.schema.json)**。
+完整坐标/字段规则、引擎机制边界、可直接使用的 JSON 示例、离线流程与 LLM 提示见 **[docs/LEVEL_FORMAT.md](docs/LEVEL_FORMAT.md)**；机器可读格式见 **[v1 Schema](schemas/level-v1.schema.json)** / **[v2 规则变种 Schema](schemas/level-v2.schema.json)** / **[v3 模块组合 Schema](schemas/level-v3.schema.json)**。
 
 点击「导入 / 本地关卡」导入 UTF-8 JSON：校验成功后自动存入本机，刷新后可从本地列表继续玩。最多12份、每份64 KiB；同 id 不覆盖内置关，同内容去重，坏文件/保存失败不会切换关卡或覆盖旧存档。移除本地存档需二次点击确认。
 
-`levels/manifest.json` 是唯一关卡目录，按顺序列出 **13 个独立 `.json` 文件**。游戏和 Node 测试从同一份文件加载，不再把关卡写死在 JavaScript 内。
+`levels/manifest.json` 是自动生成的发布目录；开发服务用同一个发现器实时返回它。顺序由每关 progression 决定，旧关的编排放在 `levels/legacy.progression.json`；没有 id+1 或必须连续编号的限制。
 
 点击画板标题右侧 **「↓ 保存关卡」**，可下载本关的完整 JSON；内容与项目中的原文件无损一致，包含：
 
 | 字段 | 含义 |
 | --- | --- |
-| `format` / `version` | `save-one-stroke-level` / `1`或`2`，v1 旧关保持原规则 |
-| `id` / `chapter` | 内置从1连续编号；v1为`入门`/`挑战`，v2另支持`变种` |
+| `format` / `version` | `save-one-stroke-level` / `1`、`2`或`3`；旧关保持原规则 |
+| `id` / `chapter` | v1/v2数字id不变；v3为namespace/name和自定义分组 |
+| `scene` / `progression` / `drawArea` | v3的模块实例、编排和可选画区；替代下列旧版几何与mechanics字段 |
 | `title`、`brief`、`condition` 等 | 标题、规则及试坐反馈文字 |
 | `ink` / `gold` | 墨水上限、三星用墨目标 |
 | `chair[]` | 木椅矩形 `{x,y,w,h,kind}`，第一块必须是 `seat` |
@@ -76,7 +97,7 @@ npm start
 
 坐标系固定为 **720×480，左上角为原点，y 向下**。JSON 只存关卡，不存执行函数、物理引擎对象或参考答案；玩家成绩仍在 localStorage，避免把关卡与游玩状态混在一起。
 
-可直接导入的文档例子：`docs/examples/level.json`（v1）和 `docs/examples/variant.json`（v2）。使用普通 `JSON.parse()` / `JSON.stringify()` 即可往返保存；加载时会验证版本、坐标、载荷、外力和目录顺序。新增文件可命名为 `14-new-level.json`，使用连续 id，并追加到 manifest 后刷新；无需修改渲染器或关卡判定。当前提供导入、保存、单关导出和离线校验，不扩展关卡编辑器或在线模型调用。导出的文件不含玩家解答或成绩；跨设备分享请发送 JSON，而不是只发送 `#local=...` 本地引用链接。
+可直接导入的例子：`docs/examples/level.json`（v1）、`docs/examples/variant.json`（v2）、`levels/lab/up-we-go.json`（v3）。加载时统一验证格式与参数；v3导出保留配方而不是展开缓存。详细旧版字段和v3差异见 LEVEL_FORMAT.md，不要混用。当前不扩展关卡编辑器或在线模型调用。导出的文件不含玩家解答或成绩；跨设备请发 JSON，而不是只发 `#local=...` 本地引用链接。
 
 ## 物理模型与边界
 
@@ -104,6 +125,10 @@ npm run level:validate -- docs/examples/variant.json --cases docs/examples/varia
 ```sh
 npm ci --cache .cache/npm
 npm test
+npm run content:check
+# 模块组合专项；浏览器脚本需先启动 npm start，可用 GAME_URL 指定地址
+npm run test:content
+npm run test:content:browser
 # 第三轮只验新变种，不重跑旧关矩阵
 npm run test:variants
 npm run test:variants:browser
@@ -139,15 +164,16 @@ npm run test:browser
 ## 文件
 
 - `index.html` / `styles.css`：纸张风中文界面、响应式布局。
-- `levels/*.json`：独立的版本化关卡文件及目录。
-- `js/levels.js`：浏览器 / Node 共用的 JSON 目录加载。
+- `levels/**/*.json`：独立版本化关卡；manifest为生成物，不手改。
+- `js/levels.js` / `js/catalog.js`：发现、刷新、排序和逐文件错误隔离。
+- `js/content.js` / `js/modules/<owner>/`：可信模块注册、元素、规则和场景配方。
 - `js/level-format.js` / `js/level-library.js`：闭合格式校验、单关解析与原子本地存档。
-- `docs/LEVEL_FORMAT.md` / `schemas/level-v1.schema.json` / `schemas/level-v2.schema.json`：作者及 LLM 规则、两版机器可读 Schema。
+- `docs/LEVEL_FORMAT.md` / `docs/MODULES.md` / `schemas/`：三版格式、模块契约与并行扩展说明。
 - `scripts/validate-level.cjs`：离线格式及同引擎样例验证入口。
 - `js/physics.js`：通用几何规则、刚体构造和试坐判定。
-- `js/render.js`：本地 Canvas 手绘人物、椅子、猫、反馈。
+- `js/render.js` / `js/render-art.js`：Canvas分层合成、共用画笔和人物；元素自己绘制外观。
 - `js/game.js`：输入、流程、提示、成绩、音效和链接。
 - `vendor/matter.min.js` / `vendor/Matter-LICENSE.txt`：Matter.js 0.20.0 及 MIT 许可。
 - `scripts/`：零运行依赖的本机静态服务。
 
-后续仅考虑更多关卡和更丰富的试坐表情；本版不含结构断裂、联机、出题编辑器或公网部署。
+后续可按独立namespace继续追加模块和关卡；本轮不含结构断裂、联机、可视化编辑器、模型服务或公网部署。

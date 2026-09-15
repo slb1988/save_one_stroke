@@ -1,0 +1,38 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "接触点在横梁下换班",
+      "expected": "success",
+      "stroke": [
+        [
+          404,
+          264
+        ],
+        [
+          375,
+          395.5
+        ],
+        [
+          580,
+          395.5
+        ]
+      ]
+    },
+    {
+      "name": "只顾出发站",
+      "expected": "failure",
+      "stroke": [
+        [
+          404,
+          264
+        ],
+        [
+          404,
+          395.5
+        ]
+      ]
+    }
+  ]
+}

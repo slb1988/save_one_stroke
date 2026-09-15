@@ -1,0 +1,15 @@
+{
+  "1": {"groupOrder":10,"order":10,"difficulty":"easy"},
+  "2": {"groupOrder":10,"order":20,"difficulty":"medium"},
+  "3": {"groupOrder":10,"order":30,"difficulty":"easy"},
+  "4": {"groupOrder":10,"order":40,"difficulty":"hard"},
+  "5": {"groupOrder":10,"order":50,"difficulty":"easy"},
+  "6": {"groupOrder":20,"order":10,"difficulty":"medium"},
+  "7": {"groupOrder":20,"order":20,"difficulty":"hard"},
+  "8": {"groupOrder":20,"order":30,"difficulty":"medium"},
+  "9": {"groupOrder":20,"order":40,"difficulty":"hard"},
+  "10": {"groupOrder":30,"order":10,"difficulty":"easy"},
+  "11": {"groupOrder":30,"order":20,"difficulty":"hard"},
+  "12": {"groupOrder":30,"order":30,"difficulty":"medium"},
+  "13": {"groupOrder":30,"order":40,"difficulty":"hard"}
+}

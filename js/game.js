@@ -1,7 +1,7 @@
 (async function () {
   'use strict';
   await window.RescueLevels.ready;
-  const P = window.RescuePhysics, { levels } = window.RescueLevels;
+  const P = window.RescuePhysics, Content = window.RescueContent, catalog = window.RescueLevels, { levels } = catalog;
   const $ = id => document.getElementById(id);
   const canvas = $('game-canvas');
   const Format = window.RescueLevelFormat;
@@ -14,9 +14,8 @@
   let lastClock = '', didBonk = false, lastRuleText = '', lastRuleEvent = 0;
   try {
     const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
-    for (const level of levels) {
-      const value = saved.records?.[level.id];
-      if (value && Number.isInteger(value.stars) && value.stars >= 1 && value.stars <= 3 && Number.isFinite(value.ink) && value.ink >= 10 && value.ink <= level.ink + 1) records[level.id] = { stars: value.stars, ink: value.ink };
+    for (const [id,value] of Object.entries(saved.records || {})) {
+      if ((/^\d{1,6}$/.test(id) || Content.TYPE.test(id)) && value && Number.isInteger(value.stars) && value.stars >= 1 && value.stars <= 3 && Number.isFinite(value.ink) && value.ink >= 10 && value.ink <= 2001) records[id] = {stars:value.stars,ink:value.ink};
     }
     muted = saved.muted !== false;
   } catch { storageOK = false; }
@@ -48,22 +47,35 @@
     $('sound-button').setAttribute('aria-label', muted ? '开启音效' : '关闭音效');
     $('sound-button').querySelector('span').textContent = muted ? '音效关' : '音效开';
   }
+  const difficultyNames = {easy:'轻松',medium:'推理',hard:'烧脑'};
+  const entryFor = level => catalog.entries.find(e=>String(e.level.id)===String(level.id));
+  const nextLevel = () => levels[levels.findIndex(l=>String(l.id)===String(state.level.id))+1];
   function renderRecords() {
-    const total = Object.values(records).reduce((n, r) => n + r.stars, 0);
+    const total = levels.reduce((n,l)=>n+(records[l.id]?.stars||0),0);
+    $('content-count').textContent = `${levels.length} 关，随便试，不扣命。`;
+    const chapters = [...new Set(levels.map(level=>level.chapter))];
+    $('chapter-tabs').replaceChildren(...chapters.map(chapter=>{
+      const button=document.createElement('button');button.type='button';
+      button.id=({'入门':'chapter-beginner','挑战':'chapter-challenge','变种':'chapter-variant'})[chapter] || '';
+      button.textContent=chapter;button.dataset.chapter=chapter;button.setAttribute('aria-pressed',String(state.level.chapter===chapter));
+      button.addEventListener('click',()=>selectLevel(chapterLast[chapter] || levels.find(l=>l.chapter===chapter).id));return button;
+    }));
     $('total-stars').innerHTML = `${total} <small>/ ${levels.length * 3}</small>`;
     const visible = levels.filter(level => level.chapter === state.level.chapter);
     $('level-nav').style.setProperty('--level-columns', visible.length);
-    for(const [id,chapter] of [['chapter-beginner','入门'],['chapter-challenge','挑战'],['chapter-variant','变种']]) $(id).setAttribute('aria-pressed',String(state.level.chapter===chapter));
-    $('chapter-note').textContent = state.level.chapter==='变种' ? '这次，规则会真的变。' : state.level.chapter==='挑战' ? '把重心和落脚点练熟。' : '先熟悉笔性，再挑战脑洞。';
+    $('chapter-note').textContent = '轻松 → 推理 / 烧脑 → 歇一关。随时自由选关。';
     $('level-nav').replaceChildren(...visible.map(level => {
       const button = document.createElement('button'); button.type = 'button'; button.className = 'level-button';
       const r = records[level.id];
       if (r) button.classList.add('completed');
-      if (!state.customKey && level.id === state.level.id) button.setAttribute('aria-current', 'step');
+      if (!state.customKey && String(level.id) === String(state.level.id)) button.setAttribute('aria-current', 'step');
       button.setAttribute('aria-label', `第${level.id}关 ${level.title}${r ? `，已获${r.stars}星` : '，未通关'}`);
       button.dataset.level = level.id;
-      button.innerHTML = `<span class="nav-num">${String(level.id).padStart(2, '0')}</span><span class="nav-copy"><span class="nav-name"></span><span class="nav-stars" aria-hidden="true">${r ? '★'.repeat(r.stars) + '☆'.repeat(3 - r.stars) : '· · ·'}</span></span>`;
-      button.querySelector('.nav-name').textContent = level.title;
+      const difficulty=entryFor(level)?.progression.difficulty;
+      button.dataset.difficulty=difficulty || '';
+      button.innerHTML = `<span class="nav-num"></span><span class="nav-copy"><span class="nav-name"></span><span class="nav-stars" aria-hidden="true">${r ? '★'.repeat(r.stars) + '☆'.repeat(3 - r.stars) : '· · ·'}</span></span>`;
+      button.querySelector('.nav-num').textContent=typeof level.id==='number'?String(level.id).padStart(2,'0'):String(visible.indexOf(level)+1).padStart(2,'0');
+      button.querySelector('.nav-name').textContent = `${level.title} · ${difficultyNames[difficulty] || '自选'}`;
       button.addEventListener('click', () => selectLevel(level.id));
       return button;
     }));
@@ -136,15 +148,16 @@
   }
   function selectLevel(id, fromHash = false, customKey = null) {
     const entry = customKey ? library.get(customKey) : null;
-    const level = entry?.level || levels.find(l => l.id === id) || levels[0];
+    const source = entry?.level || levels.find(l => String(l.id) === String(id)) || levels[0];
+    const level = Content.resolve(source);
     state.level = level; state.customKey = entry?.key || null;
     if (!state.customKey) chapterLast[level.chapter] = level.id;
     state.hintIndex = 0; reset(false);
-    $('hint-panel').hidden = true; $('level-number').textContent = state.customKey ? '本地' : String(level.id).padStart(2, '0');
+    $('hint-panel').hidden = true; $('level-number').textContent = state.customKey ? '本地' : typeof level.id==='number' ? String(level.id).padStart(2, '0') : '新';
     $('level-tag').textContent = state.customKey ? `本地关卡 · ${level.tag}` : level.tag; $('level-title').textContent = level.title;
     $('level-brief').textContent = level.brief; $('condition-text').textContent = level.condition;
     document.title = `救一笔！第 ${level.id} 关 · ${level.title}`;
-    if (!fromHash) history.replaceState(null, '', state.customKey ? `#local=${state.customKey}` : `#level=${level.id}`);
+    if (!fromHash) history.replaceState(null, '', state.customKey ? `#local=${state.customKey}` : `#level=${encodeURIComponent(level.id)}`);
     renderRecords();
   }
   function selectFromHash() {
@@ -154,8 +167,7 @@
       if (entry) return selectLevel(entry.level.id, true, entry.key);
       selectLevel(1); toast('这台浏览器没有此本地关卡，请导入对应 JSON 文件。'); return;
     }
-    const value = Number(params.get('level'));
-    selectLevel(Number.isInteger(value) && value >= 1 && value <= levels.length ? value : 1);
+    selectLevel(params.get('level') || levels[0].id);
   }
 
   function toWorld(event) {
@@ -165,7 +177,7 @@
   function constrain(p) { return P.constrainPoint(state.level,p,state.points.at(-1)); }
   function startStroke(p) {
     if (state.mode !== 'ready' || state.points.length) { toast('只准补一笔哦。想换笔画，先点「清除重画」。'); return false; }
-    if (p.y<P.drawTop(state.level)-10 || p.y>P.drawBottom(state.level)+10) { setStatus(state.level.version===2 ? '本关只能在亮色标线内画线，先看看开放画区。' : '从木椅附近开始，在椅面及以下画线。',true); return false; }
+    if (p.y<P.drawTop(state.level)-10 || p.y>P.drawBottom(state.level)+10) { setStatus(state.level.version>=2 ? '本关只能在亮色标线内画线，先看看开放画区。' : '从木椅附近开始，在椅面及以下画线。',true); return false; }
     state.points = [P.snapEndpoint(constrain(p), state.level)]; state.drawing = true;
     $('test-button').disabled = true; setStatus('一笔可以拐弯。让支架碰上木椅，再找个落脚点。');
     $('board-state').textContent = '墨水施工中'; return true;
@@ -205,8 +217,8 @@
     if (state.mode === 'result') {
       if (state.trial.outcome.success) {
         if (state.customKey) { reset(); return; }
-        if (state.level.id < levels.length) selectLevel(state.level.id + 1);
-        else { selectLevel(chapterLast['变种'] || levels[0].id); toast(`${levels.length} 关毕业！回到变种关，把省墨星星收齐吧。`); }
+        if (nextLevel()) selectLevel(nextLevel().id);
+        else { selectLevel(levels[0].id); toast('当前目录已走完！可以刷新目录看看已发布的新脑洞。'); }
       } else reset();
       return;
     }
@@ -229,7 +241,7 @@
     $('result-reason').textContent = result.reason;
     $('result-stats').textContent = `用墨 ${result.ink} / ${level.ink}　·　最大倾斜 ${result.maxTilt}°　·　试坐 5 秒`;
     $('test-button').disabled = false; $('hint-button').disabled = false; $('reset-label').textContent = result.success ? '挑战更省' : '清除重画';
-    $('test-label').textContent = result.success ? state.customKey ? '再试此关 ↺' : level.id < levels.length ? '救下一把椅子 →' : `${levels.length} 关毕业，再挑战 ↺` : '再救一次 →';
+    $('test-label').textContent = result.success ? state.customKey ? '再试此关 ↺' : nextLevel() ? '救下一把椅子 →' : `${levels.length} 关毕业，再挑战 ↺` : '再救一次 →';
     if (result.success) {
       if (state.customKey) {
         let saved = true;
@@ -280,9 +292,15 @@
     if (event.key.toLowerCase() === 'r') { event.preventDefault(); reset(); }
     if (event.key === 'Enter' && document.activeElement?.tagName !== 'BUTTON') { event.preventDefault(); runTrial(); }
   });
-  $('chapter-beginner').addEventListener('click', () => selectLevel(chapterLast['入门']));
-  $('chapter-challenge').addEventListener('click', () => selectLevel(chapterLast['挑战']));
-  $('chapter-variant').addEventListener('click', () => selectLevel(chapterLast['变种']));
+  function catalogFeedback(message) {
+    $('catalog-feedback').textContent=message || (catalog.errors.length ? catalog.errors.map(e=>`${e.file}：${e.message}`).join('\n') : `目录可用：${levels.length} 关。刷新只读取本机开发目录或此站点已发布的文件。`);
+  }
+  $('refresh-catalog').addEventListener('click', async()=>{
+    $('refresh-catalog').disabled=true;
+    try { await catalog.refresh();renderRecords();catalogFeedback();toast(`目录已刷新：${levels.length} 关；当前笔画和试坐保持不变。`); }
+    catch(error) {catalogFeedback(`刷新未完成，保留原目录与当前试坐：${error.message}`);}
+    finally {$('refresh-catalog').disabled=false;}
+  });
   $('export-button').addEventListener('click', () => {
     const file = new Blob([Format.serializeLevel(state.level)], { type: 'application/json;charset=utf-8' });
     const url = URL.createObjectURL(file), link = document.createElement('a');
@@ -333,7 +351,7 @@
   $('help-dialog').addEventListener('click', event => { if (event.target === $('help-dialog')) { const r = event.target.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) event.target.close(); } });
   $('share-button').addEventListener('click', async () => {
     if (state.customKey) { toast('本地链接不包含关卡数据，请点击「保存关卡」导出 JSON 后分享。'); return; }
-    const url = new URL(location.href); url.hash = `level=${state.level.id}`;
+    const url = new URL(location.href); url.hash = `level=${encodeURIComponent(state.level.id)}`;
     let copied = false;
     try { await navigator.clipboard.writeText(url.href); copied = true; }
     catch {
@@ -361,10 +379,10 @@
     RescueRenderer.draw(canvas, state, now);
     requestAnimationFrame(frame);
   }
-  renderSound(); selectFromHash(); resize(); requestAnimationFrame(frame);
+  renderSound(); selectFromHash(); catalogFeedback(); resize(); requestAnimationFrame(frame);
   // Read-only diagnostics for acceptance/debugging. No path injection or forced wins.
   window.rescueDebug = Object.freeze({
-    snapshot: () => ({ level: state.level.id, customKey: state.customKey, savedLevels: library.list().map(entry => ({key:entry.key,id:entry.level.id,title:entry.level.title})), mode: state.mode, drawing: state.drawing, points: state.points.map(p => ({ ...p })), validation: state.validation ? { valid: state.validation.valid, attached: state.validation.attached, code: state.validation.code, anchorCount:state.validation.anchorCount } : null, rules: state.trial ? {events:state.trial.events,removedTerrain:[...state.trial.removedTerrain],anchorCount:state.trial.bindings.filter(b=>b.body===state.trial.chair).length,gravity:{x:state.trial.engine.gravity.x,y:state.trial.engine.gravity.y},drops:state.trial.drops.map(d=>({index:d.index,x:d.body.position.x,y:d.body.position.y})),dropImpact:state.trial.dropImpact} : null, outcome: state.trial?.ended ? { ...state.trial.outcome } : null, elapsed: state.trial?.elapsed || 0, records: JSON.parse(JSON.stringify(records)) })
+    snapshot: () => ({ catalog: {ids:levels.map(l=>l.id),errors:catalog.errors}, modules: state.trial?.modules.filter(i=>i.def.inspect).map(i=>({type:i.def.type,id:i.id,...i.def.inspect(i.state)})) || [], level: state.level.id, customKey: state.customKey, savedLevels: library.list().map(entry => ({key:entry.key,id:entry.level.id,title:entry.level.title})), mode: state.mode, drawing: state.drawing, points: state.points.map(p => ({ ...p })), validation: state.validation ? { valid: state.validation.valid, attached: state.validation.attached, code: state.validation.code, anchorCount:state.validation.anchorCount } : null, rules: state.trial ? {events:state.trial.events,removedTerrain:[...state.trial.removedTerrain],anchorCount:state.trial.bindings.filter(b=>b.body===state.trial.chair).length,gravity:{x:state.trial.engine.gravity.x,y:state.trial.engine.gravity.y},drops:state.trial.drops.map(d=>({index:d.index,x:d.body.position.x,y:d.body.position.y})),dropImpact:state.trial.dropImpact} : null, outcome: state.trial?.ended ? { ...state.trial.outcome } : null, elapsed: state.trial?.elapsed || 0, records: JSON.parse(JSON.stringify(records)) })
   });
 })().catch(error => {
   console.error(error);
