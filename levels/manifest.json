@@ -1,0 +1,15 @@
+{
+  "format": "save-one-stroke-manifest",
+  "version": 1,
+  "files": [
+    "01-missing-leg.json",
+    "02-heavy-cat.json",
+    "03-floor-gap.json",
+    "04-sleeping-boss.json",
+    "05-borrow-a-step.json",
+    "06-legless.json",
+    "07-crosswind.json",
+    "08-two-islands.json",
+    "09-cat-corridor.json"
+  ]
+}

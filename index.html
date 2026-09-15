@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f4f0e7">
+  <meta name="description" content="只准补一笔的离谱椅子急救。九个物理小谜题，挑战双向风、高低双岛与双猫夹击！">
+  <title>救一笔！｜不靠谱家具研究所</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="vendor/matter.min.js"></script>
+  <script defer src="js/levels.js"></script>
+  <script defer src="js/physics.js"></script>
+  <script defer src="js/render.js"></script>
+  <script defer src="js/game.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="#level=1" aria-label="救一笔，回到第一关">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M10 11v17h24M15 28l-3 12M31 28l5 12M10 21h24"/><path class="mark-ink" d="m38 7-7 12-1 5 4-3 7-12z"/></svg></span>
+        <span><span class="brand-title">救一笔<span>！</span></span><span class="brand-sub">不靠谱家具研究所</span></span>
+      </a>
+      <div class="header-right">
+        <span class="edition">九关急救 · 进阶上新</span>
+        <button id="sound-button" class="icon-button" type="button" aria-label="开启音效" aria-pressed="false" title="切换音效">♪<span>音效关</span></button>
+        <button id="help-button" class="icon-button" type="button" aria-label="查看玩法">?<span>怎么玩</span></button>
+      </div>
+    </header>
+
+    <section class="intro" aria-label="游戏介绍">
+      <div><p class="eyebrow">THE ONE-STROKE RESCUE CLUB</p><h1>椅子不靠谱，<span>这一笔靠你。</span></h1><p class="intro-copy">有限的墨水，无限的求生欲。让阿稳坐住 5 秒就赢。</p></div>
+      <div class="progress-stamp"><strong id="total-stars">0 <small>/ 27</small></strong><span>省墨小星星</span><div class="stamp-stars" aria-hidden="true">✦ ✦ ✦</div></div>
+    </section>
+
+    <div class="chapter-bar"><div class="chapter-tabs" role="group" aria-label="关卡难度"><button id="chapter-beginner" type="button" aria-pressed="true">入门 · 01–05</button><button id="chapter-challenge" type="button" aria-pressed="false">进阶 · 06–09 <span>NEW</span></button></div><span id="chapter-note">先熟悉笔性，再挑战脑洞。</span></div>
+    <nav class="level-nav" aria-label="选择急救关卡" id="level-nav"></nav>
+
+    <main class="workspace">
+      <section class="game-card" aria-label="椅子急救画板">
+        <div class="level-heading">
+          <div class="level-number" id="level-number">01</div>
+          <div class="level-info"><p id="level-tag" class="eyebrow"></p><h2 id="level-title"></h2><p id="level-brief"></p></div>
+          <div class="heading-tools"><button id="export-button" class="small-button" type="button" aria-label="保存本关 JSON 文件" title="保存本关 JSON 文件"><span aria-hidden="true">↓</span> <span>保存关卡</span></button><button id="share-button" class="small-button" type="button" aria-label="复制当前关卡挑战链接" title="复制当前关卡链接"><span aria-hidden="true">↗</span> <span>挑战链接</span></button></div>
+        </div>
+        <div class="condition"><span class="condition-icon" aria-hidden="true">!</span><p id="condition-text"></p></div>
+
+        <div class="canvas-wrap" id="canvas-wrap">
+          <canvas id="game-canvas" width="720" height="480" tabindex="0" aria-label="一笔画板。按住鼠标或手指，在椅面及以下画一条连续支撑线，再按试坐。方向键移动画笔，空格落笔或抬笔，回车试坐。"></canvas>
+          <div class="board-badge" id="board-badge"><span class="live-dot"></span><span id="board-state">关卡加载中…</span></div>
+          <div class="trial-clock" id="trial-clock" hidden><span id="clock-text">5.0</span><small>秒 · 试坐中</small><div><i id="clock-fill"></i></div></div>
+          <section class="result-panel" id="result-panel" aria-label="试坐结果" hidden>
+            <div class="result-eyebrow" id="result-eyebrow"></div><h3 id="result-title"></h3><p id="result-quip"></p><p class="result-reason" id="result-reason"></p><div class="result-stats" id="result-stats"></div>
+          </section>
+        </div>
+
+        <div class="drawing-status" aria-live="polite"><span id="stroke-status">按住画一笔 → 松手 → 请阿稳试坐</span><span class="keyboard-note">R 重画 · Enter 试坐</span></div>
+        <div class="control-panel">
+          <div class="ink-row"><div><span class="ink-icon" aria-hidden="true">✎</span> <strong>急救墨水</strong><span class="ink-unit">按长度计费</span></div><span><b id="ink-left">185</b><small id="ink-total"> / 185</small></span></div>
+          <div class="ink-track" role="progressbar" aria-label="剩余墨水" aria-valuemin="0" aria-valuemax="185" aria-valuenow="185" id="ink-track"><div id="ink-fill"></div><span id="gold-marker" title="三星省墨线"></span></div>
+          <div class="actions"><button id="reset-button" class="secondary-button" type="button"><span aria-hidden="true">↺</span> <span id="reset-label">清除重画</span></button><button id="hint-button" class="secondary-button hint-button" type="button"><span aria-hidden="true">✧</span> 提示</button><button id="test-button" class="primary-button" type="button" disabled><span id="test-label">请阿稳试坐 <span aria-hidden="true">→</span></span></button></div>
+          <div id="hint-panel" class="hint-panel" aria-live="polite" hidden><strong id="hint-title">灵感便签</strong><p id="hint-text"></p><small>提示不扣分，再点一次看更具体的思路。</small></div>
+        </div>
+      </section>
+
+      <aside class="side-notes">
+        <section class="note-card rules-card"><span class="tape" aria-hidden="true"></span><p class="eyebrow">研究所的奇怪规定</p><h2>只补一笔，<br>不许施法。</h2><ol class="rules-list"><li><span>01</span><p><strong>线要碰到木椅</strong>墨水变成硬支架，接触处自动焊牢。不接上，就会自己掉下去。</p></li><li><span>02</span><p><strong>支撑要有落脚点</strong>地板、台阶可以承重；空气和虚线不行。画长不如落得对。</p></li><li><span>03</span><p><strong>稳住，还要省着画</strong>一笔可以拐弯。人会带着椅子一起翻；坐满 5 秒才算数。</p></li></ol><p class="rule-footnote">笔尖靠近表面会轻轻吸附，仍计入墨水。粉色猫区不能碰。</p></section>
+        <section class="record-card"><div class="record-top"><h2>本关急救档案</h2><span aria-hidden="true">⌁</span></div><div class="personal-stars" id="personal-stars" aria-label="尚无成绩">☆ ☆ ☆</div><p id="personal-best">还没留下你的神来之笔。</p><div class="record-target"><span>三星小目标</span><strong id="gold-target">≤ 145 墨水</strong></div><p class="save-note" id="save-note">成绩只保存在这台设备，不用登录。</p></section>
+        <div class="side-doodle" aria-hidden="true"><svg viewBox="0 0 220 78"><path d="M12 55q20-40 42 0t45 0q20-40 46 0l25-29-7 26 18-9"/><text x="40" y="75">画得歪，也可能是天才。</text></svg></div>
+      </aside>
+    </main>
+    <footer class="footer"><span>小实验，大求生欲。<span class="footer-dot">·</span> 9 关，随便试，不扣命。</span><span>纯本地物理 · 无需联网</span></footer>
+  </div>
+
+  <dialog id="help-dialog" aria-labelledby="help-title"><button class="dialog-close" id="close-help" type="button" aria-label="关闭玩法">×</button><p class="eyebrow">欢迎来到不靠谱家具研究所</p><h2 id="help-title">阿稳的小命，<br>交给你这一笔了。</h2><p>先看本关试坐条件，在<strong>椅面及以下</strong>按住画一条连续线。抬笔后点「请阿稳试坐」，观察 5 秒。</p><ul><li><strong>硬支架，不是魔法：</strong>碰到木椅就焊接成整体；否则线会自由掉落。支架不会断，但整把椅子会滑、倒、掉进洞。</li><li><strong>真实落脚：</strong>线要能把重量传到实心地板或台阶。墨水不能画进实体，也不能碰粉色猫区。</li><li><strong>省墨拿星：</strong>成功至少一星；用墨不超过本关三星目标可获三星。提示不扣星，清除可无限重试。</li></ul><p class="dialog-tip">触屏：一根手指画，画板外可滚动。<br>键盘：选中画板后，方向键移动，空格落笔/抬笔，Shift 慢移；R 重画，Enter 试坐。</p><button id="got-it" class="primary-button" type="button">懂了，开救！ →</button></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <noscript><div class="noscript">请开启 JavaScript 才能试玩《救一笔！》。</div></noscript>
+</body>
+</html>
