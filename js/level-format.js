@@ -7,7 +7,7 @@
   'use strict';
   const MAX_FILE_BYTES = 64 * 1024;
   const byteLength = text => new TextEncoder().encode(text).length;
-  const fail = (path, message) => { throw new Error(`${path}：${message}`); };
+  const fail = (path, message) => { throw new Error(`${path.length > 140 ? path.slice(0,140) + '…' : path}：${message}`); };
   function object(value, allowed, required, path) {
     if (!value || typeof value !== 'object' || Array.isArray(value)) fail(path, '需要 JSON 对象');
     for (const key of Object.keys(value)) if (!allowed.includes(key)) fail(`${path}.${key}`, '不支持的字段（不允许脚本或自定义回调）');
