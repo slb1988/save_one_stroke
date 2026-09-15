@@ -9,7 +9,9 @@ const Format = require('../js/level-format.js');
 const Library = require('../js/level-library.js');
 const {levels} = require('../js/levels.js');
 const example = require('../docs/examples/level.json');
-const schema = new Ajv({strict:false,allErrors:true}).compile(require('../schemas/level-v1.schema.json'));
+const ajv=new Ajv({strict:false,allErrors:true});
+const schema=ajv.compile(require('../schemas/level-v1.schema.json'));
+const schema2=ajv.compile(require('../schemas/level-v2.schema.json'));
 const copy = data => JSON.parse(JSON.stringify(data));
 function storage() {
   const data = new Map();
@@ -17,8 +19,8 @@ function storage() {
 }
 function cli(...args) { return spawnSync(process.execPath,[path.resolve(__dirname,'../scripts/validate-level.cjs'),...args,'--json'],{encoding:'utf8'}); }
 
-test('九个现有 JSON 与文档完整示例同时满足 Schema 和运行时格式', () => {
-  for (const level of [...levels,example]) { assert.equal(schema(level),true,JSON.stringify(schema.errors)); assert.equal(Format.validateLevel(level),level); }
+test('内置 JSON 与文档完整示例同时满足各自版本 Schema 和运行时格式', () => {
+  for(const level of [...levels,example]) { const check=level.version===2 ? schema2 : schema; assert.equal(check(level),true,JSON.stringify(check.errors)); assert.equal(Format.validateLevel(level),level); }
 });
 test('Markdown 中可复制的完整例子与实际文件一致', () => {
   const doc = fs.readFileSync(path.join(__dirname,'../docs/LEVEL_FORMAT.md'),'utf8');

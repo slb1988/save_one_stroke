@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#f4f0e7">
-  <meta name="description" content="只准补一笔的离谱椅子急救。九个物理小谜题，挑战双向风、高低双岛与双猫夹击！">
+  <meta name="description" content="只准补一笔的离谱椅子急救。十三关物理谜题，支点撤走、金环悬挂、重力转向和落球惊喜！">
   <title>救一笔！｜不靠谱家具研究所</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
@@ -24,7 +24,7 @@
         <span><span class="brand-title">救一笔<span>！</span></span><span class="brand-sub">不靠谱家具研究所</span></span>
       </a>
       <div class="header-right">
-        <span class="edition">九关急救 · 进阶上新</span>
+        <span class="edition">十三关急救 · 规则会变</span>
         <button id="sound-button" class="icon-button" type="button" aria-label="开启音效" aria-pressed="false" title="切换音效">♪<span>音效关</span></button>
         <button id="help-button" class="icon-button" type="button" aria-label="查看玩法">?<span>怎么玩</span></button>
       </div>
@@ -32,10 +32,10 @@
 
     <section class="intro" aria-label="游戏介绍">
       <div><p class="eyebrow">THE ONE-STROKE RESCUE CLUB</p><h1>椅子不靠谱，<span>这一笔靠你。</span></h1><p class="intro-copy">有限的墨水，无限的求生欲。让阿稳坐住 5 秒就赢。</p></div>
-      <div class="progress-stamp"><strong id="total-stars">0 <small>/ 27</small></strong><span>省墨小星星</span><div class="stamp-stars" aria-hidden="true">✦ ✦ ✦</div></div>
+      <div class="progress-stamp"><strong id="total-stars">0 <small>/ 39</small></strong><span>省墨小星星</span><div class="stamp-stars" aria-hidden="true">✦ ✦ ✦</div></div>
     </section>
 
-    <div class="chapter-bar"><div class="chapter-tabs" role="group" aria-label="关卡难度"><button id="chapter-beginner" type="button" aria-pressed="true">入门 · 01–05</button><button id="chapter-challenge" type="button" aria-pressed="false">进阶 · 06–09 <span>NEW</span></button></div><span id="chapter-note">先熟悉笔性，再挑战脑洞。</span><button id="open-library" class="small-button" type="button">导入 / 本地关卡 <span id="local-count">0</span></button></div>
+    <div class="chapter-bar"><div class="chapter-tabs" role="group" aria-label="关卡难度"><button id="chapter-beginner" type="button" aria-pressed="true">入门 · 01–05</button><button id="chapter-challenge" type="button" aria-pressed="false">进阶 · 06–09</button><button id="chapter-variant" type="button" aria-pressed="false">变种 · 10–13 <span>NEW</span></button></div><span id="chapter-note">先熟悉笔性，再挑战脑洞。</span><button id="open-library" class="small-button" type="button">导入 / 本地关卡 <span id="local-count">0</span></button></div>
     <nav class="level-nav" aria-label="选择急救关卡" id="level-nav"></nav>
 
     <main class="workspace">
@@ -48,8 +48,9 @@
         <div class="condition"><span class="condition-icon" aria-hidden="true">!</span><p id="condition-text"></p></div>
 
         <p id="custom-warning" class="custom-warning" hidden></p>
+        <div id="rule-status" class="rule-status" aria-live="off" hidden></div>
         <div class="canvas-wrap" id="canvas-wrap">
-          <canvas id="game-canvas" width="720" height="480" tabindex="0" aria-label="一笔画板。按住鼠标或手指，在椅面及以下画一条连续支撑线，再按试坐。方向键移动画笔，空格落笔或抬笔，回车试坐。"></canvas>
+          <canvas id="game-canvas" width="720" height="480" tabindex="0" aria-label="一笔画板。按住鼠标或手指，在本关标明的画区画一条连续支撑线，再按试坐。方向键移动画笔，空格落笔或抬笔，回车试坐。"></canvas>
           <div class="board-badge" id="board-badge"><span class="live-dot"></span><span id="board-state">关卡加载中…</span></div>
           <div class="trial-clock" id="trial-clock" hidden><span id="clock-text">5.0</span><small>秒 · 试坐中</small><div><i id="clock-fill"></i></div></div>
           <section class="result-panel" id="result-panel" aria-label="试坐结果" hidden>
@@ -67,16 +68,16 @@
       </section>
 
       <aside class="side-notes">
-        <section class="note-card rules-card"><span class="tape" aria-hidden="true"></span><p class="eyebrow">研究所的奇怪规定</p><h2>只补一笔，<br>不许施法。</h2><ol class="rules-list"><li><span>01</span><p><strong>线要碰到木椅</strong>墨水变成硬支架，接触处自动焊牢。不接上，就会自己掉下去。</p></li><li><span>02</span><p><strong>支撑要有落脚点</strong>地板、台阶可以承重；空气和虚线不行。画长不如落得对。</p></li><li><span>03</span><p><strong>稳住，还要省着画</strong>一笔可以拐弯。人会带着椅子一起翻；坐满 5 秒才算数。</p></li></ol><p class="rule-footnote">笔尖靠近表面会轻轻吸附，仍计入墨水。粉色猫区不能碰。</p></section>
+        <section class="note-card rules-card"><span class="tape" aria-hidden="true"></span><p class="eyebrow">研究所的奇怪规定</p><h2>只补一笔，<br>不许施法。</h2><ol class="rules-list"><li><span>01</span><p><strong>线要碰到木椅</strong>墨水变成硬支架，接触处自动焊牢。不接上，就会自己掉下去。</p></li><li><span>02</span><p><strong>支撑要有落脚点</strong>地板、台阶可以承重；空气和虚线不行。画长不如落得对。</p></li><li><span>03</span><p><strong>稳住，还要省着画</strong>一笔可以拐弯。人会带着椅子一起翻；坐满 5 秒才算数。</p></li></ol><p class="rule-footnote">变种以关前规则为准：金环可挂接，地面可能撤走，画区可能改为上方。吸附仍计墨水。</p></section>
         <section class="record-card"><div class="record-top"><h2>本关急救档案</h2><span aria-hidden="true">⌁</span></div><div class="personal-stars" id="personal-stars" aria-label="尚无成绩">☆ ☆ ☆</div><p id="personal-best">还没留下你的神来之笔。</p><div class="record-target"><span>三星小目标</span><strong id="gold-target">≤ 145 墨水</strong></div><p class="save-note" id="save-note">成绩只保存在这台设备，不用登录。</p></section>
         <div class="side-doodle" aria-hidden="true"><svg viewBox="0 0 220 78"><path d="M12 55q20-40 42 0t45 0q20-40 46 0l25-29-7 26 18-9"/><text x="40" y="75">画得歪，也可能是天才。</text></svg></div>
       </aside>
     </main>
-    <footer class="footer"><span>小实验，大求生欲。<span class="footer-dot">·</span> 9 关，随便试，不扣命。</span><span>纯本地物理 · 无需联网</span></footer>
+    <footer class="footer"><span>小实验，大求生欲。<span class="footer-dot">·</span> 13 关，随便试，不扣命。</span><span>纯本地物理 · 无需联网</span></footer>
   </div>
 
-  <dialog id="help-dialog" aria-labelledby="help-title"><button class="dialog-close" id="close-help" type="button" aria-label="关闭玩法">×</button><p class="eyebrow">欢迎来到不靠谱家具研究所</p><h2 id="help-title">阿稳的小命，<br>交给你这一笔了。</h2><p>先看本关试坐条件，在<strong>椅面及以下</strong>按住画一条连续线。抬笔后点「请阿稳试坐」，观察 5 秒。</p><ul><li><strong>硬支架，不是魔法：</strong>碰到木椅就焊接成整体；否则线会自由掉落。支架不会断，但整把椅子会滑、倒、掉进洞。</li><li><strong>真实落脚：</strong>线要能把重量传到实心地板或台阶。墨水不能画进实体，也不能碰粉色猫区。</li><li><strong>省墨拿星：</strong>成功至少一星；用墨不超过本关三星目标可获三星。提示不扣星，清除可无限重试。</li></ul><p class="dialog-tip">触屏：一根手指画，画板外可滚动。<br>键盘：选中画板后，方向键移动，空格落笔/抬笔，Shift 慢移；R 重画，Enter 试坐。</p><button id="got-it" class="primary-button" type="button">懂了，开救！ →</button></dialog>
-  <dialog id="library-dialog" aria-labelledby="library-title"><button class="dialog-close" id="close-library" type="button" aria-label="关闭本地关卡">×</button><p class="eyebrow">关卡文件夹 · 只在本机保存</p><h2 id="library-title">把你的脑洞，<br>装进一个 JSON。</h2><p>导入单关文件后自动保存，可刷新后继续选用。最多 12 关、每个文件 ≤ 64 KiB；不会替换任何内置关卡。</p><button id="import-button" class="primary-button" type="button">↑ 选择 JSON 并保存</button><input id="import-file" type="file" accept=".json,application/json" hidden><p id="import-feedback" class="import-feedback" role="alert" hidden></p><label for="saved-level-select" class="library-label">已经保存在这台浏览器的关卡</label><select id="saved-level-select" aria-label="选择已保存的本地关卡"></select><div class="library-actions"><button id="play-saved" class="primary-button" type="button" disabled>试玩选中关卡 →</button><button id="delete-saved" class="secondary-button" type="button" disabled>移除存档</button></div><p class="dialog-tip">格式合法不代表可解。用「保存关卡」导出 JSON 才能跨设备分享；本地 URL 只引用本机存档。<br><a href="docs/LEVEL_FORMAT.md" target="_blank" rel="noopener">格式规则与 LLM 生成提示</a> · <a href="schemas/level-v1.schema.json" target="_blank" rel="noopener">机器可读 Schema</a></p></dialog>
+  <dialog id="help-dialog" aria-labelledby="help-title"><button class="dialog-close" id="close-help" type="button" aria-label="关闭玩法">×</button><p class="eyebrow">欢迎来到不靠谱家具研究所</p><h2 id="help-title">阿稳的小命，<br>交给你这一笔了。</h2><p>先看本关试坐条件，在<strong>本关标出的画区</strong>按住画一条连续线（入门默认椅面以下）。抬笔后点「请阿稳试坐」，观察 5 秒。</p><ul><li><strong>硬支架，不是魔法：</strong>碰到木椅就焊接成整体；否则线会自由掉落。支架不会断，但整把椅子会滑、倒、掉进洞。</li><li><strong>真实落脚：</strong>线要能把重量传到实心地形，或挂到明确标出的金环。变种会预告支点撤走、重力转向或落球；只有文案不算规则，观察真实变化。</li><li><strong>省墨拿星：</strong>成功至少一星；用墨不超过本关三星目标可获三星。提示不扣星，清除可无限重试。</li></ul><p class="dialog-tip">触屏：一根手指画，画板外可滚动。<br>键盘：选中画板后，方向键移动，空格落笔/抬笔，Shift 慢移；R 重画，Enter 试坐。</p><button id="got-it" class="primary-button" type="button">懂了，开救！ →</button></dialog>
+  <dialog id="library-dialog" aria-labelledby="library-title"><button class="dialog-close" id="close-library" type="button" aria-label="关闭本地关卡">×</button><p class="eyebrow">关卡文件夹 · 只在本机保存</p><h2 id="library-title">把你的脑洞，<br>装进一个 JSON。</h2><p>导入单关文件后自动保存，可刷新后继续选用。最多 12 关、每个文件 ≤ 64 KiB；不会替换任何内置关卡。</p><button id="import-button" class="primary-button" type="button">↑ 选择 JSON 并保存</button><input id="import-file" type="file" accept=".json,application/json" hidden><p id="import-feedback" class="import-feedback" role="alert" hidden></p><label for="saved-level-select" class="library-label">已经保存在这台浏览器的关卡</label><select id="saved-level-select" aria-label="选择已保存的本地关卡"></select><div class="library-actions"><button id="play-saved" class="primary-button" type="button" disabled>试玩选中关卡 →</button><button id="delete-saved" class="secondary-button" type="button" disabled>移除存档</button></div><p class="dialog-tip">格式合法不代表可解。用「保存关卡」导出 JSON 才能跨设备分享；本地 URL 只引用本机存档。<br><a href="docs/LEVEL_FORMAT.md" target="_blank" rel="noopener">格式规则与 LLM 生成提示</a> · <a href="schemas/level-v1.schema.json" target="_blank" rel="noopener">v1 Schema</a> / <a href="schemas/level-v2.schema.json" target="_blank" rel="noopener">v2 变种 Schema</a></p></dialog>
   <div class="toast" id="toast" role="status" hidden></div>
   <noscript><div class="noscript">请开启 JavaScript 才能试玩《救一笔！》。</div></noscript>
 </body>

@@ -1,0 +1,703 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://save-one-stroke.invalid/level-v2.schema.json",
+  "title": "救一笔！单关文件 v2 · 规则变种",
+  "description": "兼容全部 v1 基础几何；v2 必须显式声明 mechanics，纯数据、64KiB 上限，同一运行时校验，格式合法不代表可解。",
+  "$comment": "附加运行时约束：gold<=ink；矩形 x+w<=720、y+h<=600；gap[0]<gap[1]；force.start<force.end。内置 manifest 要求 id 从1连续；外部单关无此顺序要求。 v2还须验证：临时terrain索引有效且不重复；gravity从at=0严格递增、向量模0.2–1.5；画区非空且能接到座面；落球出生圈在可见范围内且不与初始实体重叠。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "version",
+    "id",
+    "chapter",
+    "title",
+    "tag",
+    "brief",
+    "condition",
+    "quip",
+    "success",
+    "failure",
+    "ink",
+    "gold",
+    "chair",
+    "terrain",
+    "load",
+    "hint",
+    "mechanics"
+  ],
+  "properties": {
+    "format": {
+      "const": "save-one-stroke-level"
+    },
+    "version": {
+      "const": 2
+    },
+    "id": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 999999
+    },
+    "chapter": {
+      "enum": [
+        "入门",
+        "挑战",
+        "变种"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "pattern": "\\S"
+    },
+    "tag": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "\\S"
+    },
+    "brief": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240,
+      "pattern": "\\S"
+    },
+    "condition": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "pattern": "\\S"
+    },
+    "quip": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "pattern": "\\S"
+    },
+    "success": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240,
+      "pattern": "\\S"
+    },
+    "failure": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240,
+      "pattern": "\\S"
+    },
+    "ink": {
+      "type": "number",
+      "minimum": 10,
+      "maximum": 2000
+    },
+    "gold": {
+      "type": "number",
+      "minimum": 10,
+      "maximum": 2000
+    },
+    "chair": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 30,
+      "prefixItems": [
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/woodRect"
+            },
+            {
+              "properties": {
+                "kind": {
+                  "const": "seat"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "items": {
+        "$ref": "#/$defs/woodRect"
+      }
+    },
+    "terrain": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 30,
+      "items": {
+        "$ref": "#/$defs/terrainRect"
+      }
+    },
+    "load": {
+      "$ref": "#/$defs/load"
+    },
+    "hint": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 300,
+        "pattern": "\\S"
+      }
+    },
+    "forbidden": {
+      "$ref": "#/$defs/rect"
+    },
+    "forbiddenZones": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/$defs/zoneRect"
+      }
+    },
+    "gap": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 720
+      }
+    },
+    "labels": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 12,
+      "items": {
+        "$ref": "#/$defs/label"
+      }
+    },
+    "forces": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/$defs/force"
+      }
+    },
+    "mechanics": {
+      "$ref": "#/$defs/mechanics"
+    }
+  },
+  "not": {
+    "required": [
+      "forbidden",
+      "forbiddenZones"
+    ]
+  },
+  "$defs": {
+    "x": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 719
+    },
+    "y": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 480
+    },
+    "w": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 720
+    },
+    "h": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 600
+    },
+    "rect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y",
+        "w",
+        "h"
+      ],
+      "properties": {
+        "x": {
+          "$ref": "#/$defs/x"
+        },
+        "y": {
+          "$ref": "#/$defs/y"
+        },
+        "w": {
+          "$ref": "#/$defs/w"
+        },
+        "h": {
+          "$ref": "#/$defs/h"
+        }
+      }
+    },
+    "woodRect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y",
+        "w",
+        "h",
+        "kind"
+      ],
+      "properties": {
+        "x": {
+          "$ref": "#/$defs/x"
+        },
+        "y": {
+          "$ref": "#/$defs/y"
+        },
+        "w": {
+          "$ref": "#/$defs/w"
+        },
+        "h": {
+          "$ref": "#/$defs/h"
+        },
+        "kind": {
+          "enum": [
+            "seat",
+            "leg"
+          ]
+        }
+      }
+    },
+    "terrainRect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y",
+        "w",
+        "h"
+      ],
+      "properties": {
+        "x": {
+          "$ref": "#/$defs/x"
+        },
+        "y": {
+          "$ref": "#/$defs/y"
+        },
+        "w": {
+          "$ref": "#/$defs/w"
+        },
+        "h": {
+          "$ref": "#/$defs/h"
+        },
+        "step": {
+          "type": "boolean"
+        }
+      }
+    },
+    "zoneRect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y",
+        "w",
+        "h"
+      ],
+      "properties": {
+        "x": {
+          "$ref": "#/$defs/x"
+        },
+        "y": {
+          "$ref": "#/$defs/y"
+        },
+        "w": {
+          "$ref": "#/$defs/w"
+        },
+        "h": {
+          "$ref": "#/$defs/h"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 720
+        },
+        "y": {
+          "$ref": "#/$defs/y"
+        }
+      }
+    },
+    "load": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "mass"
+      ],
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 25,
+          "maximum": 695
+        },
+        "mass": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 200
+        },
+        "cat": {
+          "type": "boolean"
+        },
+        "catX": {
+          "type": "number",
+          "minimum": 25,
+          "maximum": 695
+        },
+        "catMass": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 200
+        }
+      },
+      "if": {
+        "required": [
+          "cat"
+        ],
+        "properties": {
+          "cat": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "catX",
+          "catMass"
+        ]
+      }
+    },
+    "label": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y",
+        "text",
+        "to"
+      ],
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 720
+        },
+        "y": {
+          "$ref": "#/$defs/y"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "\\S"
+        },
+        "to": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 720
+            },
+            {
+              "$ref": "#/$defs/y"
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "force": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end",
+        "fx",
+        "at",
+        "label"
+      ],
+      "properties": {
+        "start": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5000
+        },
+        "end": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5000
+        },
+        "fx": {
+          "type": "number",
+          "minimum": -0.1,
+          "maximum": 0.1
+        },
+        "fy": {
+          "type": "number",
+          "minimum": -0.1,
+          "maximum": 0.1
+        },
+        "at": {
+          "$ref": "#/$defs/point"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "temporaryTerrain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index",
+        "removeAt",
+        "label"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 29
+        },
+        "removeAt": {
+          "type": "number",
+          "minimum": 750,
+          "maximum": 4000
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y",
+        "radius",
+        "label"
+      ],
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 24,
+          "maximum": 696
+        },
+        "y": {
+          "type": "number",
+          "minimum": 40,
+          "maximum": 460
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 6,
+          "maximum": 14
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "gravityChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "at",
+        "x",
+        "y",
+        "label"
+      ],
+      "properties": {
+        "at": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 4000
+        },
+        "x": {
+          "type": "number",
+          "minimum": -1.5,
+          "maximum": 1.5
+        },
+        "y": {
+          "type": "number",
+          "minimum": -1.5,
+          "maximum": 1.5
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "drop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "at",
+        "x",
+        "y",
+        "radius",
+        "mass",
+        "label"
+      ],
+      "properties": {
+        "at": {
+          "type": "number",
+          "minimum": 500,
+          "maximum": 3500
+        },
+        "x": {
+          "type": "number",
+          "minimum": 24,
+          "maximum": 696
+        },
+        "y": {
+          "type": "number",
+          "minimum": 40,
+          "maximum": 350
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 10,
+          "maximum": 35
+        },
+        "mass": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 30
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "mechanics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {
+        "drawTop": {
+          "type": "number",
+          "minimum": 40,
+          "maximum": 400
+        },
+        "drawBottom": {
+          "type": "number",
+          "minimum": 100,
+          "maximum": 465
+        },
+        "temporaryTerrain": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/temporaryTerrain"
+          }
+        },
+        "anchors": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/anchor"
+          }
+        },
+        "gravity": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/$defs/gravityChange"
+          },
+          "prefixItems": [
+            {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/gravityChange"
+                },
+                {
+                  "properties": {
+                    "at": {
+                      "const": 0
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "drops": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/drop"
+          }
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "temporaryTerrain"
+          ]
+        },
+        {
+          "required": [
+            "anchors"
+          ]
+        },
+        {
+          "required": [
+            "gravity"
+          ]
+        },
+        {
+          "required": [
+            "drops"
+          ]
+        }
+      ]
+    }
+  }
+}

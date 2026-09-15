@@ -10,7 +10,9 @@
     "test:browser": "node tests/browser.cjs",
     "test:format": "node --test tests/format.test.cjs",
     "test:import": "node tests/import-browser.cjs",
-    "level:validate": "node scripts/validate-level.cjs"
+    "level:validate": "node scripts/validate-level.cjs",
+    "test:variants": "node --test tests/variants.test.cjs",
+    "test:variants:browser": "node tests/variants-browser.cjs"
   },
   "engines": {
     "node": ">=18"

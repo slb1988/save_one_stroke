@@ -10,6 +10,10 @@
     "06-legless.json",
     "07-crosswind.json",
     "08-two-islands.json",
-    "09-cat-corridor.json"
+    "09-cat-corridor.json",
+    "10-vanishing-support.json",
+    "11-hanging-chair.json",
+    "12-sideways-gravity.json",
+    "13-bowling-interruption.json"
   ]
 }

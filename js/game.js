@@ -9,9 +9,9 @@
   const library = window.RescueLevelLibrary.createLibrary(localStore);
   const KEY = 'save-one-stroke:v1';
   const state = { level: levels[0], customKey: null, mode: 'ready', points: [], validation: null, trial: null, drawing: false, pointerId: null, hintIndex: 0, keyboard: null };
-  const chapterLast = { '入门': 1, '挑战': 6 };
+  const chapterLast = Object.fromEntries([...new Set(levels.map(level=>level.chapter))].map(chapter=>[chapter,levels.find(level=>level.chapter===chapter).id]));
   let records = {}, storageOK = true, muted = true, audio = null, toastTimer = null, lastTime = performance.now(), accumulator = 0;
-  let lastClock = '', didBonk = false;
+  let lastClock = '', didBonk = false, lastRuleText = '', lastRuleEvent = 0;
   try {
     const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
     for (const level of levels) {
@@ -53,9 +53,8 @@
     $('total-stars').innerHTML = `${total} <small>/ ${levels.length * 3}</small>`;
     const visible = levels.filter(level => level.chapter === state.level.chapter);
     $('level-nav').style.setProperty('--level-columns', visible.length);
-    $('chapter-beginner').setAttribute('aria-pressed', String(state.level.chapter === '入门'));
-    $('chapter-challenge').setAttribute('aria-pressed', String(state.level.chapter === '挑战'));
-    $('chapter-note').textContent = state.level.chapter === '挑战' ? '没那么好救了。先想，再落笔。' : '先熟悉笔性，再挑战脑洞。';
+    for(const [id,chapter] of [['chapter-beginner','入门'],['chapter-challenge','挑战'],['chapter-variant','变种']]) $(id).setAttribute('aria-pressed',String(state.level.chapter===chapter));
+    $('chapter-note').textContent = state.level.chapter==='变种' ? '这次，规则会真的变。' : state.level.chapter==='挑战' ? '把重心和落脚点练熟。' : '先熟悉笔性，再挑战脑洞。';
     $('level-nav').replaceChildren(...visible.map(level => {
       const button = document.createElement('button'); button.type = 'button'; button.className = 'level-button';
       const r = records[level.id];
@@ -94,6 +93,17 @@
   function setStatus(text, warning = false) {
     $('stroke-status').textContent = text; $('stroke-status').parentElement.classList.toggle('warning', warning);
   }
+  function updateRuleUI() {
+    const count=state.trial ? state.trial.bindings.length : state.validation?.anchorCount || 0;
+    const info=P.ruleStatus(state.level,state.trial?.elapsed || 0,count);
+    $('rule-status').hidden=!info.text;
+    if(info.text!==lastRuleText) { $('rule-status').textContent=info.text;lastRuleText=info.text; }
+    $('rule-status').classList.toggle('changed',info.changed);
+    if(state.mode==='running' && state.trial.events.length>lastRuleEvent) {
+      lastRuleEvent=state.trial.events.length;
+      if(!state.trial.outcome) setStatus(`规则变化：${state.trial.events.at(-1).label}。观察现在的受力路线。`);
+    }
+  }
   function updateInk() {
     const used = Math.min(state.level.ink, P.length(state.points));
     const remaining = Math.max(0, state.level.ink - used);
@@ -115,14 +125,14 @@
   }
   function reset(announce = true) {
     state.drawing = false; releasePointer(); destroyTrial();
-    state.mode = 'ready'; state.points = []; state.validation = null; state.keyboard = null; accumulator = 0;
+    state.mode = 'ready'; state.points = []; state.validation = null; state.keyboard = null; accumulator = 0; lastRuleEvent = 0;
     $('result-panel').hidden = true; $('trial-clock').hidden = true;
     $('canvas-wrap').classList.remove('is-running');
     $('board-badge').hidden = false; $('board-state').textContent = '等你补一笔';
     $('reset-label').textContent = '清除重画'; $('test-label').innerHTML = '请阿稳试坐 <span aria-hidden="true">→</span>';
     $('test-button').disabled = true; $('hint-button').disabled = false;
     setStatus(announce ? '墨水补满！换个思路，再救一笔。' : '按住画一笔 → 松手 → 请阿稳试坐');
-    updateInk();
+    updateInk(); updateRuleUI();
   }
   function selectLevel(id, fromHash = false, customKey = null) {
     const entry = customKey ? library.get(customKey) : null;
@@ -152,16 +162,10 @@
     const r = canvas.getBoundingClientRect();
     return { x: (event.clientX - r.left) * 720 / r.width, y: (event.clientY - r.top) * 480 / r.height };
   }
-  function constrain(p) {
-    const q = { x: Math.max(24, Math.min(696, p.x)), y: Math.max(state.level.chair[0].y - 4, Math.min(465, p.y)) };
-    for (const r of state.level.terrain) {
-      if (q.x >= r.x && q.x <= r.x + r.w && q.y > r.y - P.RADIUS) q.y = Math.min(q.y, r.y - P.RADIUS);
-    }
-    return q;
-  }
+  function constrain(p) { return P.constrainPoint(state.level,p,state.points.at(-1)); }
   function startStroke(p) {
     if (state.mode !== 'ready' || state.points.length) { toast('只准补一笔哦。想换笔画，先点「清除重画」。'); return false; }
-    if (p.y < state.level.chair[0].y - 14) { setStatus('从木椅附近开始，在椅面及以下画线。', true); return false; }
+    if (p.y<P.drawTop(state.level)-10 || p.y>P.drawBottom(state.level)+10) { setStatus(state.level.version===2 ? '本关只能在亮色标线内画线，先看看开放画区。' : '从木椅附近开始，在椅面及以下画线。',true); return false; }
     state.points = [P.snapEndpoint(constrain(p), state.level)]; state.drawing = true;
     $('test-button').disabled = true; setStatus('一笔可以拐弯。让支架碰上木椅，再找个落脚点。');
     $('board-state').textContent = '墨水施工中'; return true;
@@ -190,11 +194,11 @@
     if (!state.validation.valid) {
       setStatus(state.validation.message, true); $('board-state').textContent = '这一笔需要调整';
     } else if (state.validation.attached) {
-      setStatus('已接上木椅 ✓ 能不能坐稳？点试坐看真实结果。'); $('board-state').textContent = '支架已焊接，等待试坐'; sound('draw');
+      setStatus(state.validation.anchorCount ? `已接上木椅 ✓ 已碰到 ${state.validation.anchorCount} 个挂点，试坐看它会不会转。` : '已接上木椅 ✓ 能不能坐稳？点试坐看真实结果。'); $('board-state').textContent = '支架已焊接，等待试坐'; sound('draw');
     } else {
-      setStatus('还没接上木椅：这条线会自由掉落。仍可试坐观察。', true); $('board-state').textContent = '悬空支架，注意接头';
+      setStatus(state.validation.anchorCount ? '笔画碰到了金环，但没接上木椅：只挂住笔画，不会把木椅一起挂住。' : '还没接上木椅：这条线会自由掉落。仍可试坐观察。',true); $('board-state').textContent='未接木椅，注意接头';
     }
-    updateInk();
+    updateInk(); updateRuleUI();
   }
   function runTrial() {
     if (state.mode === 'running' || state.drawing) return;
@@ -202,7 +206,7 @@
       if (state.trial.outcome.success) {
         if (state.customKey) { reset(); return; }
         if (state.level.id < levels.length) selectLevel(state.level.id + 1);
-        else { selectLevel(6); toast('九关毕业！回到进阶关，把省墨星星收齐吧。'); }
+        else { selectLevel(chapterLast['变种'] || levels[0].id); toast(`${levels.length} 关毕业！回到变种关，把省墨星星收齐吧。`); }
       } else reset();
       return;
     }
@@ -225,7 +229,7 @@
     $('result-reason').textContent = result.reason;
     $('result-stats').textContent = `用墨 ${result.ink} / ${level.ink}　·　最大倾斜 ${result.maxTilt}°　·　试坐 5 秒`;
     $('test-button').disabled = false; $('hint-button').disabled = false; $('reset-label').textContent = result.success ? '挑战更省' : '清除重画';
-    $('test-label').textContent = result.success ? state.customKey ? '再试此关 ↺' : level.id < levels.length ? '救下一把椅子 →' : '九关毕业，再挑战 ↺' : '再救一次 →';
+    $('test-label').textContent = result.success ? state.customKey ? '再试此关 ↺' : level.id < levels.length ? '救下一把椅子 →' : `${levels.length} 关毕业，再挑战 ↺` : '再救一次 →';
     if (result.success) {
       if (state.customKey) {
         let saved = true;
@@ -237,7 +241,7 @@
       records[level.id] = { stars: Math.max(previous?.stars || 0, result.stars), ink: Math.min(previous?.ink ?? Infinity, result.ink) };
       persist(); renderRecords(); sound('win');
       const finished = levels.every(l => records[l.id]);
-      setStatus(finished ? '九把椅子全部获救！你已获得「首席一笔工程师」称号。' : '急救成功，成绩已记录。也可以再挑战更少墨水。');
+      setStatus(finished ? `${levels.length} 把椅子全部获救！你已获得「首席一笔工程师」称号。` : '急救成功，成绩已记录。也可以再挑战更少墨水。');
     } else { setStatus('没关系，不扣命。清除重画只要一下，提示也不扣分。'); if (!didBonk) sound('fail'); }
   }
 
@@ -262,7 +266,7 @@
   canvas.addEventListener('keydown', event => {
     if (state.mode !== 'ready') return;
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key)) {
-      event.preventDefault(); state.keyboard ||= { x: 404, y: 264 };
+      event.preventDefault(); state.keyboard ||= P.constrainPoint(state.level,{x:404,y:state.level.chair[0].y+13});
       if (event.key === ' ') { if (state.drawing) finishStroke(); else startStroke(state.keyboard); }
       else {
         const n = event.shiftKey ? 2 : 6;
@@ -278,6 +282,7 @@
   });
   $('chapter-beginner').addEventListener('click', () => selectLevel(chapterLast['入门']));
   $('chapter-challenge').addEventListener('click', () => selectLevel(chapterLast['挑战']));
+  $('chapter-variant').addEventListener('click', () => selectLevel(chapterLast['变种']));
   $('export-button').addEventListener('click', () => {
     const file = new Blob([Format.serializeLevel(state.level)], { type: 'application/json;charset=utf-8' });
     const url = URL.createObjectURL(file), link = document.createElement('a');
@@ -352,13 +357,14 @@
       if (state.trial.outcome && !state.trial.outcome.success && !didBonk) { didBonk = true; sound('fail'); setStatus(state.trial.outcome.reason, true); }
       if (state.trial.ended) completeTrial();
     }
+    updateRuleUI();
     RescueRenderer.draw(canvas, state, now);
     requestAnimationFrame(frame);
   }
   renderSound(); selectFromHash(); resize(); requestAnimationFrame(frame);
   // Read-only diagnostics for acceptance/debugging. No path injection or forced wins.
   window.rescueDebug = Object.freeze({
-    snapshot: () => ({ level: state.level.id, customKey: state.customKey, savedLevels: library.list().map(entry => ({key:entry.key,id:entry.level.id,title:entry.level.title})), mode: state.mode, drawing: state.drawing, points: state.points.map(p => ({ ...p })), validation: state.validation ? { valid: state.validation.valid, attached: state.validation.attached, code: state.validation.code } : null, outcome: state.trial?.ended ? { ...state.trial.outcome } : null, elapsed: state.trial?.elapsed || 0, records: JSON.parse(JSON.stringify(records)) })
+    snapshot: () => ({ level: state.level.id, customKey: state.customKey, savedLevels: library.list().map(entry => ({key:entry.key,id:entry.level.id,title:entry.level.title})), mode: state.mode, drawing: state.drawing, points: state.points.map(p => ({ ...p })), validation: state.validation ? { valid: state.validation.valid, attached: state.validation.attached, code: state.validation.code, anchorCount:state.validation.anchorCount } : null, rules: state.trial ? {events:state.trial.events,removedTerrain:[...state.trial.removedTerrain],anchorCount:state.trial.bindings.filter(b=>b.body===state.trial.chair).length,gravity:{x:state.trial.engine.gravity.x,y:state.trial.engine.gravity.y},drops:state.trial.drops.map(d=>({index:d.index,x:d.body.position.x,y:d.body.position.y})),dropImpact:state.trial.dropImpact} : null, outcome: state.trial?.ended ? { ...state.trial.outcome } : null, elapsed: state.trial?.elapsed || 0, records: JSON.parse(JSON.stringify(records)) })
   });
 })().catch(error => {
   console.error(error);
