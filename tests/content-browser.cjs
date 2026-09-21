@@ -24,6 +24,7 @@ let browser,created=false;
  await page.evaluate(()=>localStorage.setItem('save-one-stroke:v1',JSON.stringify({records:{1:{stars:3,ink:132},999:{stars:2,ink:55}},muted:true})));
  await page.reload({waitUntil:'networkidle'});await page.waitForFunction(()=>Boolean(window.rescueDebug));
  assert.equal((await snapshot()).level,1);assert.equal((await snapshot()).records[1].stars,3);
+ const baselineIds=(await snapshot()).catalog.ids;
  // v2 import is still raw and exportable. Refresh while drawing does not reset a local entry.
  await page.locator('#open-library').click();await page.locator('#import-file').setInputFiles(path.join(root,'docs/examples/variant.json'));
  await page.waitForFunction(()=>Boolean(rescueDebug.snapshot().customKey));
@@ -46,6 +47,18 @@ let browser,created=false;
  await select('lab/not-a-chair-leg');await draw(cases('lab/not-a-chair-leg')[0].stroke);assert.equal((await snapshot()).validation.attached,false);await page.locator('#test-button').click();await finish();
  await page.locator('#reset-button').click();await draw(cases('lab/not-a-chair-leg')[1].stroke);await page.locator('#test-button').click();assert.equal((await finish(false)).outcome.code,'cat');
  await select('lab/return-ticket');await draw(cases('lab/return-ticket')[0].stroke);await page.locator('#test-button').click();await finish();
+ // Course batches 01–05 + 06–10 + 11–15: each level completed once through native pointer input; representative unwelded failure + immediate retry on 03.
+ for(const id of ['course/01-reach-the-ground','course/02-start-from-ground','course/03-not-welded','course/04-borrow-the-leg','course/05-full-route','course/06-follow-the-weight','course/07-two-kinds-of-cat','course/08-two-short-legs','course/09-wide-enough-span','course/10-high-low-feet','course/11-cantilever-rail','course/12-tall-back','course/13-rocking-runner','course/14-tulip-base','course/15-kneeling-two-points']){await select(id);await draw(cases(id)[0].stroke);await page.locator('#test-button').click();await finish();}
+ await select('course/03-not-welded');await draw(cases('course/03-not-welded').find(c=>c.expected==='failure').stroke);await page.locator('#test-button').click();await finish(false);
+ await page.locator('#reset-button').click();await draw(cases('course/03-not-welded')[0].stroke);await page.locator('#test-button').click();await finish();
+ // Prototype source card: shown only on a successful result of a level that carries source metadata; safe link, no leakage across failure/retry/switch.
+ await select('course/11-cantilever-rail');await draw(cases('course/11-cantilever-rail')[0].stroke);await page.locator('#test-button').click();await finish();
+ const srcLink=page.locator('#result-source-link');
+ assert.ok(await page.locator('#result-source').isVisible());assert.match(await srcLink.textContent(),/悬臂椅/);assert.match((await srcLink.getAttribute('href'))||'',/^https:\/\//);assert.equal(await srcLink.getAttribute('rel'),'noopener noreferrer');assert.equal(await srcLink.getAttribute('target'),'_blank');
+ await page.locator('#reset-button').click();await draw(cases('course/11-cantilever-rail').find(c=>c.expected==='failure').stroke);await page.locator('#test-button').click();await finish(false);
+ assert.equal(await page.locator('#result-source').isVisible(),false);
+ await page.locator('#reset-button').click();await draw(cases('course/11-cantilever-rail')[0].stroke);await page.locator('#test-button').click();await finish();assert.ok(await page.locator('#result-source').isVisible());
+ await select('course/01-reach-the-ground');await draw(cases('course/01-reach-the-ground')[0].stroke);await page.locator('#test-button').click();await finish();assert.equal(await page.locator('#result-source').isVisible(),false);
  // v3 import/export preserves recipes, parameters, namespace id, local key and record on reload.
  await page.locator('#open-library').click();await page.locator('#import-file').setInputFiles(path.join(root,'levels/lab/up-we-go.json'));await page.waitForFunction(()=>rescueDebug.snapshot().level==='lab/up-we-go'&&Boolean(rescueDebug.snapshot().customKey));
  const v3key=(await snapshot()).customKey,wait=page.waitForEvent('download');await page.locator('#export-button').click();const v3export=path.join(local,'content-v3-roundtrip.json');await (await wait).saveAs(v3export);
@@ -53,9 +66,15 @@ let browser,created=false;
  await page.reload({waitUntil:'networkidle'});await page.waitForFunction(()=>Boolean(window.rescueDebug));assert.equal((await snapshot()).customKey,v3key);assert.equal((await snapshot()).savedLevels.length,2);
  await page.setViewportSize({width:390,height:844});await page.locator('#chapter-tabs').getByRole('button',{name:'脑洞接力',exact:true}).click();await page.locator('[data-level="lab/last-stop"]').click();
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+ await page.locator('#chapter-tabs').getByRole('button',{name:'课程一·承重与重心',exact:true}).click();await page.locator('[data-level="course/01-reach-the-ground"]').click();
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+ await page.locator('#chapter-tabs').getByRole('button',{name:'课程二·空间与外力',exact:true}).click();await page.locator('[data-level="course/11-cantilever-rail"]').click();
+ await draw(cases('course/11-cantilever-rail')[0].stroke);await page.locator('#test-button').click();await finish();
+ assert.ok(await page.locator('#result-source').isVisible());assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+ const sourceShot=path.join(local,'course-source-strip.png');await page.screenshot({path:sourceShot});
  const screenshot=path.join(local,'content-narrow.png');await page.screenshot({path:screenshot,fullPage:true});
  assert.deepEqual(errors,[]);
  // Removal is discovered too, without disrupting the selected independent level.
- fs.unlinkSync(hotFile);fs.unlinkSync(badFile);fs.rmdirSync(newDir);created=false;await refresh();assert.equal((await snapshot()).catalog.ids.length,19);assert.deepEqual((await snapshot()).catalog.errors,[]);
+ fs.unlinkSync(hotFile);fs.unlinkSync(badFile);fs.rmdirSync(newDir);created=false;await refresh();assert.deepEqual((await snapshot()).catalog.ids,baselineIds);assert.deepEqual((await snapshot()).catalog.errors,[]);
  console.log(JSON.stringify({passed:true,url:URL,results,hotFileRefreshPlayable:true,refreshPreservesRunningTrial:true,badFileIsolated:true,legacyNumericLinkAndRecords:true,v2AndV3ImportExport:true,localLibrarySurvivesRefresh:true,narrowScreenNoOverflow:true,screenshot,errors},null,2));
 })().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{if(created){for(const f of [hotFile,badFile])if(fs.existsSync(f))fs.unlinkSync(f);fs.rmdirSync(newDir);}await browser?.close();});

@@ -1,0 +1,30 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "从地面起笔真正伸进椅面",
+      "expected": "success",
+      "stroke": [
+        [436, 395.5],
+        [436, 262]
+      ]
+    },
+    {
+      "name": "从椅面起笔落到地面（非照抄画法）",
+      "expected": "success",
+      "stroke": [
+        [428, 262],
+        [428, 395.5]
+      ]
+    },
+    {
+      "name": "在椅子旁边立了根像样的柱子，却没焊上",
+      "expected": "failure",
+      "stroke": [
+        [510, 395.5],
+        [510, 285]
+      ]
+    }
+  ]
+}

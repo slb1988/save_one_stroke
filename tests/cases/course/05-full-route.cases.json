@@ -1,0 +1,33 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "帐篷形一笔造两脚",
+      "expected": "success",
+      "stroke": [
+        [300, 395.5],
+        [372, 243],
+        [452, 395.5]
+      ]
+    },
+    {
+      "name": "平顶自由画法（非照抄画法）",
+      "expected": "success",
+      "stroke": [
+        [310, 395.5],
+        [340, 244],
+        [420, 242],
+        [462, 395.5]
+      ]
+    },
+    {
+      "name": "只撑住右边，左边照样翻",
+      "expected": "failure",
+      "stroke": [
+        [440, 243],
+        [440, 395.5]
+      ]
+    }
+  ]
+}

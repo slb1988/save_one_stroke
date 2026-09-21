@@ -240,6 +240,10 @@
     $('result-quip').textContent = result.success ? level.success : level.failure;
     $('result-reason').textContent = result.reason;
     $('result-stats').textContent = `用墨 ${result.ink} / ${level.ink}　·　最大倾斜 ${result.maxTilt}°　·　试坐 5 秒`;
+    // 原型来源只在成功结果卡展示；纯文本 + 协议白名单，不自动加载外部资源。
+    const src = result.success ? level.source : null, srcOk = Boolean(src && /^https?:\/\/\S+$/.test(src.url));
+    $('result-source').hidden = !srcOk;
+    if (srcOk) { $('result-source-link').textContent = src.prototype + (src.credit ? ` · ${src.credit}` : ''); $('result-source-link').setAttribute('href', src.url); $('result-source-note').textContent = src.note ? `（${src.note}）` : ''; }
     $('test-button').disabled = false; $('hint-button').disabled = false; $('reset-label').textContent = result.success ? '挑战更省' : '清除重画';
     $('test-label').textContent = result.success ? state.customKey ? '再试此关 ↺' : nextLevel() ? '救下一把椅子 →' : `${levels.length} 关毕业，再挑战 ↺` : '再救一次 →';
     if (result.success) {

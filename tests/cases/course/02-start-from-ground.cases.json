@@ -1,0 +1,30 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "从地面起笔向上焊住椅面",
+      "expected": "success",
+      "stroke": [
+        [330, 395.5],
+        [330, 262]
+      ]
+    },
+    {
+      "name": "斜向从地面起笔（非照抄画法）",
+      "expected": "success",
+      "stroke": [
+        [372, 395.5],
+        [340, 264]
+      ]
+    },
+    {
+      "name": "从地面起笔却只画到半路，没接到椅子",
+      "expected": "failure",
+      "stroke": [
+        [332, 395.5],
+        [332, 366]
+      ]
+    }
+  ]
+}

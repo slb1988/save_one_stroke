@@ -1,0 +1,30 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "从椅面左侧竖直补腿落地",
+      "expected": "success",
+      "stroke": [
+        [320, 260],
+        [320, 395.5]
+      ]
+    },
+    {
+      "name": "斜腿同样焊牢落地（非照抄画法）",
+      "expected": "success",
+      "stroke": [
+        [330, 264],
+        [285, 395.5]
+      ]
+    },
+    {
+      "name": "接到了椅子却停在半空，重量无处传导",
+      "expected": "failure",
+      "stroke": [
+        [320, 260],
+        [320, 340]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "顺着底轨把支撑接过洞口",
+      "expected": "success",
+      "stroke": [
+        [350, 392],
+        [475, 395.5]
+      ]
+    },
+    {
+      "name": "从椅面前沿斜撑到洞那边（非照抄画法）",
+      "expected": "success",
+      "stroke": [
+        [410, 264],
+        [475, 395.5]
+      ]
+    },
+    {
+      "name": "往空洞里伸腿，什么也没踩到",
+      "expected": "failure",
+      "stroke": [
+        [410, 264],
+        [410, 395.5]
+      ]
+    }
+  ]
+}

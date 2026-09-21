@@ -1,0 +1,32 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "从椅面右侧横越过睡猫区再落地",
+      "expected": "success",
+      "stroke": [
+        [440, 264],
+        [640, 300],
+        [640, 395.5]
+      ]
+    },
+    {
+      "name": "提前压低的横绕路线（非照抄画法）",
+      "expected": "success",
+      "stroke": [
+        [445, 262],
+        [630, 296],
+        [630, 395.5]
+      ]
+    },
+    {
+      "name": "躲开睡猫区落在其左侧，脚却在重量左边",
+      "expected": "failure",
+      "stroke": [
+        [360, 264],
+        [335, 395.5]
+      ]
+    }
+  ]
+}

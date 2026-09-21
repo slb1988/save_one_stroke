@@ -23,6 +23,7 @@ function build(){
  Object.assign(v3.properties,{version:{const:3},id:{type:'string',maxLength:100,pattern:'^[a-z0-9-]+/[a-z0-9-]+$'},chapter:{type:'string',minLength:1,maxLength:40,pattern:'\\S'},
   progression:{type:'object',additionalProperties:false,required:['groupOrder','order','difficulty'],properties:{groupOrder:{type:'number',minimum:0,maximum:99999},order:{type:'number',minimum:0,maximum:99999},difficulty:{enum:['easy','medium','hard']}}},
   drawArea:{type:'object',additionalProperties:false,properties:{drawTop:{type:'number',minimum:40,maximum:400},drawBottom:{type:'number',minimum:100,maximum:465}}},
+  source:{type:'object',additionalProperties:false,required:['prototype','url'],properties:{prototype:{type:'string',minLength:1,maxLength:80,pattern:'\\S'},url:{type:'string',minLength:1,maxLength:200,pattern:'^https?://\\S+$'},credit:{type:'string',maxLength:80},note:{type:'string',maxLength:160}}},
   scene:{type:'array',minItems:1,maxItems:80,items:{oneOf:C.list().map(d=>({type:'object',additionalProperties:false,required:['id','type','params'],properties:{id:{type:'string',pattern:'^[a-z0-9-]{1,60}$'},type:{const:d.type},params:d.schema,at:{$ref:'#/$defs/point'}}}))}}
  });
  artifacts.push(['schemas/level-v3.schema.json',v3]);

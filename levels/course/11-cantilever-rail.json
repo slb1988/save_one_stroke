@@ -1,0 +1,98 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "course/11-cantilever-rail",
+  "chapter": "课程二·空间与外力",
+  "progression": {
+    "groupOrder": 60,
+    "order": 10,
+    "difficulty": "medium"
+  },
+  "title": "悬臂椅 · 前排脚下是空的",
+  "tag": "课程11 · 底轨要伸到重量下",
+  "brief": "这把悬臂椅没有前腿，靠前柱和底部脚轨承重。可脚轨不够长，而且前排正下方的地板还缺了一块。",
+  "condition": "人坐在前部，脚轨伸不到重量下面；前排正下方是空洞，腿插进去什么也踩不到。顺着底轨把支撑接到洞那边的地板上。",
+  "quip": "没有前腿，不是我的错，是设计。",
+  "success": "底轨接过了洞，悬臂椅终于名副其实。",
+  "failure": "往空洞里伸腿，等于没伸——前排还是压空了。",
+  "ink": 200,
+  "gold": 160,
+  "load": {
+    "x": 385,
+    "mass": 16
+  },
+  "hint": [
+    "先看重量落在哪：人在前部，可底轨只到椅子中间；前排正下方没有地板，竖直伸腿踩空。",
+    "从底轨的右端起笔，贴着地面高度向右画过洞口，落到洞那边的实心地板上；也可以从椅面前沿斜撑到洞那边。"
+  ],
+  "labels": [
+    {
+      "x": 410,
+      "y": 430,
+      "text": "这里是空的",
+      "to": [
+        410,
+        420
+      ]
+    }
+  ],
+  "gap": [
+    360,
+    460
+  ],
+  "source": {
+    "prototype": "悬臂椅（Cantilever chair）",
+    "url": "https://en.wikipedia.org/wiki/Cantilever_chair",
+    "credit": "Mart Stam 等，1920年代末",
+    "note": "钢管悬臂的弹性简化为刚性矩形框架；后排立柱与前伸底轨的特征保留"
+  },
+  "scene": [
+    {
+      "id": "wood",
+      "type": "core/chair",
+      "params": [
+        {
+          "x": 240,
+          "y": 251,
+          "w": 184,
+          "h": 18,
+          "kind": "seat"
+        },
+        {
+          "x": 246,
+          "y": 269,
+          "w": 14,
+          "h": 116,
+          "kind": "leg"
+        },
+        {
+          "x": 246,
+          "y": 385,
+          "w": 100,
+          "h": 15,
+          "kind": "leg"
+        }
+      ]
+    },
+    {
+      "id": "floor-left",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 340,
+        "h": 90
+      }
+    },
+    {
+      "id": "floor-right",
+      "type": "core/terrain",
+      "params": {
+        "x": 460,
+        "y": 400,
+        "w": 240,
+        "h": 90
+      }
+    }
+  ]
+}

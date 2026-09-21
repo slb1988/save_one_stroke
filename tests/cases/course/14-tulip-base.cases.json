@@ -1,0 +1,31 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "从椅面右沿借台阶顶面落脚",
+      "expected": "success",
+      "stroke": [
+        [455, 264],
+        [520, 345.5]
+      ]
+    },
+    {
+      "name": "横越过台阶落到右侧地板（非照抄画法）",
+      "expected": "success",
+      "stroke": [
+        [455, 264],
+        [660, 300],
+        [660, 395.5]
+      ]
+    },
+    {
+      "name": "往反方向加宽底座，右侧仍空",
+      "expected": "failure",
+      "stroke": [
+        [310, 392],
+        [255, 395.5]
+      ]
+    }
+  ]
+}

@@ -10,7 +10,7 @@
     source=C.source(source);
     const v3=source?.version===3, v2=source?.version===2;
     const required=[...narrative,...(v3?['scene','progression']:['chair','terrain',...(v2?['mechanics']:[])])];
-    object(source,[...required,'gap','labels',...(v3?['drawArea']:['forbidden','forbiddenZones','forces'])],required,'$');
+    object(source,[...required,'gap','labels',...(v3?['drawArea','source']:['forbidden','forbiddenZones','forces'])],required,'$');
     if(source.format!=='save-one-stroke-level'||![1,2,3].includes(source.version))fail('$.version','仅支持 save-one-stroke-level 格式的版本 1、2 或 3');
     if(v3) {
       if(typeof source.id!=='string'||!C.TYPE.test(source.id)||source.id.length>100)fail('$.id','v3 需要稳定 namespace/name 标识，最多100字');
@@ -19,6 +19,15 @@
       number(source.progression.groupOrder,0,99999,'$.progression.groupOrder');number(source.progression.order,0,99999,'$.progression.order');
       if(!['easy','medium','hard'].includes(source.progression.difficulty))fail('$.progression.difficulty','只能是 easy、medium 或 hard');
       if(source.drawArea!==undefined)object(source.drawArea,['drawTop','drawBottom'],[],'$.drawArea');
+      // 可选来源元数据：只含纯文本与 http/https 链接；不影响物理与胜负。
+      if(source.source!==undefined){
+        object(source.source,['prototype','url','credit','note'],['prototype','url'],'$.source');
+        text(source.source.prototype,80,'$.source.prototype');
+        text(source.source.url,200,'$.source.url');
+        if(!/^https?:\/\/\S+$/.test(source.source.url))fail('$.source.url','来源链接只支持 http/https 协议');
+        if(source.source.credit!==undefined)text(source.source.credit,80,'$.source.credit');
+        if(source.source.note!==undefined)text(source.source.note,160,'$.source.note');
+      }
     } else {
       number(source.id,1,999999,'$.id',true);
       if(!(v2?['入门','挑战','变种']:['入门','挑战']).includes(source.chapter))fail('$.chapter','不支持的旧版分组');

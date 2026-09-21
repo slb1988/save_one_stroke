@@ -3,13 +3,14 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { levels, validateLevel, manifestFiles } = require('../js/levels.js');
+const { levels, errors, validateLevel, manifestFiles } = require('../js/levels.js');
 const P = require('../js/physics.js');
 const { solutions, failures } = require('./fixtures.cjs');
 
 test('每关为独立版本化 JSON，目录唯一且完整', () => {
   const files = manifestFiles(require('../levels/manifest.json'));
-  assert.equal(files.length, 19); assert.equal(levels.length, 19);
+  // 清单与有效加载集合相符：数量随关卡增减，不写死；隔离/坏文件必须为零。
+  assert.equal(levels.length, files.length); assert.deepEqual(errors, []);
   for (let i = 0; i < files.length; i++) {
     const data = JSON.parse(fs.readFileSync(path.join(__dirname, '../levels', files[i]), 'utf8'));
     assert.equal(validateLevel(data), data);

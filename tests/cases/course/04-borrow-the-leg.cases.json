@@ -1,0 +1,30 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "从悬空旧脚底部接着画到地面",
+      "expected": "success",
+      "stroke": [
+        [398, 330],
+        [398, 395.5]
+      ]
+    },
+    {
+      "name": "从椅面另画一整条新腿（非照抄画法）",
+      "expected": "success",
+      "stroke": [
+        [414, 264],
+        [414, 395.5]
+      ]
+    },
+    {
+      "name": "从地面往上顶却停在旧脚下方半空，没焊上",
+      "expected": "failure",
+      "stroke": [
+        [424, 395.5],
+        [424, 352]
+      ]
+    }
+  ]
+}

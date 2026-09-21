@@ -56,7 +56,21 @@ test('闭合契约拒绝未知类型、脚本、重复实例、无效引用/位�
 test('自动生成的静态目录/模块 allowlist 与开发发现一致，没有手写关卡清单',()=>{
   assert.deepEqual(discover(),JSON.parse(fs.readFileSync(path.join(__dirname,'../levels/manifest.json'),'utf8')));
   assert.deepEqual(modules(),JSON.parse(fs.readFileSync(path.join(__dirname,'../js/modules/manifest.json'),'utf8')));
-  assert.equal(discover().files.length,19);assert.equal(new Set(levels.map(l=>l.id)).size,19);
+  // 旧 19 关 id 集合完整、id 全局唯一；课程 namespace 当前首批恰好 5 关（终批再独立断言 50）；发现目录与有效加载一致，无隔离缺项。
+  const ids=new Set(levels.map(l=>String(l.id)));
+  for(const id of ['1','2','3','4','5','6','7','8','9','10','11','12','13','lab/last-stop','lab/not-a-chair-leg','lab/off-duty','lab/return-ticket','lab/up-we-go','lab/world-tour'])assert.ok(ids.has(id),`旧关缺失：${id}`);
+  assert.equal(ids.size,levels.length);
+  // 课程 namespace 当前恰好 15 关且顺序固定（终批再独立断言 50）。
+  assert.deepEqual(levels.filter(l=>String(l.id).startsWith('course/')).map(l=>l.id),['course/01-reach-the-ground','course/02-start-from-ground','course/03-not-welded','course/04-borrow-the-leg','course/05-full-route','course/06-follow-the-weight','course/07-two-kinds-of-cat','course/08-two-short-legs','course/09-wide-enough-span','course/10-high-low-feet','course/11-cantilever-rail','course/12-tall-back','course/13-rocking-runner','course/14-tulip-base','course/15-kneeling-two-points']);
+  assert.equal(discover().files.length,levels.length);
+});
+test('v3 来源元数据闭合：可选、协议白名单、序列化往返保留；v1 拒绝',()=>{
+  const l=levels.find(l=>l.id==='course/11-cantilever-rail');
+  assert.match(l.source.prototype,/悬臂椅/);assert.match(l.source.url,/^https:\/\//);
+  assert.deepEqual(F.parseLevel(F.serializeLevel(C.resolve(l))).source,l.source);
+  const badUrl=clone(l);badUrl.source={...l.source,url:'javascript:alert(1)'};assert.throws(()=>F.validateLevel(badUrl));
+  const extra=clone(l);extra.source={...l.source,onclick:'x'};assert.throws(()=>F.validateLevel(extra));
+  assert.throws(()=>F.validateLevel({...clone(levels[0]),source:{prototype:'x',url:'https://example.com'}}));
 });
 test('目录逐文件隔离；重复 id 全部隔离，不用先到者覆盖；排序不靠编号',()=>{
   const good=levels.find(l=>l.id==='lab/up-we-go'),other={...good,id:'parallel/zebra',title:'独立关',progression:{...good.progression,order:5}};

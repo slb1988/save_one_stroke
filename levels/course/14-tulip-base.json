@@ -1,0 +1,95 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "course/14-tulip-base",
+  "chapter": "课程二·空间与外力",
+  "progression": {
+    "groupOrder": 60,
+    "order": 40,
+    "difficulty": "medium"
+  },
+  "title": "郁金香椅 · 底座不够大",
+  "tag": "课程14 · 单柱偏心承重",
+  "brief": "这把郁金香椅只有一根中柱和一块小底座，人又坐得偏右。右侧还有一块高台阶，正好可以借它落脚。",
+  "condition": "单柱椅的底座范围小，人偏右就会向右翻。从椅面右沿借台阶顶面落脚要落得够远；也可以横越过台阶落到它右边的地板。",
+  "quip": "优雅的中柱，发愁的底座。",
+  "success": "底座顺着重量接了力，单柱也稳稳的。",
+  "failure": "往反方向加宽底座，重量那侧还是空的——向右翻。",
+  "ink": 340,
+  "gold": 115,
+  "load": {
+    "x": 460,
+    "mass": 28
+  },
+  "hint": [
+    "底座只在中间一小块，人偏右：支撑要往右侧追出去，往左加宽没用。",
+    "从椅面右沿斜画到台阶顶面、落得比人的投影更远；或者从台阶上方横绕到它右边的地板。"
+  ],
+  "labels": [
+    {
+      "x": 560,
+      "y": 310,
+      "text": "台阶顶面可以落脚",
+      "to": [
+        520,
+        346
+      ]
+    }
+  ],
+  "source": {
+    "prototype": "郁金香椅（Tulip chair）",
+    "url": "https://en.wikipedia.org/wiki/Tulip_chair",
+    "credit": "Eero Saarinen，1955–1956，Knoll",
+    "note": "圆形底座简化为矩形底板；单柱窄底座的抗倾覆特征保留"
+  },
+  "scene": [
+    {
+      "id": "wood",
+      "type": "core/chair",
+      "params": [
+        {
+          "x": 280,
+          "y": 251,
+          "w": 184,
+          "h": 18,
+          "kind": "seat"
+        },
+        {
+          "x": 358,
+          "y": 269,
+          "w": 14,
+          "h": 116,
+          "kind": "leg"
+        },
+        {
+          "x": 310,
+          "y": 385,
+          "w": 114,
+          "h": 15,
+          "kind": "leg"
+        }
+      ]
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "step",
+      "type": "core/terrain",
+      "params": {
+        "x": 470,
+        "y": 350,
+        "w": 170,
+        "h": 140,
+        "step": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "底轨往重量那边（前侧）加长",
+      "expected": "success",
+      "stroke": [
+        [374, 395.5],
+        [450, 395.5]
+      ]
+    },
+    {
+      "name": "底轨两侧整体加宽（非照抄画法）",
+      "expected": "success",
+      "stroke": [
+        [280, 395.5],
+        [450, 395.5]
+      ]
+    },
+    {
+      "name": "底轨往反方向续，前侧仍空",
+      "expected": "failure",
+      "stroke": [
+        [312, 395.5],
+        [265, 395.5]
+      ]
+    }
+  ]
+}

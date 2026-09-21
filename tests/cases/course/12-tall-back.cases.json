@@ -1,0 +1,31 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "落在睡猫右沿与前腿之间的条带",
+      "expected": "success",
+      "stroke": [
+        [315, 264],
+        [320, 395.5]
+      ]
+    },
+    {
+      "name": "绕到睡猫左边远处落地（非照抄画法）",
+      "expected": "success",
+      "stroke": [
+        [300, 264],
+        [155, 330],
+        [155, 395.5]
+      ]
+    },
+    {
+      "name": "脚落在重心前面，向后倒砸醒猫",
+      "expected": "failure",
+      "stroke": [
+        [370, 264],
+        [360, 395.5]
+      ]
+    }
+  ]
+}
