@@ -553,6 +553,116 @@
                 "pattern": "^[a-z0-9-]{1,60}$"
               },
               "type": {
+                "const": "lab/trigger-lift"
+              },
+              "params": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "button",
+                  "x",
+                  "y",
+                  "w",
+                  "h",
+                  "dx",
+                  "dy",
+                  "speed",
+                  "label"
+                ],
+                "properties": {
+                  "button": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "x",
+                      "y",
+                      "w",
+                      "h"
+                    ],
+                    "properties": {
+                      "x": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 719
+                      },
+                      "y": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 480
+                      },
+                      "w": {
+                        "type": "number",
+                        "minimum": 20,
+                        "maximum": 120
+                      },
+                      "h": {
+                        "type": "number",
+                        "minimum": 6,
+                        "maximum": 30
+                      }
+                    }
+                  },
+                  "x": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 719
+                  },
+                  "y": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 480
+                  },
+                  "w": {
+                    "type": "number",
+                    "minimum": 20,
+                    "maximum": 300
+                  },
+                  "h": {
+                    "type": "number",
+                    "minimum": 10,
+                    "maximum": 60
+                  },
+                  "dx": {
+                    "type": "number",
+                    "minimum": -160,
+                    "maximum": 160
+                  },
+                  "dy": {
+                    "type": "number",
+                    "minimum": -120,
+                    "maximum": 120
+                  },
+                  "speed": {
+                    "type": "number",
+                    "minimum": 0.02,
+                    "maximum": 0.08
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 60
+                  }
+                }
+              },
+              "at": {
+                "$ref": "#/$defs/point"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "type",
+              "params"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]{1,60}$"
+              },
+              "type": {
                 "const": "workshop/hanging-kit"
               },
               "params": {
@@ -733,6 +843,11 @@
         },
         "step": {
           "type": "boolean"
+        },
+        "friction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1.5
         }
       }
     },

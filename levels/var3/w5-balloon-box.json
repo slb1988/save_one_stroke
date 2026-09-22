@@ -1,0 +1,100 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "派生试玩 · 再来5个",
+  "progression": {
+    "groupOrder": 90,
+    "order": 50,
+    "difficulty": "medium"
+  },
+  "ink": 560,
+  "gold": 500,
+  "load": {
+    "x": 150,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 60,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "boss",
+      "type": "core/cats",
+      "params": [
+        {
+          "x": 300,
+          "y": 310,
+          "w": 220,
+          "h": 70,
+          "label": "午睡老板"
+        }
+      ]
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 280,
+          "y": 70,
+          "radius": 10,
+          "label": "左箱耳"
+        },
+        {
+          "x": 420,
+          "y": 70,
+          "radius": 10,
+          "label": "右箱耳"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 900,
+          "x": 350,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "restitution": 1,
+          "label": "弹力球"
+        }
+      ]
+    }
+  ],
+  "id": "var3/w5-balloon-box",
+  "title": "弹球收纳箱",
+  "tag": "派生试验03 · W5",
+  "brief": "W5：这只球恢复系数 1.0，永远停不下来。画一只挂在两环上的箱子，把球留在箱子里弹。",
+  "condition": "球 0.9 秒出生在两环之间，弹性 1.0。箱壁要够高、箱底别漏——球一直弹也不能碰猫。",
+  "quip": "给永动机一个家。",
+  "success": "球在箱子里一直弹，猫一直在睡。",
+  "failure": "球蹦出去了——箱子要么漏了，要么根本没画。",
+  "hint": [
+    "两只环各挂一面墙，箱底连起来。",
+    "箱壁要高于球弹起的高度，箱底别留缝。"
+  ]
+}

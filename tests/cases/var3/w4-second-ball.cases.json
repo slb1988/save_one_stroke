@@ -1,0 +1,70 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "高位线R2（gold）",
+      "expected": "success",
+      "stroke": [
+        [
+          400,
+          140
+        ],
+        [
+          450,
+          150
+        ],
+        [
+          620,
+          158
+        ]
+      ]
+    },
+    {
+      "name": "高位线R2b（非照抄）",
+      "expected": "success",
+      "stroke": [
+        [
+          402,
+          142
+        ],
+        [
+          452,
+          152
+        ],
+        [
+          618,
+          160
+        ]
+      ]
+    },
+    {
+      "name": "只救第二球（撤板后第一球落进猫区）",
+      "expected": "failure",
+      "stroke": [
+        [
+          450,
+          150
+        ],
+        [
+          330,
+          190
+        ]
+      ]
+    },
+    {
+      "name": "只挂短绳（两球都没接）",
+      "expected": "failure",
+      "stroke": [
+        [
+          450,
+          150
+        ],
+        [
+          450,
+          190
+        ]
+      ]
+    }
+  ]
+}

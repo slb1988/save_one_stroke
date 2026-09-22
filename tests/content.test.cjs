@@ -87,6 +87,43 @@ test('落球可选 restitution：缺省 0.08 不变，高弹性真实反弹更�
   assert.ok(hi.peak<def.peak-20,`高弹性应反弹更高：${hi.peak} vs ${def.peak}`);
   const bad=clone(base);bad.scene.find(e=>e.id==='parcel').params[0].restitution=1.2;assert.throws(()=>F.validateLevel(bad));
 });
+test('触碰触发平台：仅真实落球触发、触发后真实位移、不触发不动、重试隔离、参数闭合',()=>{
+  const lift={id:'lift',type:'lab/trigger-lift',params:{button:{x:560,y:390,w:60,h:10},x:270,y:440,w:160,h:24,dx:50,dy:-40,speed:0.08,label:'接应平台'}};
+  const base={format:'save-one-stroke-level',version:3,id:'var2/tmp-trigger',chapter:'测试',progression:{groupOrder:1,order:1,difficulty:'easy'},
+    title:'触发平台测试',tag:'t',brief:'b',condition:'c',quip:'q',success:'s',failure:'f',ink:200,gold:150,load:{x:360,mass:14},hint:['h'],drawArea:{drawTop:60},
+    scene:[{id:'seat',type:'workshop/seat',params:{legs:'both'},at:{x:180,y:251}},{id:'floor',type:'core/terrain',params:{x:20,y:400,w:680,h:90}},lift]};
+  const stroke=[[300,255],[330,255]];
+  // 无球：永不触发，平台停在原地
+  const t0=P.createTrial(clone(base),stroke);const liftState=()=>t0.modules.find(m=>m.def.type==='lab/trigger-lift').state;
+  const y0=liftState().body.position.y;while(!t0.ended)P.step(t0);
+  assert.equal(liftState().triggered,false);assert.equal(liftState().body.position.y,y0);
+  // 球命中感应区：触发记录时刻，平台到达终点；重试后状态重建
+  const withBall=clone(base);withBall.scene.push({id:'parcel',type:'core/drops',params:[{at:500,x:590,y:60,radius:20,mass:8,label:'球'}]});
+  F.validateLevel(withBall);
+  const t1=P.createTrial(withBall,stroke);const s1=()=>t1.modules.find(m=>m.def.type==='lab/trigger-lift').state;
+  while(!t1.ended)P.step(t1);
+  assert.equal(s1().triggered,true);assert.ok(s1().at>=500);
+  const dx=50,dy=-40;assert.ok(Math.abs(s1().body.position.x-(270+80+dx))<1.5&&Math.abs(s1().body.position.y-(440+12+dy))<1.5,'平台须到达终点');
+  assert.equal(P.createTrial(withBall,stroke).modules.find(m=>m.def.type==='lab/trigger-lift').state.triggered,false);
+  // 球落在别处：不触发
+  const miss=clone(withBall);miss.scene.find(e=>e.id==='parcel').params[0].x=300;
+  const t2=P.createTrial(miss,stroke);while(!t2.ended)P.step(t2);
+  assert.equal(t2.modules.find(m=>m.def.type==='lab/trigger-lift').state.triggered,false);
+  // 参数闭合：超速/终点出界/未知字段拒绝
+  const badSpeed=clone(base);badSpeed.scene.find(e=>e.id==='lift').params.speed=0.2;assert.throws(()=>F.validateLevel(badSpeed));
+  const badDest=clone(base);badDest.scene.find(e=>e.id==='lift').params.dx=700;assert.throws(()=>F.validateLevel(badDest));
+  const badKey=clone(base);badKey.scene.find(e=>e.id==='lift').params.delay=100;assert.throws(()=>F.validateLevel(badKey));
+});
+test('地形可选 friction：缺省保持 Matter 静态摩擦 1 的现状，低摩擦真实生效且闭合校验',()=>{
+  const base=clone(levels.find(l=>l.id==='lab/up-we-go'));
+  const stroke=[[300,255],[330,255]];
+  const frictionOf=(src,i=0)=>{const t=P.createTrial(src,stroke);return t.terrain[i].friction;};
+  assert.equal(frictionOf(base),1,'静态地形现状摩擦应为 1（Matter setStatic 行为）');
+  const icy=clone(base);icy.scene.find(e=>e.id==='distant').params.friction=0.05;
+  F.validateLevel(icy);assert.equal(frictionOf(icy),0.05,'低摩擦须真实写入刚体');
+  const bad=clone(base);bad.scene.find(e=>e.id==='distant').params.friction=2;assert.throws(()=>F.validateLevel(bad));
+  const badKey=clone(base);badKey.scene.find(e=>e.id==='distant').params.slick=true;assert.throws(()=>F.validateLevel(badKey));
+});
 test('自动生成的静态目录/模块 allowlist 与开发发现一致，没有手写关卡清单',()=>{
   assert.deepEqual(discover(),JSON.parse(fs.readFileSync(path.join(__dirname,'../levels/manifest.json'),'utf8')));
   assert.deepEqual(modules(),JSON.parse(fs.readFileSync(path.join(__dirname,'../js/modules/manifest.json'),'utf8')));

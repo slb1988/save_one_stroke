@@ -31,7 +31,7 @@
 | type | kind | params |
 | --- | --- | --- |
 | `core/chair` | element | 木椅矩形数组 `{x,y,w,h,kind}` |
-| `core/terrain` | element | 一个矩形 `{x,y,w,h,step?}` |
+| `core/terrain` | element | 一个矩形 `{x,y,w,h,step?,friction?}`；可选 `friction`（0–1.5）为真实刚体摩擦，以构造后写入的有效值为准——Matter 静态体默认摩擦为 1，故缺省保持现状 1，显式赋值才改变 |
 | `core/cats` | element | 禁区矩形数组 `{x,y,w,h,label?}` |
 | `core/anchors` | rule | v2 anchors 数组 `{x,y,radius,label}`，可选 `releaseAt`（750–4000ms，到点真实移除该环的约束；缺省永不释放） |
 | `core/gravity` | rule | v2 gravity 数组 `{at,x,y,label}`，首项at=0，严格递增 |
@@ -39,6 +39,7 @@
 | `core/forces` | rule | 定时外力数组 `{start,end,fx,fy?,at:{x,y},label}` |
 | `core/temporary-terrain` | rule | `{target,removeAt,label}` 数组；target 为命名的 core/terrain 实例，不是下标 |
 | `lab/elevator` | element | `{x,y,w,h,dx,dy,start,end,label}`，实际移动的光滑承重平台 |
+| `lab/trigger-lift` | element | `{button:{x,y,w,h},x,y,w,h,dx,dy,speed,label}`：感应区（button，非实心不挡笔画）被真实落球触碰后，实心平台以闭合匀速（speed 0.02–0.08/ms）滑到 `(dx,dy)` 终点；非定时，不触发则不动 |
 | `workshop/seat` | prefab | `{legs:"none"|"left"|"both"}`，局部座面起点(0,0)，宽184；load 不随它改变 |
 | `workshop/hanging-kit` | prefab | `{span,floorY,removeAt}`，局部原点是左挂点；右挂点偏移span，踏板位于floorY |
 

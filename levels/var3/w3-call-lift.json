@@ -1,0 +1,137 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "派生试玩 · 再来5个",
+  "progression": {
+    "groupOrder": 90,
+    "order": 30,
+    "difficulty": "medium"
+  },
+  "ink": 300,
+  "gold": 250,
+  "load": {
+    "x": 370,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 280,
+        "y": 251
+      }
+    },
+    {
+      "id": "left-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 240,
+        "h": 90
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 520,
+        "y": 400,
+        "w": 180,
+        "h": 90
+      }
+    },
+    {
+      "id": "pillar",
+      "type": "core/terrain",
+      "params": {
+        "x": 280,
+        "y": 269,
+        "w": 160,
+        "h": 111
+      }
+    },
+    {
+      "id": "lift",
+      "type": "lab/trigger-lift",
+      "params": {
+        "button": {
+          "x": 520,
+          "y": 200,
+          "w": 80,
+          "h": 30
+        },
+        "x": 300,
+        "y": 440,
+        "w": 160,
+        "h": 24,
+        "dx": 0,
+        "dy": -120,
+        "speed": 0.08,
+        "label": "接应平台"
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 460,
+          "y": 155,
+          "radius": 10,
+          "label": "高端"
+        },
+        {
+          "x": 560,
+          "y": 230,
+          "radius": 10,
+          "label": "低端"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 500,
+          "x": 430,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "label": "开关球"
+        }
+      ]
+    },
+    {
+      "id": "depart",
+      "type": "core/temporary-terrain",
+      "params": [
+        {
+          "target": "pillar",
+          "removeAt": 2700,
+          "label": "出发柱"
+        }
+      ]
+    }
+  ],
+  "id": "var3/w3-call-lift",
+  "title": "球来开电梯",
+  "tag": "派生试验03 · W3变体",
+  "brief": "W3变体：出发柱 2.2 秒后撤走；接应平台停在坑底，只有球砸中右侧感应区才会滑上来接椅子。一笔把球送过去。",
+  "condition": "球 0.5 秒后出生，落在坑的左边；感应区在右岸上。把球导到感应区，平台就会滑到椅子脚下；柱子 2.2 秒后撤走。",
+  "quip": "叫电梯，用球。",
+  "success": "球按了开关，平台准点到达。",
+  "failure": "球没去按开关——平台不会自己来。",
+  "hint": [
+    "先别让球掉进坑里：把它顺到右边的感应区。",
+    "平台被触发后要滑行一段，别急，它来得及。"
+  ]
+}

@@ -11,6 +11,7 @@
     "core/temporary-terrain.js",
     "core/terrain.js",
     "lab/elevator.js",
+    "lab/trigger-lift.js",
     "workshop/hanging-kit.js",
     "workshop/seat.js"
   ]

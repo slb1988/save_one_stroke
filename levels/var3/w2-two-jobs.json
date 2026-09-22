@@ -1,0 +1,81 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "派生试玩 · 再来5个",
+  "progression": {
+    "groupOrder": 90,
+    "order": 20,
+    "difficulty": "medium"
+  },
+  "ink": 340,
+  "gold": 300,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "left"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "boss",
+      "type": "core/cats",
+      "params": [
+        {
+          "x": 420,
+          "y": 340,
+          "w": 80,
+          "h": 40,
+          "label": "午睡老板"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 900,
+          "x": 465,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "label": "快递球"
+        }
+      ]
+    }
+  ],
+  "id": "var3/w2-two-jobs",
+  "title": "一笔两职：腿和挡板",
+  "tag": "派生试验03 · W2",
+  "brief": "W2：椅子缺一条右腿；0.9 秒后球落向右下方的猫区。同一笔画出腿，再顺势把球挡开。",
+  "condition": "左腿在，右腿要自己画；球 0.9 秒后落下，正下方是猫区。一条线既要撑住椅子，又要给球一条出路。",
+  "quip": "一笔打两份工。",
+  "success": "腿撑住了，球也被同一条线送走了。",
+  "failure": "两份工只干了一份——看看缺的是腿还是挡板。",
+  "hint": [
+    "先把右腿画稳，再把线顺到球的落点上。",
+    "挡板别伸进猫区上空，让球在猫区右边落地。"
+  ]
+}

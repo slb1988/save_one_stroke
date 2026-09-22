@@ -43,7 +43,12 @@
     "var2/v2-release.json",
     "var2/v3-relay.json",
     "var2/v4-round-trip.json",
-    "var2/v5-bounce.json"
+    "var2/v5-bounce.json",
+    "var3/w1-tailwind.json",
+    "var3/w2-two-jobs.json",
+    "var3/w3-call-lift.json",
+    "var3/w4-second-ball.json",
+    "var3/w5-balloon-box.json"
   ],
   "legacyProgression": {
     "1": {

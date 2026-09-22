@@ -1,0 +1,113 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "派生试玩 · 再来5个",
+  "progression": {
+    "groupOrder": 90,
+    "order": 10,
+    "difficulty": "medium"
+  },
+  "ink": 460,
+  "gold": 400,
+  "load": {
+    "x": 250,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 180,
+        "y": 251
+      }
+    },
+    {
+      "id": "tray",
+      "type": "core/terrain",
+      "params": {
+        "x": 150,
+        "y": 380,
+        "w": 250,
+        "h": 30,
+        "friction": 0.05
+      }
+    },
+    {
+      "id": "apron",
+      "type": "core/terrain",
+      "params": {
+        "x": 400,
+        "y": 380,
+        "w": 70,
+        "h": 110,
+        "friction": 0.05
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 470,
+        "y": 380,
+        "w": 230,
+        "h": 110
+      }
+    },
+    {
+      "id": "stop-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 700,
+        "y": 300,
+        "w": 20,
+        "h": 190
+      }
+    },
+    {
+      "id": "depart",
+      "type": "core/temporary-terrain",
+      "params": [
+        {
+          "target": "tray",
+          "removeAt": 4000,
+          "label": "出发托盘"
+        }
+      ]
+    },
+    {
+      "id": "gust",
+      "type": "core/forces",
+      "params": [
+        {
+          "start": 400,
+          "end": 4500,
+          "fx": 0.01,
+          "at": {
+            "x": 270,
+            "y": 378
+          },
+          "label": "顺风车"
+        }
+      ]
+    }
+  ],
+  "id": "var3/w1-tailwind",
+  "title": "顺风便车",
+  "tag": "派生试验03 · W1变体",
+  "brief": "W1变体：冰面托盘 4 秒后撤走；0.4 秒起有一股贴地的顺风。画一块平底，让风把整把椅子送到右岸。",
+  "condition": "托盘是冰面，4 秒后撤走；顺风从 0.4 秒刮到 4.5 秒。硬扛没用——让风替你搬家，平底搭到右侧常摩擦的岸上。",
+  "quip": "这一笔，搭车。",
+  "success": "风把人送到了对岸，正好坐稳。",
+  "failure": "没搭上车，或者半路翻车——平底越长越会滑，姿势越平越不摔。",
+  "hint": [
+    "先画一块能滑的长平底，再让风推着你走。",
+    "托盘会撤：风停之前，底部要整个搭上右边的常摩擦岸。"
+  ]
+}

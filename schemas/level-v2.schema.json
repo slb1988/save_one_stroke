@@ -290,6 +290,11 @@
         },
         "step": {
           "type": "boolean"
+        },
+        "friction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1.5
         }
       }
     },

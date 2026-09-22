@@ -1,0 +1,134 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "派生试玩 · 再来5个",
+  "progression": {
+    "groupOrder": 90,
+    "order": 40,
+    "difficulty": "medium"
+  },
+  "ink": 300,
+  "gold": 250,
+  "load": {
+    "x": 275,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 180,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "boss",
+      "type": "core/cats",
+      "params": [
+        {
+          "x": 390,
+          "y": 310,
+          "w": 180,
+          "h": 70,
+          "label": "午睡老板"
+        }
+      ]
+    },
+    {
+      "id": "old-ramp",
+      "type": "core/terrain",
+      "params": {
+        "x": 480,
+        "y": 130,
+        "w": 90,
+        "h": 12
+      }
+    },
+    {
+      "id": "depart",
+      "type": "core/temporary-terrain",
+      "params": [
+        {
+          "target": "old-ramp",
+          "removeAt": 1800,
+          "label": "旧挡板"
+        }
+      ]
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 450,
+          "y": 150,
+          "radius": 10,
+          "label": "高环"
+        },
+        {
+          "x": 330,
+          "y": 190,
+          "radius": 10,
+          "label": "低环"
+        },
+        {
+          "x": 620,
+          "y": 158,
+          "radius": 10,
+          "label": "右环"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 900,
+          "x": 480,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "label": "第一球"
+        },
+        {
+          "at": 2600,
+          "x": 420,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "label": "第二球"
+        }
+      ]
+    }
+  ],
+  "id": "var3/w4-second-ball",
+  "title": "第二球不走旧路",
+  "tag": "派生试验03 · W4",
+  "brief": "W4：两球先后落下。旧挡板 1.8 秒后撤走，只来得及救第一球；第二球得靠你提前画好的另一条路。",
+  "condition": "第一球 0.9 秒落在旧挡板上，挡板 1.8 秒撤走；第二球 2.6 秒从左边落下，正下方是大片猫区。一笔把第二球也安顿好。",
+  "quip": "后来的球，走新路了。",
+  "success": "两个球都有了去处，猫一直在睡。",
+  "failure": "只救了第一球——第二球来的时候，旧路已经没了。",
+  "hint": [
+    "第二球从左边来：左上的两只环可以挂一条新路。",
+    "旧挡板撤走后，你的新路得自己扛住第二球。"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "陡臂导球按开关D3b（gold）",
+      "expected": "success",
+      "stroke": [
+        [
+          407,
+          129
+        ],
+        [
+          462,
+          157
+        ],
+        [
+          558,
+          231
+        ]
+      ]
+    },
+    {
+      "name": "陡臂导球按开关E2（非照抄）",
+      "expected": "success",
+      "stroke": [
+        [
+          408,
+          130
+        ],
+        [
+          463,
+          158
+        ],
+        [
+          557,
+          229
+        ]
+      ]
+    },
+    {
+      "name": "只挂短绳（球掉进坑里，没人按开关）",
+      "expected": "failure",
+      "stroke": [
+        [
+          460,
+          155
+        ],
+        [
+          460,
+          190
+        ]
+      ]
+    }
+  ]
+}
