@@ -1,0 +1,94 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "派生试玩 · 新增5个",
+  "progression": {
+    "groupOrder": 80,
+    "order": 30,
+    "difficulty": "medium"
+  },
+  "ink": 520,
+  "gold": 470,
+  "load": {
+    "x": 460,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 300,
+        "y": 251
+      }
+    },
+    {
+      "id": "left-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 200,
+        "h": 90
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 600,
+        "y": 400,
+        "w": 100,
+        "h": 90
+      }
+    },
+    {
+      "id": "plat-a",
+      "type": "lab/elevator",
+      "params": {
+        "x": 320,
+        "y": 340,
+        "w": 160,
+        "h": 24,
+        "dx": -160,
+        "dy": 0,
+        "start": 900,
+        "end": 2900,
+        "label": "A班"
+      }
+    },
+    {
+      "id": "plat-b",
+      "type": "lab/elevator",
+      "params": {
+        "x": 556,
+        "y": 340,
+        "w": 160,
+        "h": 24,
+        "dx": -160,
+        "dy": 0,
+        "start": 1500,
+        "end": 3500,
+        "label": "B班"
+      }
+    }
+  ],
+  "id": "var2/v3-relay",
+  "title": "双平台接力",
+  "tag": "派生试验02 · V3变体",
+  "brief": "V3变体：A 班平台 0.9 秒后向左离场，B 班平台 1.5 秒后从右侧滑入。它们不打滑你的结构——接触面会真的从一班车换到另一班车。",
+  "condition": "两座平台都是光滑的单程班车：A 先走，B 后到。画一个足够宽的底，让支撑从一班车接力到另一班车。",
+  "quip": "换车不停车。",
+  "success": "一班车走，一班车来，座位没晃。",
+  "failure": "底太窄——两班车交接的空档，脚悬空了。",
+  "hint": [
+    "平台是光滑的，不会拖着结构横移。",
+    "底要宽到盖住交接的空档：A 离开前，B 已经接住。"
+  ]
+}

@@ -974,6 +974,11 @@
           "minLength": 1,
           "maxLength": 60,
           "pattern": "\\S"
+        },
+        "releaseAt": {
+          "type": "number",
+          "minimum": 750,
+          "maximum": 4000
         }
       }
     },
@@ -1052,6 +1057,11 @@
           "minLength": 1,
           "maxLength": 60,
           "pattern": "\\S"
+        },
+        "restitution": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
         }
       }
     },

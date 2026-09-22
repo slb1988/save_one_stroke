@@ -1,0 +1,57 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "派生试玩 · 原3个",
+  "progression": {
+    "groupOrder": 70,
+    "order": 20,
+    "difficulty": "easy"
+  },
+  "ink": 520,
+  "gold": 490,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "dock-kit",
+      "type": "workshop/hanging-kit",
+      "params": {
+        "span": 210,
+        "floorY": 270,
+        "removeAt": 2200
+      },
+      "at": {
+        "x": 200,
+        "y": 130
+      }
+    }
+  ],
+  "id": "var1/f2-dock-leaves",
+  "title": "偏心挂点 · 地板先下班",
+  "tag": "派生试验01 · F2变体",
+  "brief": "F2变体：off-duty 家族的迁移实例——挂点组偏心左移，装卸踏板 2.2 秒后照样撤走。",
+  "condition": "装卸踏板 2.2 秒后撤走；两只金环偏在座椅一侧。一笔可以把整把椅子提前挂起来。",
+  "quip": "今天的工位，又有自己的想法。",
+  "success": "原来还可以这样坐！",
+  "failure": "再想想重量下一站要去哪。",
+  "hint": [
+    "腿再长，也留不住要撤走的地板。",
+    "从偏心的左环连到椅面，再连到右环。金环能转动，两个分开的挂点更稳。"
+  ]
+}

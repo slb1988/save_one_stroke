@@ -1,0 +1,124 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "派生试玩 · 新增5个",
+  "progression": {
+    "groupOrder": 80,
+    "order": 40,
+    "difficulty": "hard"
+  },
+  "ink": 700,
+  "gold": 640,
+  "load": {
+    "x": 360,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 300,
+        "y": 251
+      }
+    },
+    {
+      "id": "tray",
+      "type": "core/terrain",
+      "params": {
+        "x": 280,
+        "y": 400,
+        "w": 60,
+        "h": 36
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 440,
+        "y": 400,
+        "w": 260,
+        "h": 90
+      }
+    },
+    {
+      "id": "wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 60,
+        "y": 120,
+        "w": 28,
+        "h": 320
+      }
+    },
+    {
+      "id": "low-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 450,
+        "w": 300,
+        "h": 40
+      }
+    },
+    {
+      "id": "depart",
+      "type": "core/temporary-terrain",
+      "params": [
+        {
+          "target": "tray",
+          "removeAt": 1200,
+          "label": "出发托盘"
+        },
+        {
+          "target": "wall",
+          "removeAt": 2900,
+          "label": "中场左墙"
+        }
+      ]
+    },
+    {
+      "id": "route",
+      "type": "core/gravity",
+      "params": [
+        {
+          "at": 0,
+          "x": 0,
+          "y": 1,
+          "label": "出发向下 ↓"
+        },
+        {
+          "at": 1400,
+          "x": -1,
+          "y": 0,
+          "label": "中场向左 ←"
+        },
+        {
+          "at": 2900,
+          "x": 0,
+          "y": 1,
+          "label": "回程向下 ↓"
+        }
+      ]
+    }
+  ],
+  "id": "var2/v4-round-trip",
+  "title": "重力的去程与回程",
+  "tag": "派生试验02 · V4变体",
+  "brief": "V4变体：托盘 1.3 秒撤走，1.5 秒重力向左、把结构压上左侧墙，3.0 秒重力回向下。一笔要管三段路。",
+  "condition": "先在托盘上站稳；重力横向时要有能贴上左墙的面；回程向下时，结构落在较低的左岸。",
+  "quip": "去程贴墙，回程落岸。",
+  "success": "贴过墙，落回岸，一趟没少。",
+  "failure": "只有出发的脚，没有贴墙的面——横向重力不接客。",
+  "hint": [
+    "重力向左时，左墙就是地板：要有一面能贴上去。",
+    "回程向下时整体已经左移，落点是左岸。"
+  ]
+}

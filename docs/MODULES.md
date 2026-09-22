@@ -33,9 +33,9 @@
 | `core/chair` | element | 木椅矩形数组 `{x,y,w,h,kind}` |
 | `core/terrain` | element | 一个矩形 `{x,y,w,h,step?}` |
 | `core/cats` | element | 禁区矩形数组 `{x,y,w,h,label?}` |
-| `core/anchors` | rule | v2 anchors 数组 `{x,y,radius,label}` |
+| `core/anchors` | rule | v2 anchors 数组 `{x,y,radius,label}`，可选 `releaseAt`（750–4000ms，到点真实移除该环的约束；缺省永不释放） |
 | `core/gravity` | rule | v2 gravity 数组 `{at,x,y,label}`，首项at=0，严格递增 |
-| `core/drops` | rule | v2 drops 数组 `{at,x,y,radius,mass,label}` |
+| `core/drops` | rule | v2 drops 数组 `{at,x,y,radius,mass,label}`，可选 `restitution`（0–1，缺省 0.08；直接作用于真实圆球刚体） |
 | `core/forces` | rule | 定时外力数组 `{start,end,fx,fy?,at:{x,y},label}` |
 | `core/temporary-terrain` | rule | `{target,removeAt,label}` 数组；target 为命名的 core/terrain 实例，不是下标 |
 | `lab/elevator` | element | `{x,y,w,h,dx,dy,start,end,label}`，实际移动的光滑承重平台 |

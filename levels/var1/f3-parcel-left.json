@@ -1,0 +1,99 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "var1/f3-parcel-left",
+  "chapter": "派生试玩 · 原3个",
+  "progression": {
+    "groupOrder": 70,
+    "order": 30,
+    "difficulty": "easy"
+  },
+  "title": "快递从左边来",
+  "tag": "派生试验01 · F3变体",
+  "brief": "F3变体：球改从左侧出生——在两个挂环的连线之外。直连两环的旧挡板够不着它，得把挡板往左接一段再导回右边。",
+  "condition": "0.9 秒后球在左挂环的左上方出生，正下方仍是猫区。旧直连挡板拦不到球；把挡板向左伸出接球，再导回右侧出口。",
+  "quip": "快递改从左边来。",
+  "success": "接住左边的球，送回右边的路。",
+  "failure": "球没碰上挡板——先接住它，再谈导走。",
+  "ink": 250,
+  "gold": 200,
+  "load": {
+    "x": 275,
+    "mass": 14
+  },
+  "hint": [
+    "旧挡板从左环才开始，球落在它左边。",
+    "挡板可以从左环再往左伸一截，接住球后照旧向右导。"
+  ],
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 180,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "boss",
+      "type": "core/cats",
+      "params": [
+        {
+          "x": 390,
+          "y": 310,
+          "w": 150,
+          "h": 70,
+          "label": "午睡老板"
+        }
+      ]
+    },
+    {
+      "id": "ramp-pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 450,
+          "y": 150,
+          "radius": 10,
+          "label": "高端"
+        },
+        {
+          "x": 580,
+          "y": 215,
+          "radius": 10,
+          "label": "低端"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 900,
+          "x": 420,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "label": "快递球"
+        }
+      ]
+    }
+  ]
+}

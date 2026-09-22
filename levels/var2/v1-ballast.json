@@ -1,0 +1,88 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "派生试玩 · 新增5个",
+  "progression": {
+    "groupOrder": 80,
+    "order": 10,
+    "difficulty": "medium"
+  },
+  "ink": 250,
+  "gold": 200,
+  "load": {
+    "x": 360,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 300,
+        "y": 291
+      }
+    },
+    {
+      "id": "left-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 280,
+        "h": 90
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 560,
+        "y": 400,
+        "w": 140,
+        "h": 90
+      }
+    },
+    {
+      "id": "pillar",
+      "type": "core/terrain",
+      "params": {
+        "x": 380,
+        "y": 309,
+        "w": 80,
+        "h": 91
+      }
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 500,
+          "x": 520,
+          "y": 250,
+          "radius": 22,
+          "mass": 12,
+          "label": "配重球"
+        }
+      ]
+    }
+  ],
+  "id": "var2/v1-ballast",
+  "title": "接住它，拿球当配重",
+  "tag": "派生试验02 · V1变体",
+  "brief": "V1变体：无腿座面架在窄柱上、人偏左，0.5 秒后 12 公斤的球从右侧落下。把球接在右臂上，它就是配重。",
+  "condition": "座面会慢慢往左倒；0.5 秒后球从右侧出生。画一条能接住球的右臂，让球的重量帮你把重心拉回来。",
+  "quip": "这一笔，接球。",
+  "success": "球落在臂上，重心回到了柱子上。",
+  "failure": "没接到球，或者接错了边——配重不会自己走上来。",
+  "hint": [
+    "右臂要伸到球的正下方，末端翘一点别让球滚走。",
+    "接到球之前椅子会往右倒一点，别慌，看球落到臂上之后的平衡。"
+  ]
+}

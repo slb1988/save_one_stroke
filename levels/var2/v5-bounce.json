@@ -1,0 +1,100 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "派生试玩 · 新增5个",
+  "progression": {
+    "groupOrder": 80,
+    "order": 50,
+    "difficulty": "easy"
+  },
+  "ink": 250,
+  "gold": 200,
+  "load": {
+    "x": 275,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 180,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "boss",
+      "type": "core/cats",
+      "params": [
+        {
+          "x": 400,
+          "y": 330,
+          "w": 80,
+          "h": 50,
+          "label": "午睡老板"
+        }
+      ]
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 280,
+          "y": 200,
+          "radius": 10,
+          "label": "高端"
+        },
+        {
+          "x": 360,
+          "y": 240,
+          "radius": 10,
+          "label": "低端"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 900,
+          "x": 330,
+          "y": 46,
+          "radius": 22,
+          "mass": 10,
+          "label": "弹力球",
+          "restitution": 1
+        }
+      ]
+    }
+  ],
+  "id": "var2/v5-bounce",
+  "title": "弹性球反弹导流",
+  "tag": "派生试验02 · V5变体",
+  "brief": "V5变体：这只球恢复系数 1.0，真的会弹。同一块斜板，不弹时滚进猫区，弹起来就能飞过猫区。",
+  "condition": "球 0.9 秒后落在斜板上会向右上方弹起。用斜面把它弹过猫区；板尾别伸进猫区上空。",
+  "quip": "让球自己跳过去。",
+  "success": "球从猫区上空飞了过去。",
+  "failure": "球碰了猫区——弹道也是道。",
+  "hint": [
+    "弹性 1.0：落板后向右上方弹。",
+    "板子越短越安全——板尾伸到猫区上空，球还是会落进去。"
+  ]
+}

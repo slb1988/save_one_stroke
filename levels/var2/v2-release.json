@@ -1,0 +1,94 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "派生试玩 · 新增5个",
+  "progression": {
+    "groupOrder": 80,
+    "order": 20,
+    "difficulty": "medium"
+  },
+  "ink": 560,
+  "gold": 520,
+  "load": {
+    "x": 430,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 300,
+        "y": 251
+      }
+    },
+    {
+      "id": "left-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 260,
+        "h": 90
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 500,
+        "y": 400,
+        "w": 200,
+        "h": 90
+      }
+    },
+    {
+      "id": "pedestal",
+      "type": "core/terrain",
+      "params": {
+        "x": 370,
+        "y": 360,
+        "w": 90,
+        "h": 40
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 342,
+          "y": 120,
+          "radius": 10,
+          "label": "左挂点",
+          "releaseAt": 2500
+        },
+        {
+          "x": 442,
+          "y": 120,
+          "radius": 10,
+          "label": "右挂点",
+          "releaseAt": 2500
+        }
+      ]
+    }
+  ],
+  "id": "var2/v2-release",
+  "title": "挂点 2.5 秒后松手",
+  "tag": "派生试验02 · V2变体",
+  "brief": "V2变体：双环先把椅子吊在半空，2.5 秒后一起松手。一笔要同时是吊索和落地架——落点是中间的小窄台。",
+  "condition": "开局把椅子挂到两只金环上；2.5 秒双环松手，结构落向中间的小窄台。脚要先画好。",
+  "quip": "前半程靠环，后半程靠台。",
+  "success": "松手之后，正好落在窄台上。",
+  "failure": "只想着悬挂，没想过落地——松手就是审判。",
+  "hint": [
+    "吊在半空时脚不能碰到台子，松手后才会落下去。",
+    "两只脚对准窄台，比台子窄一点没关系，别偏出去。"
+  ]
+}

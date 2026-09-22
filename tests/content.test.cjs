@@ -53,6 +53,40 @@ test('闭合契约拒绝未知类型、脚本、重复实例、无效引用/位�
   for(const bad of bads)assert.throws(()=>F.validateLevel(bad));
   assert.throws(()=>C.register(C.get('lab/elevator')),/重复注册/);
 });
+test('挂点可选 releaseAt：缺省永不释放，到点真实移除约束并同步 bindings，重试隔离',()=>{
+  const base=clone(levels.find(l=>l.id==='lab/not-a-chair-leg'));
+  const stroke=[[450,150],[620,230]];
+  // 默认行为不变：无 releaseAt 时挂接保持到底
+  const keep=P.createTrial(base,stroke);while(!keep.ended)P.step(keep);
+  assert.equal(keep.bindings.length,2);assert.equal(keep.outcome.success,true);
+  // 到点释放：约束从世界移除、bindings 同步清空、事件预告存在
+  const rel=clone(base);rel.scene.find(e=>e.id==='ramp-pins').params.forEach(a=>a.releaseAt=1500);
+  F.validateLevel(rel);
+  assert.ok(P.ruleEvents(rel).some(e=>e.type==='anchor-release'&&e.at===1500));
+  const t=P.createTrial(rel,stroke);
+  const constraints=()=>Matter.Composite.allConstraints(t.engine.world).length;
+  assert.equal(t.bindings.length,2);assert.equal(constraints(),2);
+  while(t.elapsed<1400)P.step(t);assert.equal(t.bindings.length,2);
+  while(!t.ended)P.step(t);
+  assert.equal(t.bindings.length,0);assert.equal(constraints(),0);
+  // 重试隔离：新一轮试坐重新挂接
+  assert.equal(P.createTrial(rel,stroke).bindings.length,2);
+  // 参数校验：越界与未知字段仍拒绝
+  const bad=clone(base);bad.scene.find(e=>e.id==='ramp-pins').params[0].releaseAt=100;assert.throws(()=>F.validateLevel(bad));
+  const unknown=clone(base);unknown.scene.find(e=>e.id==='ramp-pins').params[0].releaseNote='x';assert.throws(()=>F.validateLevel(unknown));
+});
+test('落球可选 restitution：缺省 0.08 不变，高弹性真实反弹更高，参数闭合校验',()=>{
+  const base=clone(levels.find(l=>l.id==='lab/not-a-chair-leg'));
+  const stroke=[[300,255],[330,255]];
+  const bounce=src=>{const t=P.createTrial(src,stroke);let contacted=false,peak=Infinity;
+    while(!t.ended){P.step(t);const b=t.drops[0]?.body;if(!b)continue;if(!contacted&&b.position.y>350)contacted=true;else if(contacted)peak=Math.min(peak,b.position.y);}
+    return {peak,rest:t.drops[0].body.restitution};};
+  const def=bounce(base);assert.equal(def.rest,0.08);
+  const bouncy=clone(base);bouncy.scene.find(e=>e.id==='parcel').params[0].restitution=0.95;
+  F.validateLevel(bouncy);const hi=bounce(bouncy);assert.equal(hi.rest,0.95);
+  assert.ok(hi.peak<def.peak-20,`高弹性应反弹更高：${hi.peak} vs ${def.peak}`);
+  const bad=clone(base);bad.scene.find(e=>e.id==='parcel').params[0].restitution=1.2;assert.throws(()=>F.validateLevel(bad));
+});
 test('自动生成的静态目录/模块 allowlist 与开发发现一致，没有手写关卡清单',()=>{
   assert.deepEqual(discover(),JSON.parse(fs.readFileSync(path.join(__dirname,'../levels/manifest.json'),'utf8')));
   assert.deepEqual(modules(),JSON.parse(fs.readFileSync(path.join(__dirname,'../js/modules/manifest.json'),'utf8')));

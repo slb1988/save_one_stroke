@@ -35,7 +35,15 @@
     "lab/off-duty.json",
     "lab/return-ticket.json",
     "lab/up-we-go.json",
-    "lab/world-tour.json"
+    "lab/world-tour.json",
+    "var1/f1-gust-reverse.json",
+    "var1/f2-dock-leaves.json",
+    "var1/f3-parcel-left.json",
+    "var2/v1-ballast.json",
+    "var2/v2-release.json",
+    "var2/v3-relay.json",
+    "var2/v4-round-trip.json",
+    "var2/v5-bounce.json"
   ],
   "legacyProgression": {
     "1": {

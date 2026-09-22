@@ -1,0 +1,66 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "斜板弹道（低端朝右）",
+      "expected": "success",
+      "stroke": [
+        [
+          280,
+          200
+        ],
+        [
+          360,
+          280
+        ]
+      ]
+    },
+    {
+      "name": "斜板弹道微移（非照抄）",
+      "expected": "success",
+      "stroke": [
+        [
+          282,
+          202
+        ],
+        [
+          362,
+          282
+        ]
+      ]
+    },
+    {
+      "name": "跳台滑板（同机制另一构形）",
+      "expected": "success",
+      "stroke": [
+        [
+          280,
+          200
+        ],
+        [
+          340,
+          275
+        ],
+        [
+          400,
+          275
+        ]
+      ]
+    },
+    {
+      "name": "短平板（弹着弹着挪出板沿）",
+      "expected": "failure",
+      "stroke": [
+        [
+          290,
+          210
+        ],
+        [
+          380,
+          210
+        ]
+      ]
+    }
+  ]
+}
