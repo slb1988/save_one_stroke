@@ -1,0 +1,139 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/47-pusher-to-field",
+  "chapter": "新发现八·协作机器",
+  "progression": {
+    "groupOrder": 270,
+    "order": 47,
+    "difficulty": "medium"
+  },
+  "title": "推杆不上天，包裹上天",
+  "tag": "新发现 47 · 真实运动与可见工单",
+  "brief": "不是把整件支架一起举起；带搬墨水，墨水推球，只有球进入磁场后被托上去。",
+  "condition": "A原本停在固定台上；把它推进右侧上托场，送到高处框，墨水不会受磁力。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 450,
+  "gold": 374,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "画推杆的脚接触带，让墨水先替你走过去。",
+    "带上的长底L形推杆能持续把A推入磁区。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 280,
+        "y": 300,
+        "w": 220,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": 4
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "dock",
+      "type": "core/terrain",
+      "params": {
+        "x": 500,
+        "y": 300,
+        "w": 180,
+        "h": 20
+      }
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 530,
+        "y": 270,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "lift-field",
+      "type": "nova/field",
+      "params": {
+        "x": 580,
+        "y": 170,
+        "w": 110,
+        "h": 150,
+        "fx": 0,
+        "fy": -1.6,
+        "start": 0,
+        "end": 5000,
+        "label": "局部磁场"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 585,
+            "y": 175,
+            "w": 105,
+            "h": 85,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

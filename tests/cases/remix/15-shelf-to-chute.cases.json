@@ -1,0 +1,38 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "永久通道接住撤架球和后来弹球",
+      "expected": "success",
+      "stroke": [
+        [
+          400,
+          140
+        ],
+        [
+          450,
+          150
+        ],
+        [
+          620,
+          158
+        ]
+      ]
+    },
+    {
+      "name": "只接左侧，撤架球没有安全出口",
+      "expected": "failure",
+      "stroke": [
+        [
+          450,
+          150
+        ],
+        [
+          330,
+          190
+        ]
+      ]
+    }
+  ]
+}

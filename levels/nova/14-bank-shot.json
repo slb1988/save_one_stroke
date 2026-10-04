@@ -1,0 +1,125 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/14-bank-shot",
+  "chapter": "新发现三·发射与反弹",
+  "progression": {
+    "groupOrder": 220,
+    "order": 14,
+    "difficulty": "medium"
+  },
+  "title": "落地只是中转站",
+  "tag": "新发现 14 · 真实运动与可见工单",
+  "brief": "旧弹球箱只要求别逃出去；现在要先落到低框，再反弹回高框，第一次下落经过高框不计。",
+  "condition": "A以向右速度8发射、恢复系数1；按①低处→②高处顺序验收。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "先把横射变成近处落地，才有向上的回弹。",
+    "近竖直挡板刹住横速，让地板完成第二段上行。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 520,
+          "y": 120,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 540,
+          "y": 280,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 300,
+        "y": 120,
+        "vx": 8,
+        "vy": -2,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A",
+        "restitution": 1
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 500,
+            "y": 350,
+            "w": 85,
+            "h": 48,
+            "mode": "visit",
+            "label": "落地章"
+          },
+          {
+            "ball": "a",
+            "x": 500,
+            "y": 280,
+            "w": 85,
+            "h": 60,
+            "mode": "visit",
+            "label": "回弹章"
+          }
+        ],
+        "ordered": true
+      }
+    }
+  ]
+}

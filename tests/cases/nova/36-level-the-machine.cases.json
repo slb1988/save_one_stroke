@@ -1,0 +1,42 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "完成可见工单的画法",
+      "expected": "success",
+      "stroke": [
+        [
+          350,
+          395.5
+        ],
+        [
+          350,
+          300
+        ],
+        [
+          590,
+          300
+        ],
+        [
+          590,
+          395.5
+        ]
+      ]
+    },
+    {
+      "name": "只顾椅子，不改变球路",
+      "expected": "failure",
+      "stroke": [
+        [
+          100,
+          255
+        ],
+        [
+          130,
+          255
+        ]
+      ]
+    }
+  ]
+}

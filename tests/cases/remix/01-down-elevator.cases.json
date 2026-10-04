@@ -1,0 +1,38 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "两脚同乘下降平台",
+      "expected": "success",
+      "stroke": [
+        [
+          260,
+          365.5
+        ],
+        [
+          341,
+          265
+        ],
+        [
+          430,
+          365.5
+        ]
+      ]
+    },
+    {
+      "name": "只撑右边，开车前就倾斜",
+      "expected": "failure",
+      "stroke": [
+        [
+          341,
+          265
+        ],
+        [
+          430,
+          365.5
+        ]
+      ]
+    }
+  ]
+}

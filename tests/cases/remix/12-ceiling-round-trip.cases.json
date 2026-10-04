@@ -1,0 +1,38 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "顶撑和旧腿分工",
+      "expected": "success",
+      "stroke": [
+        [
+          250,
+          114.5
+        ],
+        [
+          341,
+          255
+        ],
+        [
+          465,
+          114.5
+        ]
+      ]
+    },
+    {
+      "name": "只加一段地脚，无法接住向上阶段",
+      "expected": "failure",
+      "stroke": [
+        [
+          404,
+          265
+        ],
+        [
+          430,
+          395.5
+        ]
+      ]
+    }
+  ]
+}

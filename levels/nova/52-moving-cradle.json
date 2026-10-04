@@ -1,0 +1,114 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/52-moving-cradle",
+  "chapter": "新发现九·综合委托",
+  "progression": {
+    "groupOrder": 280,
+    "order": 52,
+    "difficulty": "easy"
+  },
+  "title": "画一个会走的货架",
+  "tag": "新发现 52 · 真实运动与可见工单",
+  "brief": "旧箱子挂在固定环上；这次整只墨水货架要在传送带上行驶，抬高的货台让球不会落回带面。",
+  "condition": "A落进正在移动的货架；5秒时球应留在右侧高框，不能直接躺在带面上。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 800,
+  "gold": 664,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "高框比皮带高，普通让球搭带的路线不够。",
+    "画有脚的浅货篮：脚接带，篮底抬高，两端留护栏。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 300,
+        "y": 350,
+        "w": 380,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": 3
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 540,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 550,
+            "y": 255,
+            "w": 140,
+            "h": 65,
+            "mode": "hold",
+            "label": "高位到站"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

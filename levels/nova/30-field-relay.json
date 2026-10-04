@@ -1,0 +1,154 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/30-field-relay",
+  "chapter": "新发现五·局部磁场",
+  "progression": {
+    "groupOrder": 240,
+    "order": 30,
+    "difficulty": "hard"
+  },
+  "title": "两块磁场接力",
+  "tag": "新发现 30 · 真实运动与可见工单",
+  "brief": "不是一个全场方向；先向右送出，离开第一块后再被第二块托起，过界才换受力。",
+  "condition": "A按顺序经过低处入口框和右侧高框；两个场各有不同方向与范围。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "两块场不是一股合力，关键是球经过哪一块。",
+    "把球送进第一块的下半部，它会把球交给第二块上托区。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 280,
+          "y": 150,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 450,
+          "y": 270,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 310,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "push",
+      "type": "nova/field",
+      "params": {
+        "x": 410,
+        "y": 240,
+        "w": 120,
+        "h": 130,
+        "fx": 1,
+        "fy": 0,
+        "start": 0,
+        "end": 5000,
+        "label": "局部磁场"
+      }
+    },
+    {
+      "id": "lift",
+      "type": "nova/field",
+      "params": {
+        "x": 530,
+        "y": 140,
+        "w": 150,
+        "h": 250,
+        "fx": 0,
+        "fy": -1.6,
+        "start": 0,
+        "end": 5000,
+        "label": "局部磁场"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 425,
+            "y": 250,
+            "w": 90,
+            "h": 90,
+            "mode": "visit",
+            "label": "接力一"
+          },
+          {
+            "ball": "a",
+            "x": 550,
+            "y": 100,
+            "w": 120,
+            "h": 120,
+            "mode": "visit",
+            "label": "接力二"
+          }
+        ],
+        "ordered": true
+      }
+    }
+  ]
+}

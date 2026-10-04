@@ -1,0 +1,130 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/25-local-lift",
+  "chapter": "新发现五·局部磁场",
+  "progression": {
+    "groupOrder": 240,
+    "order": 25,
+    "difficulty": "easy"
+  },
+  "title": "磁场只托球",
+  "tag": "新发现 25 · 真实运动与可见工单",
+  "brief": "旧重力换向会连椅子一起改变；局部磁场只对进入框内的标记球施力，框外仍自由落体。",
+  "condition": "A要进入中部磁场，再去右上交接框；磁场向右上施力，木椅与墨水不受磁力。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "不要给椅子造天花板支架，变化只发生在球身上。",
+    "把球送进磁场下半部，让局部上托力接管后半程。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 320,
+          "y": 150,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 470,
+          "y": 250,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 350,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "field",
+      "type": "nova/field",
+      "params": {
+        "x": 420,
+        "y": 160,
+        "w": 250,
+        "h": 180,
+        "fx": 0.5,
+        "fy": -1.2,
+        "start": 0,
+        "end": 5000,
+        "label": "局部磁场"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 580,
+            "y": 180,
+            "w": 110,
+            "h": 120,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

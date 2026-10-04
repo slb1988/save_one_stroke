@@ -1,0 +1,133 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/08-momentum-turn",
+  "chapter": "新发现二·空间捷径",
+  "progression": {
+    "groupOrder": 210,
+    "order": 8,
+    "difficulty": "medium"
+  },
+  "title": "出口把速度转半圈",
+  "tag": "新发现 8 · 真实运动与可见工单",
+  "brief": "传送不是重新自由落体；把原速度旋转180°，球会先反向飞，再被重力拉下。",
+  "condition": "A进入紫圈后从右上蓝圈出现，速度反向；请先经过中间高处的回程框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "把出口当作第二个有方向的发射器。",
+    "入口路线决定出口速度；先送进门，再观察回飞。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 300,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 430,
+          "y": 220,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 320,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "portal",
+      "type": "nova/portal",
+      "params": {
+        "entry": {
+          "x": 490,
+          "y": 285,
+          "radius": 26
+        },
+        "exit": {
+          "x": 600,
+          "y": 160,
+          "radius": 26
+        },
+        "turn": 180,
+        "label": "单向传送"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 490,
+            "y": 105,
+            "w": 90,
+            "h": 100,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

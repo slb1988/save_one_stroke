@@ -1,0 +1,114 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "ink": 500,
+  "gold": 420,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "ceiling",
+      "type": "core/terrain",
+      "params": {
+        "x": 200,
+        "y": 85,
+        "w": 85,
+        "h": 25
+      }
+    },
+    {
+      "id": "ceiling-right",
+      "type": "core/terrain",
+      "params": {
+        "x": 420,
+        "y": 85,
+        "w": 110,
+        "h": 25
+      }
+    },
+    {
+      "id": "depart",
+      "type": "core/temporary-terrain",
+      "params": [
+        {
+          "target": "ceiling",
+          "removeAt": 3000,
+          "label": "左天花板"
+        },
+        {
+          "target": "ceiling-right",
+          "removeAt": 3000,
+          "label": "右天花板"
+        }
+      ]
+    },
+    {
+      "id": "gravity",
+      "type": "core/gravity",
+      "params": [
+        {
+          "at": 0,
+          "x": 0,
+          "y": 1,
+          "label": "出发向下 ↓"
+        },
+        {
+          "at": 1400,
+          "x": 0,
+          "y": -1,
+          "label": "中场向上 ↑"
+        },
+        {
+          "at": 3000,
+          "x": 0,
+          "y": 1,
+          "label": "回程向下 ↓"
+        }
+      ]
+    }
+  ],
+  "id": "remix/12-ceiling-round-trip",
+  "chapter": "变种工坊二·重力旅行",
+  "progression": {
+    "groupOrder": 110,
+    "order": 12,
+    "difficulty": "medium"
+  },
+  "title": "天花板只接中场",
+  "tag": "变种工坊 12 · 换向",
+  "brief": "旧椅腿负责去程与回程；新的一笔负责中场。",
+  "condition": "1.4秒重力向上；3.0秒天花板撤走，重力回向下。保留旧双腿，给上行阶段加一副顶撑。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "不要拆掉去程的理解：旧腿回程还要用。",
+    "一笔连接天花板两处和座面，重力回向下后旧腿重新落地。"
+  ]
+}

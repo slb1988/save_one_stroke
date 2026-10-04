@@ -1,0 +1,93 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "变种工坊一·支撑换班",
+  "progression": {
+    "groupOrder": 100,
+    "order": 4,
+    "difficulty": "medium"
+  },
+  "ink": 800,
+  "gold": 690,
+  "load": {
+    "x": 360,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 300,
+        "y": 251
+      }
+    },
+    {
+      "id": "left-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 260,
+        "h": 90
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 500,
+        "y": 400,
+        "w": 200,
+        "h": 90
+      }
+    },
+    {
+      "id": "pedestal",
+      "type": "core/terrain",
+      "params": {
+        "x": 300,
+        "y": 360,
+        "w": 130,
+        "h": 40
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 342,
+          "y": 120,
+          "radius": 10,
+          "label": "左挂点",
+          "releaseAt": 1600
+        },
+        {
+          "x": 442,
+          "y": 120,
+          "radius": 10,
+          "label": "右挂点"
+        }
+      ]
+    }
+  ],
+  "id": "remix/04-one-ring-left",
+  "title": "只剩一只环的时候",
+  "tag": "变种工坊 04 · 接力",
+  "brief": "右环不会松手，却不能单独阻止椅子绕它转。",
+  "condition": "1.6秒左环释放，右环一直保留。用台面接住下摆的一侧，形成“环+脚”的新支撑。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "不必再找第二个永久环，台面也能接班。",
+    "左侧脚尖先停在台面上方，左环松手后只让它轻轻落下。"
+  ]
+}

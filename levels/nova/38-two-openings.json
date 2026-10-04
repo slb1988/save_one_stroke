@@ -1,0 +1,160 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/38-two-openings",
+  "chapter": "新发现七·开合时窗",
+  "progression": {
+    "groupOrder": 260,
+    "order": 38,
+    "difficulty": "medium"
+  },
+  "title": "同一扇门开两次",
+  "tag": "新发现 38 · 真实运动与可见工单",
+  "brief": "旧临时板只退场一次；这扇门关上后还会再开，两球要用不同窗口共用下方通道。",
+  "condition": "A早到、B晚到；门在1.0–1.6秒与2.3–2.9秒开放，A和B都要送到右框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "关上并不等于来不及，第二球可以等第二班。",
+    "先把门下的永久通道画好，两次释放都能接住。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "gate",
+      "type": "nova/gate",
+      "params": {
+        "x": 400,
+        "y": 210,
+        "w": 190,
+        "h": 14,
+        "windows": [
+          {
+            "open": 1000,
+            "close": 1600
+          },
+          {
+            "open": 2300,
+            "close": 2900
+          }
+        ],
+        "label": "时窗门"
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 400,
+          "y": 250,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 600,
+          "y": 340,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 450,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "ball-b",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "b",
+        "x": 450,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 1600,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球B"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 600,
+            "y": 340,
+            "w": 90,
+            "h": 58,
+            "mode": "visit",
+            "label": "收件区"
+          },
+          {
+            "ball": "b",
+            "x": 600,
+            "y": 340,
+            "w": 90,
+            "h": 58,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

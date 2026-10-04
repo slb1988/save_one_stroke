@@ -1,0 +1,112 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "变种工坊二·重力旅行",
+  "progression": {
+    "groupOrder": 110,
+    "order": 11,
+    "difficulty": "hard"
+  },
+  "ink": 1050,
+  "gold": 930,
+  "load": {
+    "x": 430,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 300,
+        "y": 251
+      }
+    },
+    {
+      "id": "left-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 260,
+        "h": 90
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 500,
+        "y": 400,
+        "w": 200,
+        "h": 90
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 342,
+          "y": 120,
+          "radius": 10,
+          "label": "左挂点",
+          "releaseAt": 2500
+        },
+        {
+          "x": 442,
+          "y": 120,
+          "radius": 10,
+          "label": "右挂点",
+          "releaseAt": 2500
+        }
+      ]
+    },
+    {
+      "id": "wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 600,
+        "y": 100,
+        "w": 25,
+        "h": 300
+      }
+    },
+    {
+      "id": "gravity",
+      "type": "core/gravity",
+      "params": [
+        {
+          "at": 0,
+          "x": 0,
+          "y": 1,
+          "label": "先向下 ↓"
+        },
+        {
+          "at": 2500,
+          "x": 1,
+          "y": 0,
+          "label": "松手后向右 →"
+        }
+      ]
+    }
+  ],
+  "id": "remix/11-release-to-wall",
+  "title": "松手后由墙接班",
+  "tag": "变种工坊 11 · 换向",
+  "brief": "挂点退休的同一刻，“下面”也换了方向。",
+  "condition": "2.5秒双环释放，重力同时向右。提前画好的墙撑必须立即接手，而不是等待落到地上。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "落地脚不能解决向右的重力。",
+    "吊架中间伸出上下两个墙脚，松手前就靠近右墙。"
+  ]
+}

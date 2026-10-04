@@ -1,0 +1,42 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "浅杯收住两班配重",
+      "expected": "success",
+      "stroke": [
+        [
+          465,
+          305
+        ],
+        [
+          500,
+          296
+        ],
+        [
+          540,
+          296
+        ],
+        [
+          548,
+          274
+        ]
+      ]
+    },
+    {
+      "name": "无接球杯，撤台后失衡",
+      "expected": "failure",
+      "stroke": [
+        [
+          380,
+          300
+        ],
+        [
+          420,
+          305
+        ]
+      ]
+    }
+  ]
+}

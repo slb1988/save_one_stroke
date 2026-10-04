@@ -1,0 +1,42 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "铰接加滑动横梁",
+      "expected": "success",
+      "stroke": [
+        [
+          254,
+          330
+        ],
+        [
+          340,
+          265
+        ],
+        [
+          375,
+          395.5
+        ],
+        [
+          580,
+          395.5
+        ]
+      ]
+    },
+    {
+      "name": "只接铰链仍会旋转",
+      "expected": "failure",
+      "stroke": [
+        [
+          254,
+          330
+        ],
+        [
+          340,
+          265
+        ]
+      ]
+    }
+  ]
+}

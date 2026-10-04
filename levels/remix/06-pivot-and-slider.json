@@ -1,0 +1,81 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "ink": 650,
+  "gold": 546,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "remote",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 440,
+        "w": 80,
+        "h": 60
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 254,
+          "y": 330,
+          "radius": 10,
+          "label": "挂点1"
+        }
+      ]
+    },
+    {
+      "id": "shuttle",
+      "type": "lab/elevator",
+      "params": {
+        "x": 390,
+        "y": 400,
+        "w": 65,
+        "h": 24,
+        "dx": 120,
+        "dy": 0,
+        "start": 1000,
+        "end": 3000,
+        "label": "接力平台"
+      }
+    }
+  ],
+  "id": "remix/06-pivot-and-slider",
+  "chapter": "变种工坊一·支撑换班",
+  "progression": {
+    "groupOrder": 100,
+    "order": 6,
+    "difficulty": "medium"
+  },
+  "title": "一边转铰，一边滑轨",
+  "tag": "变种工坊 06 · 接力",
+  "brief": "一只环配一条滑轨，也能维持水平。",
+  "condition": "左边没有地面，只留一个永久环；右平台1.0–3.0秒向右走120单位。让右侧接触沿横梁滑动。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "环负责固定一侧，平台负责托住另一侧。",
+    "先接环与椅，再向下折出覆盖平台全行程的底边。"
+  ]
+}

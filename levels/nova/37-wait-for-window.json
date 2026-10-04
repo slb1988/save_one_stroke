@@ -1,0 +1,134 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/37-wait-for-window",
+  "chapter": "新发现七·开合时窗",
+  "progression": {
+    "groupOrder": 260,
+    "order": 37,
+    "difficulty": "easy"
+  },
+  "title": "关门不是永远封路",
+  "tag": "新发现 37 · 真实运动与可见工单",
+  "brief": "旧踏板撤走后不回来；时窗门会再次关上，先排队再过门才赶得上。",
+  "condition": "水平门在1.5–2.5秒开放，之后重新实心；A先停在门上，再沿下方笔画于3.7–4.8秒经过空中验收框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "别画穿开局关闭的门。",
+    "门下方可以先画好滑道；开门后球会落到它上面。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "gate",
+      "type": "nova/gate",
+      "params": {
+        "x": 400,
+        "y": 210,
+        "w": 190,
+        "h": 14,
+        "windows": [
+          {
+            "open": 1500,
+            "close": 2500
+          }
+        ],
+        "label": "时窗门"
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 380,
+          "y": 260,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 610,
+          "y": 320,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 450,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 600,
+            "y": 330,
+            "w": 90,
+            "h": 45,
+            "mode": "visit",
+            "label": "空中验收",
+            "openAt": 3700,
+            "closeAt": 4800
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

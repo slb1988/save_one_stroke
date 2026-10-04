@@ -1,0 +1,168 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/46-field-weights-beam",
+  "chapter": "新发现八·协作机器",
+  "progression": {
+    "groupOrder": 270,
+    "order": 46,
+    "difficulty": "easy"
+  },
+  "title": "磁力不是只改航线",
+  "tag": "新发现 46 · 真实运动与可见工单",
+  "brief": "磁力作用在球上，球又压在跷板上：局部力可以通过真实接触传给另一件机器。",
+  "condition": "A先被导到跷板左侧，局部下压场只对A加力；轻球B后到，要沿压出的坡去左框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "重力没有全局变强，只有控制球A多了一份下压力。",
+    "把A放入左端场区，再让B顺着机器改变后的坡出发。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 300,
+          "y": 180,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 365,
+          "y": 230,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "beam",
+      "type": "nova/seesaw",
+      "params": {
+        "x": 340,
+        "y": 280,
+        "w": 260,
+        "h": 14,
+        "pivot": 0.5,
+        "mass": 8,
+        "label": "自由跷板"
+      }
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 330,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 1,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "ball-b",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "b",
+        "x": 530,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 2300,
+        "radius": 14,
+        "mass": 0.5,
+        "label": "钢球B"
+      }
+    },
+    {
+      "id": "press",
+      "type": "nova/field",
+      "params": {
+        "x": 340,
+        "y": 200,
+        "w": 120,
+        "h": 190,
+        "fx": 0,
+        "fy": 2,
+        "start": 0,
+        "end": 5000,
+        "label": "局部磁场",
+        "ball": "a"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 350,
+            "y": 230,
+            "w": 110,
+            "h": 110,
+            "mode": "visit",
+            "label": "控制位"
+          },
+          {
+            "ball": "b",
+            "x": 270,
+            "y": 320,
+            "w": 150,
+            "h": 78,
+            "mode": "visit",
+            "label": "货物到站"
+          }
+        ],
+        "ordered": true
+      }
+    }
+  ]
+}

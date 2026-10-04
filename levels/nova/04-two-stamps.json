@@ -1,0 +1,124 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/04-two-stamps",
+  "chapter": "新发现一·收件工单",
+  "progression": {
+    "groupOrder": 200,
+    "order": 4,
+    "difficulty": "easy"
+  },
+  "title": "先盖上章，再盖下章",
+  "tag": "新发现 4 · 真实运动与可见工单",
+  "brief": "不是随便碰两个框；同一颗球必须按编号先到高处再到低处，才算走完流程。",
+  "condition": "A依次经过①高处中转框与②右岸收件框；顺序颠倒不计。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "先规划第一站，不能直接送到终点。",
+    "在一条坡道上串起高处中转与低处落地。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 320,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 560,
+          "y": 270,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 350,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 435,
+            "y": 195,
+            "w": 95,
+            "h": 80,
+            "mode": "visit",
+            "label": "中转章"
+          },
+          {
+            "ball": "a",
+            "x": 580,
+            "y": 310,
+            "w": 110,
+            "h": 88,
+            "mode": "visit",
+            "label": "签收章"
+          }
+        ],
+        "ordered": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/48-belt-queue",
+  "chapter": "新发现八·协作机器",
+  "progression": {
+    "groupOrder": 270,
+    "order": 48,
+    "difficulty": "hard"
+  },
+  "title": "带不停，门先挡着",
+  "tag": "新发现 48 · 真实运动与可见工单",
+  "brief": "不是等所有机关一起停；传送带持续把球推向关门，门在指定时刻才放行，球要完成排队和出站两件事。",
+  "condition": "A先经过门前等候框，再等3.5秒开门去右端框；带一直向右。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "门前排队是真接触，不是计时后瞬移。",
+    "坡只管把球送上带，门负责蓄住流量。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 300,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 430,
+          "y": 230,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 330,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 380,
+        "y": 300,
+        "w": 280,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": 3
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "door",
+      "type": "nova/gate",
+      "params": {
+        "x": 570,
+        "y": 170,
+        "w": 14,
+        "h": 130,
+        "windows": [
+          {
+            "open": 3500,
+            "close": 4500
+          }
+        ],
+        "label": "时窗门"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 525,
+            "y": 260,
+            "w": 40,
+            "h": 40,
+            "mode": "visit",
+            "label": "排队"
+          },
+          {
+            "ball": "a",
+            "x": 645,
+            "y": 340,
+            "w": 50,
+            "h": 58,
+            "mode": "visit",
+            "label": "出站"
+          }
+        ],
+        "ordered": true
+      }
+    }
+  ]
+}

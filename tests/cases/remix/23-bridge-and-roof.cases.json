@@ -1,0 +1,38 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "高位斜桥同时撑椅导球",
+      "expected": "success",
+      "stroke": [
+        [
+          550,
+          395.5
+        ],
+        [
+          525,
+          315
+        ],
+        [
+          415,
+          265
+        ]
+      ]
+    },
+    {
+      "name": "低桥只承重，没有挡住球",
+      "expected": "failure",
+      "stroke": [
+        [
+          396,
+          395.5
+        ],
+        [
+          540,
+          395.5
+        ]
+      ]
+    }
+  ]
+}

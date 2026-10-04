@@ -1,0 +1,136 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/21-belt-stop",
+  "chapter": "新发现四·接触传送",
+  "progression": {
+    "groupOrder": 230,
+    "order": 21,
+    "difficulty": "hard"
+  },
+  "title": "会停的工位",
+  "tag": "新发现 21 · 真实运动与可见工单",
+  "brief": "不是碰到终点就算；传送带会停机，必须利用停机前的运输，让球最后留在指定工位。",
+  "condition": "传送带先向右，2.8秒停机；5秒时A须留在带上右半部收件框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "不要把球一路送出边缘，要给停机留位置。",
+    "短坡只负责上带，最后的停靠交给带的时序。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 300,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 430,
+          "y": 230,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 330,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 380,
+        "y": 300,
+        "w": 260,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": 3
+          },
+          {
+            "at": 2800,
+            "vx": 0
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 500,
+            "y": 265,
+            "w": 135,
+            "h": 35,
+            "mode": "hold",
+            "label": "停机工位"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

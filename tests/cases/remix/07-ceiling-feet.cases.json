@@ -1,0 +1,42 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "双脚顶住天花板底面",
+      "expected": "success",
+      "stroke": [
+        [
+          250,
+          114.5
+        ],
+        [
+          341,
+          255
+        ],
+        [
+          465,
+          114.5
+        ]
+      ]
+    },
+    {
+      "name": "仍把脚画到地面",
+      "expected": "failure",
+      "stroke": [
+        [
+          250,
+          395.5
+        ],
+        [
+          341,
+          265
+        ],
+        [
+          440,
+          395.5
+        ]
+      ]
+    }
+  ]
+}

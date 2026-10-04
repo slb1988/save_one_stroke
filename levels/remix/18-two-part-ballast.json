@@ -1,0 +1,117 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "变种工坊三·球的工作",
+  "progression": {
+    "groupOrder": 120,
+    "order": 18,
+    "difficulty": "hard"
+  },
+  "ink": 320,
+  "gold": 260,
+  "load": {
+    "x": 360,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 300,
+        "y": 291
+      }
+    },
+    {
+      "id": "left-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 280,
+        "h": 90
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 560,
+        "y": 400,
+        "w": 140,
+        "h": 90
+      }
+    },
+    {
+      "id": "pillar",
+      "type": "core/terrain",
+      "params": {
+        "x": 380,
+        "y": 309,
+        "w": 80,
+        "h": 91
+      }
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 500,
+          "x": 520,
+          "y": 250,
+          "radius": 16,
+          "mass": 6,
+          "label": "前半份配重"
+        },
+        {
+          "at": 1400,
+          "x": 520,
+          "y": 220,
+          "radius": 16,
+          "mass": 6,
+          "label": "后半份配重"
+        }
+      ]
+    },
+    {
+      "id": "loading-dock",
+      "type": "core/terrain",
+      "params": {
+        "x": 300,
+        "y": 309,
+        "w": 70,
+        "h": 91
+      }
+    },
+    {
+      "id": "depart",
+      "type": "core/temporary-terrain",
+      "params": [
+        {
+          "target": "loading-dock",
+          "removeAt": 2400,
+          "label": "装卸台"
+        }
+      ]
+    }
+  ],
+  "id": "remix/18-two-part-ballast",
+  "title": "配重分两班到",
+  "tag": "变种工坊 18 · 控球",
+  "brief": "第一球不是终点，要给第二份重量也留地方。",
+  "condition": "两颗小球各重6，分别在0.5秒和1.4秒出生；2.4秒左侧装卸台撤走。右臂需要收住两球。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "不能让先到的球把后到的球撞下去。",
+    "用浅杯而不是尖斜坡承接右侧两份配重。"
+  ]
+}

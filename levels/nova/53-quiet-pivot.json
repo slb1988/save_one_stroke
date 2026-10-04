@@ -1,0 +1,92 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/53-quiet-pivot",
+  "chapter": "新发现九·综合委托",
+  "progression": {
+    "groupOrder": 280,
+    "order": 53,
+    "difficulty": "medium"
+  },
+  "title": "板会转，支点几乎不动",
+  "tag": "新发现 53 · 真实运动与可见工单",
+  "brief": "旧移动平台整体搬家；自由跷板各处运动幅度不同，支点附近可以成为相对安静的承重位置。",
+  "condition": "左旧腿站岸上，右边只有可转跷板；A会压下板的远端，椅子仍要水平承重5秒。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 250,
+  "gold": 208,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "不是追板端，而是找板绕着哪里转。",
+    "把短支架接到板的支点附近，让远端运动与椅子解耦。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "left"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "left-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 280,
+        "h": 90
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 610,
+        "y": 400,
+        "w": 90,
+        "h": 90
+      }
+    },
+    {
+      "id": "beam",
+      "type": "nova/seesaw",
+      "params": {
+        "x": 360,
+        "y": 350,
+        "w": 240,
+        "h": 14,
+        "pivot": 0.3,
+        "mass": 8,
+        "label": "自由跷板"
+      }
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 575,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 1000,
+        "radius": 14,
+        "mass": 6,
+        "label": "钢球A"
+      }
+    }
+  ]
+}

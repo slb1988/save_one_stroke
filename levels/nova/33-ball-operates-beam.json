@@ -1,0 +1,152 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/33-ball-operates-beam",
+  "chapter": "新发现六·自由跷板",
+  "progression": {
+    "groupOrder": 250,
+    "order": 33,
+    "difficulty": "hard"
+  },
+  "title": "第一球开坡，第二球出发",
+  "tag": "新发现 33 · 真实运动与可见工单",
+  "brief": "旧配重只救椅子；A这次是机器的操作者，它压下跷板左端，为B搭好去左岸的坡。",
+  "condition": "A重8先出生，B重0.5在2.3秒出生；A先经过控制框，B再到左岸框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "这条笔画主要服务A，不要只拦B。",
+    "用短坡把重球放到跷板左半边，让后来轻球顺新的坡向左。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 300,
+          "y": 180,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 365,
+          "y": 230,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "beam",
+      "type": "nova/seesaw",
+      "params": {
+        "x": 340,
+        "y": 280,
+        "w": 260,
+        "h": 14,
+        "pivot": 0.5,
+        "mass": 4,
+        "label": "自由跷板"
+      }
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 330,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 8,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "ball-b",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "b",
+        "x": 530,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 2300,
+        "radius": 14,
+        "mass": 0.5,
+        "label": "钢球B"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 350,
+            "y": 230,
+            "w": 110,
+            "h": 110,
+            "mode": "visit",
+            "label": "压板控制"
+          },
+          {
+            "ball": "b",
+            "x": 270,
+            "y": 320,
+            "w": 150,
+            "h": 78,
+            "mode": "visit",
+            "label": "轻球收件"
+          }
+        ],
+        "ordered": true
+      }
+    }
+  ]
+}

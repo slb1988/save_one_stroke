@@ -1,0 +1,133 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/11-avoid-wrong-door",
+  "chapter": "新发现二·空间捷径",
+  "progression": {
+    "groupOrder": 210,
+    "order": 11,
+    "difficulty": "medium"
+  },
+  "title": "这道门别进去",
+  "tag": "新发现 11 · 真实运动与可见工单",
+  "brief": "旧关的机关多是救援资源；这道传送门会把包裹送错地址，入口也是要绕开的路线选择。",
+  "condition": "A正下方是错误入口；从圈外绕过去，送到右岸框，不能在圈里涂线。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "看清地址再走捷径。",
+    "在入口上方拦住球，提前把它导向右边。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 360,
+          "y": 140,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 500,
+          "y": 200,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 400,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "wrong",
+      "type": "nova/portal",
+      "params": {
+        "entry": {
+          "x": 400,
+          "y": 225,
+          "radius": 26
+        },
+        "exit": {
+          "x": 270,
+          "y": 90,
+          "radius": 26
+        },
+        "turn": 0,
+        "label": "单向传送"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 560,
+            "y": 320,
+            "w": 135,
+            "h": 78,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

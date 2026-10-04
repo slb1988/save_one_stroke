@@ -1,0 +1,130 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/28-magnetic-brake",
+  "chapter": "新发现五·局部磁场",
+  "progression": {
+    "groupOrder": 240,
+    "order": 28,
+    "difficulty": "easy"
+  },
+  "title": "没有墙的停车位",
+  "tag": "新发现 28 · 真实运动与可见工单",
+  "brief": "不是用实体挡板硬撞；磁力与坡上的重力分量对抗，球可以在没有杯壁的位置停留。",
+  "condition": "A先沿坡进入左向场；5秒时仍留在中央停车框，不能顺坡滚走。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "先获得向右速度，再用相反的力减速。",
+    "坡送入场，场把横速收回来；不用把整个球封在杯里。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 280,
+          "y": 150,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 470,
+          "y": 250,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 300,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "brake",
+      "type": "nova/field",
+      "params": {
+        "x": 420,
+        "y": 200,
+        "w": 200,
+        "h": 180,
+        "fx": -1,
+        "fy": 0,
+        "start": 0,
+        "end": 5000,
+        "label": "局部磁场"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 400,
+            "y": 180,
+            "w": 90,
+            "h": 60,
+            "mode": "hold",
+            "label": "磁力停车位"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/18-no-early-stamp",
+  "chapter": "新发现三·发射与反弹",
+  "progression": {
+    "groupOrder": 220,
+    "order": 18,
+    "difficulty": "hard"
+  },
+  "title": "先回弹，再签收",
+  "tag": "新发现 18 · 真实运动与可见工单",
+  "brief": "同样一处空间，在回球前和回球后是两件事；工单要求先碰右上框，再在回程窗口回到左下框。",
+  "condition": "A高速发射；先经过右上中转框，再在3.4–4.3秒经过左下终点框，不能只在出生处附近拦停。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "先让球到右上盖章，回弹回来才签收。",
+    "把回球墙放在第一框之后，不要抢在第一站前挡球。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 550,
+          "y": 150,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 570,
+          "y": 290,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 300,
+        "y": 120,
+        "vx": 9,
+        "vy": -2,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A",
+        "restitution": 1
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 470,
+            "y": 130,
+            "w": 100,
+            "h": 130,
+            "mode": "visit",
+            "label": "中转"
+          },
+          {
+            "ball": "a",
+            "x": 290,
+            "y": 315,
+            "w": 175,
+            "h": 83,
+            "mode": "visit",
+            "label": "返程签收",
+            "openAt": 3400,
+            "closeAt": 4300
+          }
+        ],
+        "ordered": true
+      }
+    }
+  ]
+}

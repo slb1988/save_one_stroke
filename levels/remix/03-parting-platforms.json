@@ -1,0 +1,84 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "ink": 650,
+  "gold": 546,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "remote",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 440,
+        "w": 80,
+        "h": 60
+      }
+    },
+    {
+      "id": "left",
+      "type": "lab/elevator",
+      "params": {
+        "x": 250,
+        "y": 340,
+        "w": 80,
+        "h": 24,
+        "dx": -100,
+        "dy": 0,
+        "start": 1000,
+        "end": 3000,
+        "label": "接力平台"
+      }
+    },
+    {
+      "id": "right",
+      "type": "lab/elevator",
+      "params": {
+        "x": 370,
+        "y": 340,
+        "w": 80,
+        "h": 24,
+        "dx": 100,
+        "dy": 0,
+        "start": 1000,
+        "end": 3000,
+        "label": "接力平台"
+      }
+    }
+  ],
+  "id": "remix/03-parting-platforms",
+  "chapter": "变种工坊一·支撑换班",
+  "progression": {
+    "groupOrder": 100,
+    "order": 3,
+    "difficulty": "hard"
+  },
+  "title": "两班车越走越远",
+  "tag": "变种工坊 03 · 接力",
+  "brief": "脚不能各钉在一辆车上；接触可以沿着笔画换位置。",
+  "condition": "两座光滑平台在1.0–3.0秒各向外移动100单位。让它们始终托着同一条宽底边。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "平台不会拖着椅子走，底部接触点却在移动。",
+    "底边覆盖两座平台的起点和终点，斜边只负责接椅。"
+  ]
+}

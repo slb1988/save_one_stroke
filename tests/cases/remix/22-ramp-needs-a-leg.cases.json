@@ -1,0 +1,38 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "挡板焊椅后不依赖退休挂点",
+      "expected": "success",
+      "stroke": [
+        [
+          350,
+          265
+        ],
+        [
+          450,
+          150
+        ],
+        [
+          620,
+          230
+        ]
+      ]
+    },
+    {
+      "name": "只挂独立斜板，双环释放后落下",
+      "expected": "failure",
+      "stroke": [
+        [
+          450,
+          150
+        ],
+        [
+          620,
+          230
+        ]
+      ]
+    }
+  ]
+}

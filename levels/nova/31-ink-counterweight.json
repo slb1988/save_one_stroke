@@ -1,0 +1,110 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/31-ink-counterweight",
+  "chapter": "新发现六·自由跷板",
+  "progression": {
+    "groupOrder": 250,
+    "order": 31,
+    "difficulty": "easy"
+  },
+  "title": "墨水也能当砝码",
+  "tag": "新发现 31 · 真实运动与可见工单",
+  "brief": "旧关接球当椅子配重；这次不焊椅子，墨水自身的质量落在跷板一端，改变另一颗球的出路。",
+  "condition": "A在1.4秒落到跷板右侧；把左端压低，让A从左侧去交接框；板有真实质量与可转动支点。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 500,
+  "gold": 415,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "这一笔不用接椅子，也不需要挂环。",
+    "在跷板左端上方画一段较长的墨水，让它先落上去当砝码。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "beam",
+      "type": "nova/seesaw",
+      "params": {
+        "x": 340,
+        "y": 280,
+        "w": 260,
+        "h": 14,
+        "pivot": 0.5,
+        "mass": 4,
+        "label": "自由跷板"
+      }
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 530,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 1400,
+        "radius": 14,
+        "mass": 0.5,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 270,
+            "y": 320,
+            "w": 140,
+            "h": 78,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

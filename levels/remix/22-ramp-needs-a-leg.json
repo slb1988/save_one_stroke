@@ -1,0 +1,109 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "remix/22-ramp-needs-a-leg",
+  "chapter": "变种工坊四·一笔多用",
+  "progression": {
+    "groupOrder": 130,
+    "order": 22,
+    "difficulty": "hard"
+  },
+  "title": "挡板下班后靠椅子",
+  "tag": "变种工坊 22 · 组合",
+  "brief": "同一条挡板前半场挂墙，后半场得靠椅子。",
+  "condition": "0.9秒第一球，2.0秒双环释放，2.7秒第二球。挡板不能只挂自己，要把受力传给已经站稳的木椅。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "ink": 500,
+  "gold": 430,
+  "load": {
+    "x": 275,
+    "mass": 30
+  },
+  "hint": [
+    "只画独立斜板能接第一球，却接不了环松开后的第二球。",
+    "从椅面出发连高环，再接低环，把挡板焊进整个结构。"
+  ],
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 180,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "boss",
+      "type": "core/cats",
+      "params": [
+        {
+          "x": 483,
+          "y": 310,
+          "w": 90,
+          "h": 70,
+          "label": "午睡老板"
+        }
+      ]
+    },
+    {
+      "id": "ramp-pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 450,
+          "y": 150,
+          "radius": 10,
+          "label": "高端",
+          "releaseAt": 2000
+        },
+        {
+          "x": 620,
+          "y": 230,
+          "radius": 10,
+          "label": "低端",
+          "releaseAt": 2000
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 900,
+          "x": 535,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "label": "快递球"
+        },
+        {
+          "at": 2700,
+          "x": 535,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "label": "下班后的第二球"
+        }
+      ]
+    }
+  ]
+}

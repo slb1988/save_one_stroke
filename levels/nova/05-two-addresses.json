@@ -1,0 +1,139 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/05-two-addresses",
+  "chapter": "新发现一·收件工单",
+  "progression": {
+    "groupOrder": 200,
+    "order": 5,
+    "difficulty": "medium"
+  },
+  "title": "两个球，两张地址",
+  "tag": "新发现 5 · 真实运动与可见工单",
+  "brief": "旧双球只要求都别碰猫；现在A与B必须各进自己的地址，送错安全区也不能交差。",
+  "condition": "A从380、B从550先后出生；A送左框，B送右框，不能交换。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "中间高、两侧低的分岔可以分配地址。",
+    "让两球落在峰顶两边，各自走向对应的收件框。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 340,
+          "y": 230,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 590,
+          "y": 230,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 380,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "ball-b",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "b",
+        "x": 550,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 1300,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球B"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 210,
+            "y": 320,
+            "w": 150,
+            "h": 78,
+            "mode": "visit",
+            "label": "收件区"
+          },
+          {
+            "ball": "b",
+            "x": 600,
+            "y": 330,
+            "w": 95,
+            "h": 68,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

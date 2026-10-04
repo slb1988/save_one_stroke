@@ -1,0 +1,38 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "双向分流屋脊",
+      "expected": "success",
+      "stroke": [
+        [
+          300,
+          260
+        ],
+        [
+          450,
+          135
+        ],
+        [
+          600,
+          260
+        ]
+      ]
+    },
+    {
+      "name": "只画半边屋顶",
+      "expected": "failure",
+      "stroke": [
+        [
+          300,
+          260
+        ],
+        [
+          450,
+          135
+        ]
+      ]
+    }
+  ]
+}

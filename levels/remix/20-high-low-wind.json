@@ -1,0 +1,82 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "ink": 600,
+  "gold": 504,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "gust",
+      "type": "core/forces",
+      "params": [
+        {
+          "start": 800,
+          "end": 1800,
+          "fx": 0.017,
+          "fy": 0,
+          "at": {
+            "x": 341,
+            "y": 175
+          },
+          "label": "高处右推"
+        },
+        {
+          "start": 2500,
+          "end": 3500,
+          "fx": 0.017,
+          "fy": 0,
+          "at": {
+            "x": 341,
+            "y": 390
+          },
+          "label": "贴地右推"
+        }
+      ]
+    }
+  ],
+  "id": "remix/20-high-low-wind",
+  "chapter": "变种工坊四·一笔多用",
+  "progression": {
+    "groupOrder": 130,
+    "order": 20,
+    "difficulty": "medium"
+  },
+  "title": "同向的风，也有两种脾气",
+  "tag": "变种工坊 20 · 组合",
+  "brief": "风向没反转，施力高度却换了。",
+  "condition": "0.8–1.8秒推在上方；2.5–3.5秒同向推在脚边。两次都向右，力矩和滑动反应不同。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "别只在迎风一侧加一根腿，要让重量一直留在支撑范围里。",
+    "宽底双支撑可以同时应对上推和贴地推。"
+  ]
+}

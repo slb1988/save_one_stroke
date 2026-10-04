@@ -1,0 +1,125 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "变种工坊四·一笔多用",
+  "progression": {
+    "groupOrder": 130,
+    "order": 24,
+    "difficulty": "hard"
+  },
+  "ink": 700,
+  "gold": 600,
+  "load": {
+    "x": 370,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 280,
+        "y": 251
+      }
+    },
+    {
+      "id": "left-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 240,
+        "h": 90
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 520,
+        "y": 400,
+        "w": 180,
+        "h": 90
+      }
+    },
+    {
+      "id": "lift",
+      "type": "lab/trigger-lift",
+      "params": {
+        "button": {
+          "x": 520,
+          "y": 200,
+          "w": 80,
+          "h": 30
+        },
+        "x": 300,
+        "y": 440,
+        "w": 160,
+        "h": 24,
+        "dx": 0,
+        "dy": -120,
+        "speed": 0.08,
+        "label": "接应平台"
+      }
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 500,
+          "x": 430,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "label": "开关球"
+        }
+      ]
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 290,
+          "y": 170,
+          "radius": 10,
+          "label": "挂点1",
+          "releaseAt": 3500
+        },
+        {
+          "x": 450,
+          "y": 155,
+          "radius": 10,
+          "label": "挂点2",
+          "releaseAt": 3500
+        },
+        {
+          "x": 560,
+          "y": 230,
+          "radius": 10,
+          "label": "挂点3",
+          "releaseAt": 3500
+        }
+      ]
+    }
+  ],
+  "id": "remix/24-call-before-release",
+  "title": "先叫电梯，再松手",
+  "tag": "变种工坊 24 · 组合",
+  "brief": "最后一班：悬挂、导球、叫车、落地，全靠这一笔。",
+  "condition": "0.5秒球出生，只有命中右侧感应区才叫来平台；3.5秒全部挂点释放。平台必须先到，椅子才能安全落下。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "只会挂住椅子不够，还要让球去按开关。",
+    "从左环接到椅面，再向上接出导球坡，经右侧两环通到感应区。"
+  ]
+}

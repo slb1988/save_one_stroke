@@ -1,0 +1,115 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/15-ceiling-bank",
+  "chapter": "新发现三·发射与反弹",
+  "progression": {
+    "groupOrder": 220,
+    "order": 15,
+    "difficulty": "hard"
+  },
+  "title": "上抛球要借顶",
+  "tag": "新发现 15 · 真实运动与可见工单",
+  "brief": "不是给球画落地坡；上抛球先向上，顶部挡板可以提前把它送回下方框。",
+  "condition": "A从左下以(6,-10)发射；中右侧低框是地址，不能让它自由飞出右边。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "先看上抛阶段，再看下落阶段。",
+    "在上方挂一条横梁，让球顶到它后提早落下。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 440,
+          "y": 140,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 620,
+          "y": 140,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 350,
+        "y": 300,
+        "vx": 6,
+        "vy": -10,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 510,
+            "y": 300,
+            "w": 125,
+            "h": 98,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

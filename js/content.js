@@ -72,6 +72,8 @@
       if(def.compile) def.compile(data,level,{id,terrainIds,prefix});
       else level.extensions.push({type:def.type,id,params:data});
     }
+    // Cross-module references are checked only after every instance has compiled.
+    for(const item of level.extensions) get(item.type).validateScene?.(item.params,`$.scene (${item.id})`,V,level);
     cache.set(source,level);sources.set(level,source);return level;
   }
   function instances(raw) {

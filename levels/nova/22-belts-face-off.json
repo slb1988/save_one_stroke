@@ -1,0 +1,149 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/22-belts-face-off",
+  "chapter": "新发现四·接触传送",
+  "progression": {
+    "groupOrder": 230,
+    "order": 22,
+    "difficulty": "easy"
+  },
+  "title": "两条带在中间握手",
+  "tag": "新发现 22 · 真实运动与可见工单",
+  "brief": "旧双平台让支撑换班；这里相向传送带把球送到同一交界，不让它继续跑出场。",
+  "condition": "左带向右、右带向左；把A送上任一条带，5秒时留在中间交接框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "交界是收件台，不是要跨过去的坑。",
+    "先搭到左带，让两条表面驱动力把球收在交界。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 280,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 420,
+          "y": 230,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 300,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "left-belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 360,
+        "y": 310,
+        "w": 140,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": 3
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "right-belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 500,
+        "y": 310,
+        "w": 150,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": -3
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 465,
+            "y": 270,
+            "w": 75,
+            "h": 42,
+            "mode": "hold",
+            "label": "交界工位"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

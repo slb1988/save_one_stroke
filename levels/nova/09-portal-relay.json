@@ -1,0 +1,151 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/09-portal-relay",
+  "chapter": "新发现二·空间捷径",
+  "progression": {
+    "groupOrder": 210,
+    "order": 9,
+    "difficulty": "hard"
+  },
+  "title": "两个门不是同一跳",
+  "tag": "新发现 9 · 真实运动与可见工单",
+  "brief": "一次传送后仍要飞行才能进入下一门；两次空间跳跃需要保留并利用动量。",
+  "condition": "先到右侧入口，经中场出口飞向第二入口；第二出口通往右岸交接框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "门之间有短暂冷却，不能靠重合圈套无限传送。",
+    "短坡把球送进第一门，余下两段由速度与门的位置接力。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 300,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 430,
+          "y": 220,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 320,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "first",
+      "type": "nova/portal",
+      "params": {
+        "entry": {
+          "x": 490,
+          "y": 285,
+          "radius": 26
+        },
+        "exit": {
+          "x": 540,
+          "y": 100,
+          "radius": 26
+        },
+        "turn": 30,
+        "label": "单向传送"
+      }
+    },
+    {
+      "id": "second",
+      "type": "nova/portal",
+      "params": {
+        "entry": {
+          "x": 500,
+          "y": 375,
+          "radius": 26
+        },
+        "exit": {
+          "x": 620,
+          "y": 100,
+          "radius": 26
+        },
+        "turn": 0,
+        "label": "单向传送"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 580,
+            "y": 300,
+            "w": 115,
+            "h": 98,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

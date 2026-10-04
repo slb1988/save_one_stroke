@@ -1,0 +1,116 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/03-express-lane",
+  "chapter": "新发现一·收件工单",
+  "progression": {
+    "groupOrder": 200,
+    "order": 3,
+    "difficulty": "hard"
+  },
+  "title": "快递有截止时间",
+  "tag": "新发现 3 · 真实运动与可见工单",
+  "brief": "旧关只需熬到5秒；这次最后才到也算迟到，要让球尽早走完短而陡的通道。",
+  "condition": "右岸收件框只验收到3.4秒；椅子仍须安全坐满5秒。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "墨水多不等于快，长路会让球错过截止。",
+    "在出生点旁把球顺到右方，不要画兜让它排队。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 320,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 560,
+          "y": 270,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 350,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 580,
+            "y": 310,
+            "w": 110,
+            "h": 88,
+            "mode": "visit",
+            "label": "限时件",
+            "closeAt": 3400
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

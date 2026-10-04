@@ -16,7 +16,11 @@
     "content:build": "node scripts/content-index.cjs",
     "content:check": "node scripts/content-index.cjs --check",
     "test:content": "node --test tests/content.test.cjs",
-    "test:content:browser": "node tests/content-browser.cjs"
+    "test:content:browser": "node tests/content-browser.cjs",
+    "test:remix": "node --test tests/remix.test.cjs",
+    "test:remix:browser": "node tests/remix-browser.cjs",
+    "test:nova": "node --test tests/nova.test.cjs",
+    "test:nova:browser": "node tests/nova-browser.cjs"
   },
   "engines": {
     "node": ">=18"

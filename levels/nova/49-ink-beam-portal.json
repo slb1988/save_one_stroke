@@ -1,0 +1,137 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/49-ink-beam-portal",
+  "chapter": "新发现九·综合委托",
+  "progression": {
+    "groupOrder": 280,
+    "order": 49,
+    "difficulty": "easy"
+  },
+  "title": "先动机器，再走捷径",
+  "tag": "新发现 49 · 真实运动与可见工单",
+  "brief": "不是直接给球搭到门口的坡；自由墨水改变跷板朝向，跷板才把球送进远处的传送入口。",
+  "condition": "先用墨水压低板左侧；A须先经过左侧入口框，再由门送到右侧收件框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 500,
+  "gold": 415,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "一笔先作用于板，再由板作用于球。",
+    "左端墨水砝码先落好，让后来球顺左坡进入门。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "beam",
+      "type": "nova/seesaw",
+      "params": {
+        "x": 340,
+        "y": 280,
+        "w": 260,
+        "h": 14,
+        "pivot": 0.5,
+        "mass": 4,
+        "label": "自由跷板"
+      }
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 530,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 1400,
+        "radius": 14,
+        "mass": 0.5,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "portal",
+      "type": "nova/portal",
+      "params": {
+        "entry": {
+          "x": 350,
+          "y": 350,
+          "radius": 26
+        },
+        "exit": {
+          "x": 620,
+          "y": 140,
+          "radius": 26
+        },
+        "turn": 0,
+        "label": "单向传送"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 305,
+            "y": 300,
+            "w": 90,
+            "h": 98,
+            "mode": "visit",
+            "label": "进门前"
+          },
+          {
+            "ball": "a",
+            "x": 500,
+            "y": 310,
+            "w": 195,
+            "h": 88,
+            "mode": "visit",
+            "label": "出门后"
+          }
+        ],
+        "ordered": true
+      }
+    }
+  ]
+}

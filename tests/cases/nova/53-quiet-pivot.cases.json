@@ -1,0 +1,34 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "短脚落在转轴附近",
+      "expected": "success",
+      "stroke": [
+        [
+          404,
+          264
+        ],
+        [
+          432,
+          345.5
+        ]
+      ]
+    },
+    {
+      "name": "脚落在远离转轴的一侧",
+      "expected": "failure",
+      "stroke": [
+        [
+          404,
+          264
+        ],
+        [
+          390,
+          345.5
+        ]
+      ]
+    }
+  ]
+}

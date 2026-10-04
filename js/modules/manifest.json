@@ -12,6 +12,13 @@
     "core/terrain.js",
     "lab/elevator.js",
     "lab/trigger-lift.js",
+    "nova/belt.js",
+    "nova/field.js",
+    "nova/gate.js",
+    "nova/goals.js",
+    "nova/launcher.js",
+    "nova/portal.js",
+    "nova/seesaw.js",
     "workshop/hanging-kit.js",
     "workshop/seat.js"
   ]

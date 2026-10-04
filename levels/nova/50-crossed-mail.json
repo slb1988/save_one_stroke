@@ -1,0 +1,177 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/50-crossed-mail",
+  "chapter": "新发现九·综合委托",
+  "progression": {
+    "groupOrder": 280,
+    "order": 50,
+    "difficulty": "medium"
+  },
+  "title": "不交叉笔画，也能交换地址",
+  "tag": "新发现 50 · 真实运动与可见工单",
+  "brief": "旧屋脊把左右球分开；两道按球名工作的门把分开的路线交换到对面，而不用再画交叉桥。",
+  "condition": "A从左坡进入左门后去右框；B从右坡进入右门后去中左框，各门只接自己的球。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "先分流，再跨空间换地址，两步不要混成一条大桥。",
+    "屋脊把两球送往各自入口，出门后的动量决定落点。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 340,
+          "y": 230,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 590,
+          "y": 230,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 380,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "ball-b",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "b",
+        "x": 550,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 1300,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球B"
+      }
+    },
+    {
+      "id": "left-door",
+      "type": "nova/portal",
+      "params": {
+        "entry": {
+          "x": 270,
+          "y": 285,
+          "radius": 26
+        },
+        "exit": {
+          "x": 620,
+          "y": 100,
+          "radius": 26
+        },
+        "turn": 0,
+        "label": "单向传送",
+        "ball": "a"
+      }
+    },
+    {
+      "id": "right-door",
+      "type": "nova/portal",
+      "params": {
+        "entry": {
+          "x": 670,
+          "y": 285,
+          "radius": 26
+        },
+        "exit": {
+          "x": 300,
+          "y": 100,
+          "radius": 26
+        },
+        "turn": 0,
+        "label": "单向传送",
+        "ball": "b"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 600,
+            "y": 330,
+            "w": 95,
+            "h": 68,
+            "mode": "visit",
+            "label": "收件区"
+          },
+          {
+            "ball": "b",
+            "x": 250,
+            "y": 330,
+            "w": 100,
+            "h": 68,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

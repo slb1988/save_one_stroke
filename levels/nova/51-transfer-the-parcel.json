@@ -1,0 +1,142 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/51-transfer-the-parcel",
+  "chapter": "新发现九·综合委托",
+  "progression": {
+    "groupOrder": 280,
+    "order": 51,
+    "difficulty": "hard"
+  },
+  "title": "只传包裹，不传推车",
+  "tag": "新发现 51 · 真实运动与可见工单",
+  "brief": "传送门只认识标记球；墨水推车继续留在原地，球被推进圈后才会跨空间交接。",
+  "condition": "用皮带运送自由墨水推杆，把A推进右圈；A从中左出口落回带面，5秒时在带上收件框；推杆本身不能传送。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 450,
+  "gold": 374,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "别替墨水画一座跨场桥，它只是搬运工。",
+    "长底推杆保持带面接触，把球送进门即可。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 280,
+        "y": 300,
+        "w": 220,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": 4
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "dock",
+      "type": "core/terrain",
+      "params": {
+        "x": 500,
+        "y": 300,
+        "w": 180,
+        "h": 20
+      }
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 530,
+        "y": 270,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "parcel-only",
+      "type": "nova/portal",
+      "params": {
+        "entry": {
+          "x": 600,
+          "y": 280,
+          "radius": 26
+        },
+        "exit": {
+          "x": 360,
+          "y": 100,
+          "radius": 26
+        },
+        "turn": 0,
+        "label": "单向传送"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 425,
+            "y": 265,
+            "w": 75,
+            "h": 35,
+            "mode": "hold",
+            "label": "回程工位"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

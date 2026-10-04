@@ -1,0 +1,38 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "在斜落轨迹上迎球",
+      "expected": "success",
+      "stroke": [
+        [
+          420,
+          158
+        ],
+        [
+          430,
+          170
+        ],
+        [
+          620,
+          230
+        ]
+      ]
+    },
+    {
+      "name": "只在椅面添线，球仍会碰猫",
+      "expected": "failure",
+      "stroke": [
+        [
+          300,
+          255
+        ],
+        [
+          330,
+          255
+        ]
+      ]
+    }
+  ]
+}

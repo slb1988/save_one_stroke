@@ -1,0 +1,69 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "ink": 900,
+  "gold": 756,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "remote",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 440,
+        "w": 100,
+        "h": 60
+      }
+    },
+    {
+      "id": "lift",
+      "type": "lab/elevator",
+      "params": {
+        "x": 220,
+        "y": 370,
+        "w": 260,
+        "h": 24,
+        "dx": 0,
+        "dy": 40,
+        "start": 1000,
+        "end": 2400,
+        "label": "接力平台"
+      }
+    }
+  ],
+  "id": "remix/01-down-elevator",
+  "chapter": "变种工坊一·支撑换班",
+  "progression": {
+    "groupOrder": 100,
+    "order": 1,
+    "difficulty": "easy"
+  },
+  "title": "下行也要同乘",
+  "tag": "变种工坊 01 · 接力",
+  "brief": "向下的电梯不是坠落。两只脚要一起跟它走。",
+  "condition": "平台在1.0–2.4秒下降40单位；没有旧腿。保持座面水平，随平台一起到达下站。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "不要一边站岸上一边坐电梯。",
+    "画一条地→椅→地的连续支架，两脚都落在蓝色平台上。"
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "ink": 350,
+  "gold": 294,
+  "load": {
+    "x": 370,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 280,
+        "y": 251
+      }
+    },
+    {
+      "id": "remote",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 440,
+        "w": 100,
+        "h": 60
+      }
+    },
+    {
+      "id": "lift",
+      "type": "lab/trigger-lift",
+      "params": {
+        "button": {
+          "x": 500,
+          "y": 200,
+          "w": 80,
+          "h": 30
+        },
+        "x": 250,
+        "y": 269,
+        "w": 240,
+        "h": 24,
+        "dx": 0,
+        "dy": 120,
+        "speed": 0.06,
+        "label": "误触就下行"
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 450,
+          "y": 150,
+          "radius": 10,
+          "label": "挂点1"
+        },
+        {
+          "x": 620,
+          "y": 160,
+          "radius": 10,
+          "label": "挂点2"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 700,
+          "x": 535,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "restitution": 0.08,
+          "label": "球1"
+        }
+      ]
+    }
+  ],
+  "id": "remix/16-do-not-call",
+  "chapter": "变种工坊三·球的工作",
+  "progression": {
+    "groupOrder": 120,
+    "order": 16,
+    "difficulty": "easy"
+  },
+  "title": "这次别让球按开关",
+  "tag": "变种工坊 16 · 控球",
+  "brief": "球不总是帮手：这个开关会叫走椅子脚下的车。",
+  "condition": "球0.7秒出生。只要球触碰右侧感应区，座下平台就下降120单位，超过安全落差；把球引开。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "这次目标是阻止触发，不是争取触发。",
+    "用两环挂一条浅斜通道，让球越过感应区再落下。"
+  ]
+}

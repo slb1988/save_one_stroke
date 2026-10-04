@@ -1,0 +1,132 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/19-belt-return",
+  "chapter": "新发现四·接触传送",
+  "progression": {
+    "groupOrder": 230,
+    "order": 19,
+    "difficulty": "easy"
+  },
+  "title": "先送上带，再倒回来",
+  "tag": "新发现 19 · 真实运动与可见工单",
+  "brief": "旧顺风推整把椅子；这条固定传送带只推动实际接触的物体，并把球送向与斜坡相反的方向。",
+  "condition": "A先去右侧传送带，再从带的左端离开，到达中间收件区；传送带向左，实体本身不移动。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "先用斜坡把球送上带，而不是直接落到收件区。",
+    "向右的斜坡和向左的皮带可以接力出一条折返路线。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 280,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 500,
+          "y": 260,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 300,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 420,
+        "y": 320,
+        "w": 220,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": -4
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 340,
+            "y": 350,
+            "w": 75,
+            "h": 48,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

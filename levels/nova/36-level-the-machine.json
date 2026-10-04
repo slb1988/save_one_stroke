@@ -1,0 +1,134 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/36-level-the-machine",
+  "chapter": "新发现六·自由跷板",
+  "progression": {
+    "groupOrder": 250,
+    "order": 36,
+    "difficulty": "hard"
+  },
+  "title": "把会转的台子撑平",
+  "tag": "新发现 36 · 真实运动与可见工单",
+  "brief": "旧支架直接撑椅子；这里支架撑住的是独立可转机器，球要留在机器上，不是送走。",
+  "condition": "A先落右侧，B后落左侧；5秒时两球仍要各留在板上框，板的两种转向都要挡住。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "先把跷板看成第二件需要扶稳的物体。",
+    "在板下做一条平顶门架，左右脚落地，限制板的两边一起下沉。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "beam",
+      "type": "nova/seesaw",
+      "params": {
+        "x": 340,
+        "y": 280,
+        "w": 260,
+        "h": 14,
+        "pivot": 0.5,
+        "mass": 8,
+        "label": "自由跷板"
+      }
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 540,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "ball-b",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "b",
+        "x": 400,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 2100,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球B"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 480,
+            "y": 245,
+            "w": 110,
+            "h": 40,
+            "mode": "hold",
+            "label": "右侧留件"
+          },
+          {
+            "ball": "b",
+            "x": 360,
+            "y": 245,
+            "w": 110,
+            "h": 40,
+            "mode": "hold",
+            "label": "左侧留件"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

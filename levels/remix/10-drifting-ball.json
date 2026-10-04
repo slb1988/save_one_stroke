@@ -1,0 +1,111 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "remix/10-drifting-ball",
+  "chapter": "变种工坊二·重力旅行",
+  "progression": {
+    "groupOrder": 110,
+    "order": 10,
+    "difficulty": "medium"
+  },
+  "title": "球也不再竖直落下",
+  "tag": "变种工坊 10 · 换向",
+  "brief": "画在出生点正下方，可能接不到球。",
+  "condition": "重力整场向右下(0.4,1)，球0.9秒从x=400出生。椅子已有双腿，危险在球斜落后经过的猫区。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "ink": 350,
+  "gold": 300,
+  "load": {
+    "x": 275,
+    "mass": 14
+  },
+  "hint": [
+    "先沿重力箭头想象球路，而不是画一条竖直投影。",
+    "把独立斜板挂在两个环上，迎接向右飘来的球。"
+  ],
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 180,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "boss",
+      "type": "core/cats",
+      "params": [
+        {
+          "x": 483,
+          "y": 310,
+          "w": 90,
+          "h": 70,
+          "label": "午睡老板"
+        }
+      ]
+    },
+    {
+      "id": "ramp-pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 430,
+          "y": 170,
+          "radius": 10,
+          "label": "斜落接球点"
+        },
+        {
+          "x": 620,
+          "y": 230,
+          "radius": 10,
+          "label": "低端"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 900,
+          "x": 400,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "label": "快递球"
+        }
+      ]
+    },
+    {
+      "id": "gravity",
+      "type": "core/gravity",
+      "params": [
+        {
+          "at": 0,
+          "x": 0.4,
+          "y": 1,
+          "label": "斜向右下 ↘"
+        }
+      ]
+    }
+  ]
+}

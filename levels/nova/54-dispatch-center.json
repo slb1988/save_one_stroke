@@ -1,0 +1,208 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/54-dispatch-center",
+  "chapter": "新发现九·综合委托",
+  "progression": {
+    "groupOrder": 280,
+    "order": 54,
+    "difficulty": "hard"
+  },
+  "title": "同一入口，两套验收",
+  "tag": "新发现 54 · 真实运动与可见工单",
+  "brief": "最终委托：A需要门后皮带折返，B则在同一出口被选择性磁场先刹住下落，再向上回签。",
+  "condition": "A、B共用坡与只有2次额度的门；A经左行带到低框，B必须先到下行章再回到上行章；5秒时椅子仍安全。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "共享入口不等于共享任务；场只认B，带却推动所有接触球。",
+    "短坡完成投料，让门、带与选择性磁场各干一份工作。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 300,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 430,
+          "y": 220,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 320,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "ball-b",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "b",
+        "x": 320,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 1200,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球B"
+      }
+    },
+    {
+      "id": "portal",
+      "type": "nova/portal",
+      "params": {
+        "entry": {
+          "x": 490,
+          "y": 285,
+          "radius": 26
+        },
+        "exit": {
+          "x": 630,
+          "y": 140,
+          "radius": 26
+        },
+        "turn": 0,
+        "label": "单向传送",
+        "charges": 2
+      }
+    },
+    {
+      "id": "return-belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 460,
+        "y": 300,
+        "w": 236,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": -4
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "b-lift",
+      "type": "nova/field",
+      "params": {
+        "x": 540,
+        "y": 100,
+        "w": 140,
+        "h": 210,
+        "fx": -0.3,
+        "fy": -2,
+        "start": 0,
+        "end": 5000,
+        "label": "局部磁场",
+        "ball": "b"
+      }
+    },
+    {
+      "id": "goal-a",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 350,
+            "y": 350,
+            "w": 105,
+            "h": 48,
+            "mode": "visit",
+            "label": "A低处交件"
+          }
+        ]
+      }
+    },
+    {
+      "id": "goal-b",
+      "type": "nova/goals",
+      "params": {
+        "ordered": true,
+        "targets": [
+          {
+            "ball": "b",
+            "x": 550,
+            "y": 175,
+            "w": 140,
+            "h": 55,
+            "mode": "visit",
+            "label": "B下行章"
+          },
+          {
+            "ball": "b",
+            "x": 550,
+            "y": 100,
+            "w": 140,
+            "h": 65,
+            "mode": "visit",
+            "label": "B上行章"
+          }
+        ]
+      }
+    }
+  ]
+}

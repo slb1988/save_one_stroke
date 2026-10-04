@@ -1,0 +1,83 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "ink": 400,
+  "gold": 336,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "tray",
+      "type": "core/terrain",
+      "params": {
+        "x": 200,
+        "y": 400,
+        "w": 260,
+        "h": 30
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 270,
+          "y": 335,
+          "radius": 10,
+          "label": "挂点1"
+        },
+        {
+          "x": 420,
+          "y": 335,
+          "radius": 10,
+          "label": "挂点2"
+        }
+      ]
+    },
+    {
+      "id": "depart",
+      "type": "core/temporary-terrain",
+      "params": [
+        {
+          "target": "tray",
+          "removeAt": 1800,
+          "label": "整块托盘"
+        }
+      ]
+    }
+  ],
+  "id": "remix/05-anchors-below",
+  "chapter": "变种工坊一·支撑换班",
+  "progression": {
+    "groupOrder": 100,
+    "order": 5,
+    "difficulty": "easy"
+  },
+  "title": "挂点也能在脚下",
+  "tag": "变种工坊 05 · 接力",
+  "brief": "金环约束位置，不一定非得挂在天花板。",
+  "condition": "1.8秒整块托盘撤走。脚下两个永久墙环不会撤走；它们允许旋转，单环不是万能胶。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "两个分开的低位挂点也能阻止椅子转倒。",
+    "从左环经座面接到右环，先把椅子与两个环连成一体。"
+  ]
+}

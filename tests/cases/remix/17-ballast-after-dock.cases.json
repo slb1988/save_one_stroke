@@ -1,0 +1,38 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "装卸台撤走后球仍作配重",
+      "expected": "success",
+      "stroke": [
+        [
+          465,
+          305
+        ],
+        [
+          518,
+          296
+        ],
+        [
+          525,
+          282
+        ]
+      ]
+    },
+    {
+      "name": "台上暂时稳，却没有接配重",
+      "expected": "failure",
+      "stroke": [
+        [
+          380,
+          300
+        ],
+        [
+          420,
+          305
+        ]
+      ]
+    }
+  ]
+}

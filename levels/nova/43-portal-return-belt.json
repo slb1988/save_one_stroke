@@ -1,0 +1,160 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/43-portal-return-belt",
+  "chapter": "新发现八·协作机器",
+  "progression": {
+    "groupOrder": 270,
+    "order": 43,
+    "difficulty": "easy"
+  },
+  "title": "跨过去，再运回来",
+  "tag": "新发现 43 · 真实运动与可见工单",
+  "brief": "传送省掉中间路程，出口后的反向传送带却把球带回另一边；终点不能只按出口位置判断。",
+  "condition": "门只有1次通行额度；A进门先盖远端高章，再落到左行带；额度耗尽后，回程不会再被传走，最终到中左框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "门解决距离，带解决最后的方向。",
+    "只画到入口的短坡，观察远处两段机关怎样接力。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 300,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 430,
+          "y": 220,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 320,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "portal",
+      "type": "nova/portal",
+      "params": {
+        "entry": {
+          "x": 490,
+          "y": 285,
+          "radius": 26
+        },
+        "exit": {
+          "x": 630,
+          "y": 140,
+          "radius": 26
+        },
+        "turn": 0,
+        "label": "单向传送",
+        "charges": 1
+      }
+    },
+    {
+      "id": "return-belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 460,
+        "y": 300,
+        "w": 236,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": -4
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 600,
+            "y": 120,
+            "w": 85,
+            "h": 110,
+            "mode": "visit",
+            "label": "远端高章"
+          },
+          {
+            "ball": "a",
+            "x": 350,
+            "y": 350,
+            "w": 105,
+            "h": 48,
+            "mode": "visit",
+            "label": "回程交件"
+          }
+        ],
+        "ordered": true
+      }
+    }
+  ]
+}

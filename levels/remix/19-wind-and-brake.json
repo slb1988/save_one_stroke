@@ -1,0 +1,123 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "变种工坊四·一笔多用",
+  "progression": {
+    "groupOrder": 130,
+    "order": 19,
+    "difficulty": "hard"
+  },
+  "ink": 460,
+  "gold": 400,
+  "load": {
+    "x": 250,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "none"
+      },
+      "at": {
+        "x": 180,
+        "y": 251
+      }
+    },
+    {
+      "id": "tray",
+      "type": "core/terrain",
+      "params": {
+        "x": 150,
+        "y": 380,
+        "w": 250,
+        "h": 30,
+        "friction": 0.05
+      }
+    },
+    {
+      "id": "apron",
+      "type": "core/terrain",
+      "params": {
+        "x": 400,
+        "y": 380,
+        "w": 70,
+        "h": 110,
+        "friction": 0.05
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 470,
+        "y": 380,
+        "w": 230,
+        "h": 110
+      }
+    },
+    {
+      "id": "stop-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 700,
+        "y": 300,
+        "w": 20,
+        "h": 190
+      }
+    },
+    {
+      "id": "depart",
+      "type": "core/temporary-terrain",
+      "params": [
+        {
+          "target": "tray",
+          "removeAt": 4000,
+          "label": "出发托盘"
+        }
+      ]
+    },
+    {
+      "id": "gust",
+      "type": "core/forces",
+      "params": [
+        {
+          "start": 400,
+          "end": 3000,
+          "fx": 0.014,
+          "at": {
+            "x": 270,
+            "y": 378
+          },
+          "label": "顺风去程"
+        },
+        {
+          "start": 3000,
+          "end": 4000,
+          "fx": -0.005,
+          "at": {
+            "x": 270,
+            "y": 378
+          },
+          "label": "反向刹车"
+        }
+      ]
+    }
+  ],
+  "id": "remix/19-wind-and-brake",
+  "title": "顺风车也要刹车",
+  "tag": "变种工坊 19 · 组合",
+  "brief": "去程顺风搬家，结尾反向风刹车；过长的滑橇不一定跑得远。",
+  "condition": "冰面托盘4秒撤走。0.4–3.0秒顺风推车，3.0–4.0秒反向风制动；永久岸在右边。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "支架需要及时离开托盘；把底边画得更长，也会增加重量。",
+    "试试两只分开的滑行脚：既跨住重心，也不用背着整条沉重底梁。"
+  ]
+}

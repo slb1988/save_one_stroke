@@ -43,6 +43,22 @@
 | `workshop/seat` | prefab | `{legs:"none"|"left"|"both"}`，局部座面起点(0,0)，宽184；load 不随它改变 |
 | `workshop/hanging-kit` | prefab | `{span,floorY,removeAt}`，局部原点是左挂点；右挂点偏移span，踏板位于floorY |
 
+### 新发现模块（nova，v3 附加能力）
+
+这批不是把旧的避猫/坐稳关换坐标：增加了**可见工单、真实初速、空间传送、接触传送、局部力场、自由跷板、重新关闭的门**。实例仍使用同一 scene 契约；参数完整闭合范围见生成的 v3 Schema。样例为 `levels/nova/`，对应 `tests/cases/nova/`；每关 brief 说明与旧玩法的关键差异。
+
+| type | kind | params / 真正行为 |
+| --- | --- | --- |
+| `nova/launcher` | rule | `{ball,x,y,at,vx,vy,radius,mass,label,restitution?}`；ball 是1–16位小写标识，每关唯一、最多6球；at=500–3500ms，vx/vy 各±14（Matter 每16.667ms的速度单位），半径10–30、质量0.1–30、弹性0–1（默认0.08）。到时创建真实圆球并设置一次初速，此后完全服从物理；球与墨水/椅子同样参加碰猫失败检查。出生圈不能与初始实体/载荷相交，不能在圈内作画。 |
+| `nova/goals` | rule | `{targets,ordered?}`；1–6个目标，每个为 `{ball,x,y,w,h,mode,label,openAt?,closeAt?}`。模式 visit=球心在开放窗口内经过矩形；hold=5秒时仍在框内且已满足时序。默认窗口0–5000ms，openAt≤4500、closeAt≥500且晚于openAt，hold的closeAt须5000。ordered=true 时按目标数组顺序记录，提前在框内等候可在轮到时盖章；不是隐藏命中点或指定笔画。多个工单实例必须全部完成。 |
+| `nova/portal` | rule | `{entry,exit,turn,label,ball?,charges?}`，两个圆各 `{x,y,radius}`（半径18–45）；球心进入入口后传到出口，速度旋转turn（±180°）且保留大小，仍受重力。缺省接收所有标记球、无限次；ball可筛选指定球，charges=1–6是整扇门的总额度，界面显示剩余次数。全门共享400ms球体冷却，避免同帧循环；重试恢复额度。圈内不能画线，出口不得与开局实体/载荷重叠。 |
+| `nova/belt` | element | `{x,y,w,h,speeds,label}`，宽30–500、高10–60；speeds为1–4个 `{at,vx}`（首项at=0，严格递增，at≤4500，vx±6）。实体始终不移动；只有与顶面实际接触的动态体才受到有界切向驱动力，所以可运球、墨水或椅子，离开带面即停止驱动；不会直接锁定物体速度。 |
+| `nova/field` | rule | `{x,y,w,h,fx,fy,start,end,label,ball?}`；每个力分量±2，以世界重力单位表示的附加加速度，start=0–4500、end=500–5000且end>start。只对框内的标记球（可指定ball）施加质量成比例的力，木椅、墨水、世界重力不改；不锁定坐标或轨迹。 |
+| `nova/seesaw` | element | `{x,y,w,h,pivot,mass,label}`；宽80–300、高10–30，pivot=0.2–0.8为支点在板宽中的比例，质量2–60。水平开局的真实动态矩形，用固定世界点零长度约束铰接；球、自由墨水与椅子均可施加转矩，未设置角度动画/强行保持水平。初始实体禁画，绘制随刚体运动。它拥有固定铰接，因此注册为动态承重面。 |
+| `nova/gate` | element | `{x,y,w,h,windows,label}`；宽8–300、高8–400，windows为1–3个不重叠递增 `{open,close}`，open=0–4500、close=500–5000。窗口内从碰撞世界真实移除门体，窗口后加回原位置；初始关闭的门不能画穿，初始开放时仅显示虚线。不是永不回来的旧 temporary-terrain。 |
+
+目标框、球标识、发射箭头、传送方向/剩余额度、带速、磁场范围、真实板角度与门的开合时段均来自同一 JSON。`nova/goals` **只增加胜利必要条件**：即使工单完成，翻椅/掉落/碰猫仍不可逆失败；它不能直接宣布胜利、修改5秒时长或安全阈值。没有新目标模块的全部旧关继续沿用原规则。
+
 `scene[].at` 是正向世界平移。配方中的实例 id 自动加父前缀，例如 `dock-kit/dock`；配方内 target `dock` 自动指向该配方自己的踏板，外部规则可写 `dock-kit/dock`。先展开全部几何，再解析规则，因此引用与声明先后无关。最多两层 prefab 嵌套、总展开最多160项；没有旋转、缩放、任意字段覆盖、外部模板 URL 或表达式。非位置规则（重力/撤走引用）的平移没有作用。
 
 导入与导出保存的是原始配方 JSON。渲染、输入和物理使用内部展开快照，展开结果不会污染文件或存档。
@@ -76,6 +92,7 @@
 | --- | --- |
 | `translate(params,at)` | 纯函数返回平移后的参数；元素平移前后均校验，规则在平移后校验 |
 | `expand(params)` | 仅 prefab，返回子 scene 实例数组；不创建世界或改原始 JSON |
+| `validateScene(params,path,V,compiledLevel)` | 所有实例编译后检查跨模块引用/重复标识/出生位置，不依赖实例声明顺序；纯验证，不创建运行状态 |
 | `compile(params,level,{id,terrainIds,prefix})` | 核心兼容适配器把场景转到原有几何/规则数组；普通新元素无需实现 |
 | `init({trial,api,Matter},params,state)` | 构建每次试坐的实例对象；state是新空对象，不用模块全局变量保存本次状态 |
 | `beforeStep(context,params,state)` | 每个固定步 Engine.update 前；使用 trial.elapsed 毫秒，不用墙钟或 setInterval |
@@ -86,9 +103,10 @@
 | `status({elapsed,anchorCount},params)` | 可选的简短状态文字 |
 | `layer` / `render(view,params,state)` | background/chair/foreground；view有ctx、绘画原语、level/trial、时间。预览时state可能不存在；遵守Canvas save/restore |
 | `failurePriority` / `failure(context,params,state)` | 仅给已经发生的通用失败补充原因，返回 `{code,reason}` 或无值；不能使失败变成功 |
+| `finish(context,params,state)` | 仅在5秒且原椅子安全/稳定检查通过后调用；未完成可见条件时返回 `{code,reason}` 拒绝胜利，满足条件则无返回值；不能授予胜利或放宽原检查 |
 | `inspect(state)` | 可选只读诊断，供 rescueDebug 查看 |
 
-context 提供同一 Matter 库、trial 与有限几何 api；创建的刚体加入 `trial.engine.world`。新动态物体还必须加入 `trial.dynamicBodies`，以参与通用猫区碰撞检查。通用重试清空世界并丢弃所有实例状态；本契约不提供网络、DOM订阅、外部计时器或持久服务生命周期。`select`/`legacyKey` 是 core 兼容层接口，新扩展走 v3 scene，不借它们修改旧版语义。
+context 提供同一 Matter 库、trial 与有限几何 api；创建的刚体加入 `trial.engine.world`。新动态物体还必须加入 `trial.dynamicBodies`，以参与通用猫区碰撞检查。具有真实固定铰接的动态承重面可同时加入 `trial.supportBodies`，其与椅子的实际接触才计入承重；不能把任意漂浮物注册来伪造接地。通用重试清空世界并丢弃所有实例状态；本契约不提供网络、DOM订阅、外部计时器或持久服务生命周期。`select`/`legacyKey` 是 core 兼容层接口，新扩展走 v3 scene，不借它们修改旧版语义。
 
 ## 内容发现、刷新、纯静态发布
 

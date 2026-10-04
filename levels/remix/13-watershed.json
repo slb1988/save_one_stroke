@@ -1,0 +1,109 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "ink": 520,
+  "gold": 437,
+  "load": {
+    "x": 150,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 60,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "boss",
+      "type": "core/cats",
+      "params": [
+        {
+          "x": 350,
+          "y": 310,
+          "w": 210,
+          "h": 70,
+          "label": "午睡猫区"
+        }
+      ]
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 360,
+          "y": 210,
+          "radius": 10,
+          "label": "挂点1"
+        },
+        {
+          "x": 540,
+          "y": 210,
+          "radius": 10,
+          "label": "挂点2"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 700,
+          "x": 385,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "restitution": 0.08,
+          "label": "球1"
+        },
+        {
+          "at": 1600,
+          "x": 515,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "restitution": 0.08,
+          "label": "球2"
+        }
+      ]
+    }
+  ],
+  "id": "remix/13-watershed",
+  "chapter": "变种工坊三·球的工作",
+  "progression": {
+    "groupOrder": 120,
+    "order": 13,
+    "difficulty": "easy"
+  },
+  "title": "两路球，共用分流脊",
+  "tag": "变种工坊 13 · 控球",
+  "brief": "不是把所有球都送向同一边，而是在中间分流。",
+  "condition": "0.7秒左球、1.6秒右球先后落下，中间猫区两侧都能安全落地。两个金环可托住一条中高两边低的屋脊。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "左球走左坡，右球走右坡。",
+    "把两环当作屋脊的支点，笔画要伸出猫区两侧。"
+  ]
+}

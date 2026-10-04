@@ -1,0 +1,115 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/02-keep-not-pass",
+  "chapter": "新发现一·收件工单",
+  "progression": {
+    "groupOrder": 200,
+    "order": 2,
+    "difficulty": "medium"
+  },
+  "title": "经过不算，留下才算",
+  "tag": "新发现 2 · 真实运动与可见工单",
+  "brief": "以前把球导走即可；这张工单要求5秒时球仍在半空框内，路过不能签收。",
+  "condition": "A在0.5秒出生；在高处收件框里留到5秒，不能落到地板。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "直斜坡只能路过，试着把滑道变成浅碗。",
+    "两个环之间画低底、两端抬高，球会在碗里停住。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 350,
+          "y": 150,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 600,
+          "y": 150,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 450,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 450,
+            "y": 220,
+            "w": 105,
+            "h": 65,
+            "mode": "hold",
+            "label": "留件框"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

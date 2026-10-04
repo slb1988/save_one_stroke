@@ -1,0 +1,139 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/16-head-on-catch",
+  "chapter": "新发现三·发射与反弹",
+  "progression": {
+    "groupOrder": 220,
+    "order": 16,
+    "difficulty": "easy"
+  },
+  "title": "对射也能同箱",
+  "tag": "新发现 16 · 真实运动与可见工单",
+  "brief": "旧落球从上方出生；这次左右对射先跨过矮箱壁，再在箱内停住，不能把入口封成高墙。",
+  "condition": "A从左、B从右同时射来；5秒时两球都必须留在同一收件框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "箱壁太高会把球挡在外面，太低又留不住。",
+    "让球先飞过箱口，再落进有两侧墙的浅箱。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 400,
+          "y": 250,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 560,
+          "y": 250,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 300,
+        "y": 120,
+        "vx": 8,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "ball-b",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "b",
+        "x": 660,
+        "y": 120,
+        "vx": -8,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球B"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 400,
+            "y": 250,
+            "w": 160,
+            "h": 95,
+            "mode": "hold",
+            "label": "收件区"
+          },
+          {
+            "ball": "b",
+            "x": 400,
+            "y": 250,
+            "w": 160,
+            "h": 95,
+            "mode": "hold",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "chapter": "变种工坊三·球的工作",
+  "progression": {
+    "groupOrder": 120,
+    "order": 15,
+    "difficulty": "medium"
+  },
+  "ink": 500,
+  "gold": 430,
+  "load": {
+    "x": 275,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 180,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "boss",
+      "type": "core/cats",
+      "params": [
+        {
+          "x": 390,
+          "y": 310,
+          "w": 180,
+          "h": 70,
+          "label": "午睡老板"
+        }
+      ]
+    },
+    {
+      "id": "old-ramp",
+      "type": "core/terrain",
+      "params": {
+        "x": 480,
+        "y": 130,
+        "w": 90,
+        "h": 12
+      }
+    },
+    {
+      "id": "depart",
+      "type": "core/temporary-terrain",
+      "params": [
+        {
+          "target": "old-ramp",
+          "removeAt": 1800,
+          "label": "旧挡板"
+        }
+      ]
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 450,
+          "y": 150,
+          "radius": 10,
+          "label": "高环"
+        },
+        {
+          "x": 330,
+          "y": 190,
+          "radius": 10,
+          "label": "低环"
+        },
+        {
+          "x": 620,
+          "y": 158,
+          "radius": 10,
+          "label": "右环"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 900,
+          "x": 480,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "label": "第一球"
+        },
+        {
+          "at": 2600,
+          "x": 535,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "label": "第二球",
+          "restitution": 0.8
+        }
+      ]
+    }
+  ],
+  "id": "remix/15-shelf-to-chute",
+  "title": "先托住，再送走",
+  "tag": "变种工坊 15 · 控球",
+  "brief": "第一球先停在临时货架上；货架撤走后，也需要出路。",
+  "condition": "0.9秒第一球落在货架边缘；1.8秒货架撤走；2.6秒第二颗弹球从x=535落下。一条永久通道要服务两种来路。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "别只盯着还没出生的球，已经在货架上的也会再次落下。",
+    "从左高环连到右环，继续向右延伸到猫区之外。"
+  ]
+}

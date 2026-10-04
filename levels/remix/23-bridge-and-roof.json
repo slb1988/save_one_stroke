@@ -1,0 +1,113 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "ink": 450,
+  "gold": 378,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "left-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 290,
+        "h": 90
+      }
+    },
+    {
+      "id": "right-bank",
+      "type": "core/terrain",
+      "params": {
+        "x": 520,
+        "y": 400,
+        "w": 180,
+        "h": 90
+      }
+    },
+    {
+      "id": "tray",
+      "type": "core/terrain",
+      "params": {
+        "x": 370,
+        "y": 400,
+        "w": 60,
+        "h": 35
+      }
+    },
+    {
+      "id": "depart",
+      "type": "core/temporary-terrain",
+      "params": [
+        {
+          "target": "tray",
+          "removeAt": 2200,
+          "label": "右脚踏板"
+        }
+      ]
+    },
+    {
+      "id": "boss",
+      "type": "core/cats",
+      "params": [
+        {
+          "x": 420,
+          "y": 340,
+          "w": 80,
+          "h": 40,
+          "label": "午睡猫区"
+        }
+      ]
+    },
+    {
+      "id": "parcel",
+      "type": "core/drops",
+      "params": [
+        {
+          "at": 900,
+          "x": 465,
+          "y": 74,
+          "radius": 22,
+          "mass": 10,
+          "restitution": 0.08,
+          "label": "球1"
+        }
+      ]
+    }
+  ],
+  "id": "remix/23-bridge-and-roof",
+  "chapter": "变种工坊四·一笔多用",
+  "progression": {
+    "groupOrder": 130,
+    "order": 23,
+    "difficulty": "medium"
+  },
+  "title": "脚下撤板，头顶来球",
+  "tag": "变种工坊 23 · 组合",
+  "brief": "同一条斜撑既越过缺口落到永久岸，也给球搭一条路。",
+  "condition": "0.9秒球落向猫区；2.2秒右旧腿的踏板撤走。要保猫，也要把椅子接到更远的永久右岸。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "桥放得太低只能撑椅子，接不到落球。",
+    "从右岸起笔向左上绕过猫区，再接椅面；这条斜边同时是导球屋檐。"
+  ]
+}

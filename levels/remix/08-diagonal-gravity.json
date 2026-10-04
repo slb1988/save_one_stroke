@@ -1,0 +1,83 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "ink": 600,
+  "gold": 504,
+  "load": {
+    "x": 341,
+    "mass": 14
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "left"
+      },
+      "at": {
+        "x": 234,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90,
+        "friction": 0
+      }
+    },
+    {
+      "id": "wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 550,
+        "y": 150,
+        "w": 25,
+        "h": 250
+      }
+    },
+    {
+      "id": "gravity",
+      "type": "core/gravity",
+      "params": [
+        {
+          "at": 0,
+          "x": 0,
+          "y": 1,
+          "label": "先向下 ↓"
+        },
+        {
+          "at": 1300,
+          "x": 0.8,
+          "y": 0.6,
+          "label": "右下 ↘"
+        }
+      ]
+    }
+  ],
+  "id": "remix/08-diagonal-gravity",
+  "chapter": "变种工坊二·重力旅行",
+  "progression": {
+    "groupOrder": 110,
+    "order": 8,
+    "difficulty": "hard"
+  },
+  "title": "斜下方不是正下方",
+  "tag": "变种工坊 08 · 换向",
+  "brief": "冰面能托住重量，却挡不住斜向滑动。",
+  "condition": "1.3秒重力从向下改为右下(0.8,0.6)，地板摩擦为0。右墙和地板一起承担重量。",
+  "quip": "这一笔，先想好下一步。",
+  "success": "五秒里每一次变化，都有了接应。",
+  "failure": "看看变化发生之后，哪一份工作没有接上。",
+  "hint": [
+    "只画普通椅腿会在冰面上滑动、碰墙或翻倒。",
+    "把椅子、墙上两个接触点、地面连成一笔。"
+  ]
+}

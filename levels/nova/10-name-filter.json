@@ -1,0 +1,158 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/10-name-filter",
+  "chapter": "新发现二·空间捷径",
+  "progression": {
+    "groupOrder": 210,
+    "order": 10,
+    "difficulty": "easy"
+  },
+  "title": "只给A的通行证",
+  "tag": "新发现 10 · 真实运动与可见工单",
+  "brief": "不是两个球共用同一条路；门认球的标识，B会沿原来的物理路线继续走。",
+  "condition": "A、B依次走同一斜坡，只有A能传送；A去左框，B去右框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "共享笔画不等于共享目的地，看看门标出的A。",
+    "让两球都经过入口附近，A跳走、B从坡末继续滚下。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 300,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 430,
+          "y": 220,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 320,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "ball-b",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "b",
+        "x": 320,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 2000,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球B"
+      }
+    },
+    {
+      "id": "portal",
+      "type": "nova/portal",
+      "params": {
+        "entry": {
+          "x": 490,
+          "y": 285,
+          "radius": 26
+        },
+        "exit": {
+          "x": 270,
+          "y": 200,
+          "radius": 26
+        },
+        "turn": 0,
+        "label": "单向传送",
+        "ball": "a"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 270,
+            "y": 300,
+            "w": 160,
+            "h": 98,
+            "mode": "visit",
+            "label": "收件区"
+          },
+          {
+            "ball": "b",
+            "x": 540,
+            "y": 320,
+            "w": 155,
+            "h": 78,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

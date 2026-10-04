@@ -1,0 +1,160 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/24-belt-switch-time",
+  "chapter": "新发现四·接触传送",
+  "progression": {
+    "groupOrder": 230,
+    "order": 24,
+    "difficulty": "hard"
+  },
+  "title": "同一坡，早晚两条路",
+  "tag": "新发现 24 · 真实运动与可见工单",
+  "brief": "不是给两球各画一条坡；皮带中途反向，同一上带点会按到达时刻分配不同地址。",
+  "condition": "A早到送左框，B晚到送右框；皮带3.0秒由左行改右行。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "共享入口，把分路交给带的反向时刻。",
+    "斜坡先送两球到右侧皮带，观察谁先离开、谁后到。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 280,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 500,
+          "y": 260,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 300,
+        "y": 80,
+        "vx": 3,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "ball-b",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "b",
+        "x": 300,
+        "y": 80,
+        "vx": 3,
+        "vy": 0,
+        "at": 1600,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球B"
+      }
+    },
+    {
+      "id": "belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 420,
+        "y": 320,
+        "w": 220,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": -4
+          },
+          {
+            "at": 3000,
+            "vx": 4
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 340,
+            "y": 350,
+            "w": 75,
+            "h": 48,
+            "mode": "visit",
+            "label": "收件区"
+          },
+          {
+            "ball": "b",
+            "x": 645,
+            "y": 350,
+            "w": 50,
+            "h": 48,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

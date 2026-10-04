@@ -1,0 +1,124 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/23-ink-pusher",
+  "chapter": "新发现四·接触传送",
+  "progression": {
+    "groupOrder": 230,
+    "order": 23,
+    "difficulty": "medium"
+  },
+  "title": "让皮带搬你的笔画",
+  "tag": "新发现 23 · 真实运动与可见工单",
+  "brief": "旧关笔画不是焊椅就是挂墙；这次让自由墨水站在传送带上，做一个移动推杆去推远处的球。",
+  "condition": "A落在右侧固定台上，本来不会自己到达右端；左边皮带向右，只推动真实接触的墨水。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 400,
+  "gold": 332,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "画在皮带上而不是球下面，墨水会被运走。",
+    "一根稍有高度的推杆可以把台上的球向右推。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 280,
+        "y": 300,
+        "w": 220,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": 4
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "dock",
+      "type": "core/terrain",
+      "params": {
+        "x": 500,
+        "y": 300,
+        "w": 180,
+        "h": 20
+      }
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 530,
+        "y": 270,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 610,
+            "y": 250,
+            "w": 75,
+            "h": 60,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

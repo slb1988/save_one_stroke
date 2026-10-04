@@ -1,0 +1,157 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/44-charge-before-portal",
+  "chapter": "新发现八·协作机器",
+  "progression": {
+    "groupOrder": 270,
+    "order": 44,
+    "difficulty": "medium"
+  },
+  "title": "先加速，后传送",
+  "tag": "新发现 44 · 真实运动与可见工单",
+  "brief": "不是出口处再推一把；入口前磁场蓄起的速度会跟球穿过门，在远处变成更长的回飞。",
+  "condition": "A先穿过右推加速区，再进传送门；出口把速度转180°，先盖出口章，再经过左上方回飞框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "球的速度不是在传送时清零，进门前的经历会留下来。",
+    "短坡把球送入加速场，入口在它加速后的轨迹上。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 300,
+          "y": 160,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 430,
+          "y": 220,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 320,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "accelerator",
+      "type": "nova/field",
+      "params": {
+        "x": 370,
+        "y": 150,
+        "w": 130,
+        "h": 120,
+        "fx": 0.8,
+        "fy": 0,
+        "start": 0,
+        "end": 5000,
+        "label": "局部磁场"
+      }
+    },
+    {
+      "id": "portal",
+      "type": "nova/portal",
+      "params": {
+        "entry": {
+          "x": 560,
+          "y": 285,
+          "radius": 26
+        },
+        "exit": {
+          "x": 630,
+          "y": 180,
+          "radius": 26
+        },
+        "turn": 180,
+        "label": "单向传送"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 570,
+            "y": 120,
+            "w": 90,
+            "h": 120,
+            "mode": "visit",
+            "label": "出口章"
+          },
+          {
+            "ball": "a",
+            "x": 440,
+            "y": 80,
+            "w": 130,
+            "h": 80,
+            "mode": "visit",
+            "label": "回飞章"
+          }
+        ],
+        "ordered": true
+      }
+    }
+  ]
+}

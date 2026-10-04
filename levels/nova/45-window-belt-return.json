@@ -1,0 +1,149 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/45-window-belt-return",
+  "chapter": "新发现八·协作机器",
+  "progression": {
+    "groupOrder": 270,
+    "order": 45,
+    "difficulty": "hard"
+  },
+  "title": "先排队，后折返",
+  "tag": "新发现 45 · 真实运动与可见工单",
+  "brief": "门负责放行时刻，带负责改变方向；一条单向坡可以连成先右后左的实际投递路线。",
+  "condition": "A在1.2秒开门后下落，上右侧左行带，再回到出生点左边的收件框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "别直接把球留在门正下方，目的地更靠左。",
+    "在门下画短坡，把A送上带，让带接管折返。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "gate",
+      "type": "nova/gate",
+      "params": {
+        "x": 400,
+        "y": 210,
+        "w": 190,
+        "h": 14,
+        "windows": [
+          {
+            "open": 1200,
+            "close": 1800
+          }
+        ],
+        "label": "时窗门"
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 400,
+          "y": 250,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 550,
+          "y": 290,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 450,
+        "y": 80,
+        "vx": 0,
+        "vy": 0,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A"
+      }
+    },
+    {
+      "id": "return-belt",
+      "type": "nova/belt",
+      "params": {
+        "x": 500,
+        "y": 330,
+        "w": 160,
+        "h": 20,
+        "speeds": [
+          {
+            "at": 0,
+            "vx": -4
+          }
+        ],
+        "label": "接触传送带"
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 350,
+            "y": 350,
+            "w": 80,
+            "h": 48,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "format": "save-one-stroke-cases",
+  "version": 1,
+  "cases": [
+    {
+      "name": "低位双环接管承重",
+      "expected": "success",
+      "stroke": [
+        [
+          270,
+          335
+        ],
+        [
+          341,
+          265
+        ],
+        [
+          420,
+          335
+        ]
+      ]
+    },
+    {
+      "name": "只接低位单环",
+      "expected": "failure",
+      "stroke": [
+        [
+          270,
+          335
+        ],
+        [
+          341,
+          265
+        ]
+      ]
+    }
+  ]
+}

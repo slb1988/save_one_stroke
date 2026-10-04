@@ -1,0 +1,111 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/35-moving-backboard",
+  "chapter": "新发现六·自由跷板",
+  "progression": {
+    "groupOrder": 250,
+    "order": 35,
+    "difficulty": "medium"
+  },
+  "title": "先把球墙转过来",
+  "tag": "新发现 35 · 真实运动与可见工单",
+  "brief": "跷板不只当滑道：先用墨水把右端抬起来，它才会成为拦截横射球的动态球墙。",
+  "condition": "墨水先压左端；A在1.4秒从右侧向左发射，转起的板要把它送回右岸。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 500,
+  "gold": 415,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "先改变板的朝向，再等球来，不要只在球下面补坡。",
+    "在左端上方放一根自由墨水砝码，让板自己转到拦球位置。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "beam",
+      "type": "nova/seesaw",
+      "params": {
+        "x": 340,
+        "y": 280,
+        "w": 260,
+        "h": 14,
+        "pivot": 0.5,
+        "mass": 4,
+        "label": "自由跷板"
+      }
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 650,
+        "y": 200,
+        "vx": -8,
+        "vy": 0,
+        "at": 1400,
+        "radius": 14,
+        "mass": 0.5,
+        "label": "钢球A",
+        "restitution": 0.5
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 580,
+            "y": 330,
+            "w": 115,
+            "h": 68,
+            "mode": "visit",
+            "label": "收件区"
+          }
+        ],
+        "ordered": false
+      }
+    }
+  ]
+}

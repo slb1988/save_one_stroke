@@ -1,0 +1,150 @@
+{
+  "format": "save-one-stroke-level",
+  "version": 3,
+  "id": "nova/17-sort-by-bounce",
+  "chapter": "新发现三·发射与反弹",
+  "progression": {
+    "groupOrder": 220,
+    "order": 17,
+    "difficulty": "medium"
+  },
+  "title": "同一墙，两种手感",
+  "tag": "新发现 17 · 真实运动与可见工单",
+  "brief": "不是两颗相同弹球；A要落地再向上回签，B则留在低处，按物理材质安排不同工作。",
+  "condition": "A先发射、恢复系数1；B后发射、恢复系数0。A按低→高回签，最后B留在低框。",
+  "quip": "不只坐稳，还要办成这件事。",
+  "success": "椅子坐稳，工单也完成了。",
+  "failure": "椅子安全不代表工单完成；看球与机关的真实去向。",
+  "ink": 900,
+  "gold": 747,
+  "load": {
+    "x": 130,
+    "mass": 16
+  },
+  "drawArea": {
+    "drawTop": 60
+  },
+  "hint": [
+    "同一挡板把横速刹住，不同弹性决定后半程。",
+    "近竖直墙让两球就近落地；弹球返回上方，软球留在下方。"
+  ],
+  "scene": [
+    {
+      "id": "seat",
+      "type": "workshop/seat",
+      "params": {
+        "legs": "both"
+      },
+      "at": {
+        "x": 40,
+        "y": 251
+      }
+    },
+    {
+      "id": "floor",
+      "type": "core/terrain",
+      "params": {
+        "x": 20,
+        "y": 400,
+        "w": 680,
+        "h": 90
+      }
+    },
+    {
+      "id": "end-wall",
+      "type": "core/terrain",
+      "params": {
+        "x": 696,
+        "y": 280,
+        "w": 24,
+        "h": 120
+      }
+    },
+    {
+      "id": "pins",
+      "type": "core/anchors",
+      "params": [
+        {
+          "x": 520,
+          "y": 120,
+          "radius": 10,
+          "label": "挂环1"
+        },
+        {
+          "x": 540,
+          "y": 280,
+          "radius": 10,
+          "label": "挂环2"
+        }
+      ]
+    },
+    {
+      "id": "ball-a",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "a",
+        "x": 300,
+        "y": 120,
+        "vx": 8,
+        "vy": -2,
+        "at": 500,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球A",
+        "restitution": 1
+      }
+    },
+    {
+      "id": "ball-b",
+      "type": "nova/launcher",
+      "params": {
+        "ball": "b",
+        "x": 300,
+        "y": 120,
+        "vx": 8,
+        "vy": -2,
+        "at": 2100,
+        "radius": 14,
+        "mass": 2,
+        "label": "钢球B",
+        "restitution": 0
+      }
+    },
+    {
+      "id": "goals",
+      "type": "nova/goals",
+      "params": {
+        "targets": [
+          {
+            "ball": "a",
+            "x": 500,
+            "y": 350,
+            "w": 85,
+            "h": 48,
+            "mode": "visit",
+            "label": "落地章"
+          },
+          {
+            "ball": "a",
+            "x": 500,
+            "y": 280,
+            "w": 85,
+            "h": 60,
+            "mode": "visit",
+            "label": "回弹章"
+          },
+          {
+            "ball": "b",
+            "x": 470,
+            "y": 350,
+            "w": 110,
+            "h": 48,
+            "mode": "hold",
+            "label": "软球留框"
+          }
+        ],
+        "ordered": true
+      }
+    }
+  ]
+}

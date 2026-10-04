@@ -204,7 +204,7 @@
     const trial = {
       valid: true, engine, level, stroke, chair, looseInk, origin, inkOrigin, terrain, catZones, bindings: [],
       removedTerrain: new Set(), drops: [], events: [], dropImpact: false,
-      dynamicBodies: [chair,...(looseInk ? [looseInk] : [])], modules: Content.runtime(level),
+      dynamicBodies: [chair,...(looseInk ? [looseInk] : [])], supportBodies: [], modules: Content.runtime(level),
       elapsed: 0, ended: false, outcome: null, maxTilt: 0, unstableMs: 0, stableMs: 0,
       diagnostics: { attached: stroke.attached, startCOM: { ...origin }, contacts: [] }
     };
@@ -222,7 +222,8 @@
     for (const pair of trial.engine.pairs.list) {
       if (!pair.isActive || pair.isSensor) continue;
       const a = pair.bodyA.parent, b = pair.bodyB.parent;
-      if (!((a === trial.chair && b.isStatic && !trial.removedTerrain.has(trial.terrain.indexOf(b))) || (b === trial.chair && a.isStatic && !trial.removedTerrain.has(trial.terrain.indexOf(a))))) continue;
+      const bearsWeight = body => (body.isStatic || trial.supportBodies.includes(body)) && !trial.removedTerrain.has(trial.terrain.indexOf(body));
+      if (!((a === trial.chair && bearsWeight(b)) || (b === trial.chair && bearsWeight(a)))) continue;
       for (const p of pair.collision.supports) if (p) found.push({ x: p.x, y: p.y });
     }
     for(const binding of trial.bindings) if(binding.body===trial.chair) found.push({...binding.constraint.pointA,kind:'anchor'});
@@ -270,8 +271,13 @@
           const cause=failureCause(trial,{code:'wobbly',reason:'五秒到了，还没坐稳。稍微扩大落脚范围，并让脚尖贴住承重表面。'});
           fail(trial,cause.code,cause.reason);
         } else {
-          const stars = trial.stroke.ink <= trial.level.gold ? 3 : trial.stroke.ink <= trial.level.ink * 0.91 ? 2 : 1;
-          trial.outcome = { success: true, code: 'stable', stars, reason: '连续承重 5 秒，最后稳稳坐住。' };
+          // Optional visible objectives may reject a safe trial, never grant an unsafe win.
+          const missing = trial.modules.map(({def,params,state}) => def.finish?.(context,params,state)).find(Boolean);
+          if (missing) fail(trial, missing.code, missing.reason);
+          else {
+            const stars = trial.stroke.ink <= trial.level.gold ? 3 : trial.stroke.ink <= trial.level.ink * 0.91 ? 2 : 1;
+            trial.outcome = { success: true, code: 'stable', stars, reason: '连续承重 5 秒，最后稳稳坐住。' };
+          }
         }
       }
       trial.outcome = { ...trial.outcome, ink: Math.round(trial.stroke.ink), maxTilt: Math.round(trial.maxTilt * 10) / 10, duration: DURATION };
