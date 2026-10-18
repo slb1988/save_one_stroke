@@ -113,7 +113,7 @@
     $('rule-status').classList.toggle('changed',info.changed);
     if(state.mode==='running' && state.trial.events.length>lastRuleEvent) {
       lastRuleEvent=state.trial.events.length;
-      if(!state.trial.outcome) setStatus(`规则变化：${state.trial.events.at(-1).label}。观察现在的受力路线。`);
+      if(!state.trial.outcome) setStatus(`规则变化：${state.trial.events[state.trial.events.length-1].label}。观察现在的受力路线。`);
     }
   }
   function updateInk() {
@@ -174,7 +174,7 @@
     const r = canvas.getBoundingClientRect();
     return { x: (event.clientX - r.left) * 720 / r.width, y: (event.clientY - r.top) * 480 / r.height };
   }
-  function constrain(p) { return P.constrainPoint(state.level,p,state.points.at(-1)); }
+  function constrain(p) { return P.constrainPoint(state.level,p,state.points[state.points.length-1]); }
   function startStroke(p) {
     if (state.mode !== 'ready' || state.points.length) { toast('只准补一笔哦。想换笔画，先点「清除重画」。'); return false; }
     if (p.y<P.drawTop(state.level)-10 || p.y>P.drawBottom(state.level)+10) { setStatus(state.level.version>=2 ? '本关只能在亮色标线内画线，先看看开放画区。' : '从木椅附近开始，在椅面及以下画线。',true); return false; }
@@ -370,6 +370,7 @@
   function resize() { const width = canvas.getBoundingClientRect().width; const dpr = Math.min(devicePixelRatio || 1, 2); canvas.width = Math.round(width * dpr); canvas.height = Math.round(width * dpr * 2 / 3); }
   new ResizeObserver(resize).observe(canvas);
   function frame(now) {
+    requestAnimationFrame(frame); // Reschedule first: a single bad frame must not freeze the game on browsers without devtools.
     const delta = Math.min(80, Math.max(0, now - lastTime)); lastTime = now;
     if (state.mode === 'running' && !document.hidden && !$('help-dialog').open && !$('library-dialog').open) {
       accumulator += delta;
@@ -381,7 +382,6 @@
     }
     updateRuleUI();
     RescueRenderer.draw(canvas, state, now);
-    requestAnimationFrame(frame);
   }
   renderSound(); selectFromHash(); catalogFeedback(); resize(); requestAnimationFrame(frame);
   // Read-only diagnostics for acceptance/debugging. No path injection or forced wins.

@@ -10,8 +10,17 @@
     if (fill) { ctx.fillStyle = fill; ctx.fill(); }
     ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke();
   }
+  // Manual path: old WebViews (e.g. Via on Android) lack native ctx.roundRect (Chromium 99+).
   function roundRect(ctx, x, y, w, h, radius, fill, stroke = null, width = 2) {
-    ctx.beginPath(); ctx.roundRect(x, y, w, h, radius);
+    const r = Array.isArray(radius) ? radius : [radius, radius, radius, radius];
+    const tl = r[0] || 0, tr = r[1] || 0, br = r[2] || 0, bl = r[3] || 0;
+    ctx.beginPath();
+    ctx.moveTo(x + tl, y);
+    ctx.lineTo(x + w - tr, y); if (tr) ctx.arcTo(x + w, y, x + w, y + tr, tr);
+    ctx.lineTo(x + w, y + h - br); if (br) ctx.arcTo(x + w, y + h, x + w - br, y + h, br);
+    ctx.lineTo(x + bl, y + h); if (bl) ctx.arcTo(x, y + h, x, y + h - bl, bl);
+    ctx.lineTo(x, y + tl); if (tl) ctx.arcTo(x, y, x + tl, y, tl);
+    ctx.closePath();
     if (fill) { ctx.fillStyle = fill; ctx.fill(); }
     if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = width; ctx.stroke(); }
   }

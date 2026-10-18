@@ -8,6 +8,23 @@
   <title>救一笔！｜不靠谱家具研究所</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    // On-page error surface for browsers without devtools (e.g. Via on Android WebView).
+    (function () {
+      let last = '';
+      window.addEventListener('error', function (e) {
+        const line = (e.message || e.type) + (e.filename ? ' @ ' + e.filename.split('/').pop() + ':' + e.lineno : '');
+        if (line === last) return; last = line;
+        let box = document.getElementById('js-error-banner');
+        if (!box) {
+          box = document.createElement('div'); box.id = 'js-error-banner';
+          box.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;z-index:9999;background:#b3402a;color:#fff;font:12px/1.5 monospace;padding:8px 10px;border-radius:8px;white-space:pre-wrap';
+          (document.body || document.documentElement).appendChild(box);
+        }
+        box.textContent += line + '\n';
+      }, true);
+    })();
+  </script>
   <script defer src="vendor/matter.min.js"></script>
   <script defer src="js/validation.js"></script>
   <script defer src="js/content.js"></script>

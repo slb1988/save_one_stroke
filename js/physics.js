@@ -24,7 +24,7 @@
   function ruleStatus(level, elapsed = 0, anchorCount = 0) {
     const parts = Content.instances(level).flatMap(({def,params})=>def.status ? [def.status({elapsed,anchorCount},params)] : []), timeline = ruleEvents(level);
     const upcoming = timeline.find(event => event.at > elapsed + 1e-6);
-    const past = timeline.filter(event => event.at <= elapsed + 1e-6).at(-1);
+    const pastTimeline = timeline.filter(event => event.at <= elapsed + 1e-6), past = pastTimeline[pastTimeline.length - 1];
     if (upcoming) parts.push(`${((upcoming.at-elapsed)/1000).toFixed(1)} 秒后：${upcoming.label}`);
     else if (past) parts.push(`${past.label} · 已生效`);
     return {text:parts.join(' ｜ '),changed:Boolean(past && elapsed - past.at < 650)};

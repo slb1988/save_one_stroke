@@ -7,7 +7,7 @@
   function object(value, allowed, required, path) {
     if (!value || typeof value !== 'object' || Array.isArray(value)) fail(path, '需要 JSON 对象');
     for (const key of Object.keys(value)) if (!allowed.includes(key)) fail(`${path}.${key}`, '不支持的字段（不允许脚本或自定义回调）');
-    for (const key of required) if (!Object.hasOwn(value, key)) fail(`${path}.${key}`, '缺少必填字段');
+    for (const key of required) if (!Object.prototype.hasOwnProperty.call(value, key)) fail(`${path}.${key}`, '缺少必填字段');
   }
   function number(value, min, max, path, integer = false) {
     if (typeof value !== 'number' || !Number.isFinite(value) || value < min || value > max || (integer && !Number.isInteger(value))) fail(path, `需要 ${min}–${max} 的${integer ? '整数' : '有限数字'}`);

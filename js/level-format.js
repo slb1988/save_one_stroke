@@ -58,7 +58,7 @@
   function validateMechanics(level,v3) {
     const m=level.mechanics, defs=C.list().filter(d=>d.legacyKey), keys=defs.map(d=>d.legacyKey);
     object(m,['drawTop','drawBottom',...keys],[],'$.mechanics');
-    if(!v3&&!keys.some(key=>Object.hasOwn(m,key)))fail('$.mechanics','至少声明一个规则数组，不能仅改变画区');
+    if(!v3&&!keys.some(key=>Object.prototype.hasOwnProperty.call(m,key)))fail('$.mechanics','至少声明一个规则数组，不能仅改变画区');
     if(m.drawTop!==undefined){number(m.drawTop,40,400,'$.mechanics.drawTop');if(m.drawTop>level.chair[0].y-4)fail('$.mechanics.drawTop','不得低于默认座面画区上界');}
     if(m.drawBottom!==undefined){number(m.drawBottom,100,465,'$.mechanics.drawBottom');if(m.drawBottom<level.chair[0].y)fail('$.mechanics.drawBottom','下界不能高于座面顶面，否则无法接椅子');}
     if((m.drawTop??level.chair[0].y-4)>=(m.drawBottom??465))fail('$.mechanics','开放画区不能为空');
